@@ -4,7 +4,7 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'kuhsaft/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'kuhsaft'
+  s.name        = 'qbrick'
   s.version     = Kuhsaft::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Immanuel Häussermann', 'Felipe Kaufmann', 'Phil Schilter', 'Donat Baier', 'Franca Rast']

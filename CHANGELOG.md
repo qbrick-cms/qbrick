@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.0 - 2014-07-21
+
+No Changes since last release. This release is just for the big rename.
+
 ## 2.4.3 - 2014-07-10
 
 * Fix inconsistent image size handling
