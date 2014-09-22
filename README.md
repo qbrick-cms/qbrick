@@ -1,10 +1,12 @@
-[![Build Status](https://travis-ci.org/screenconcept/kuhsaft.png)](https://travis-ci.org/screenconcept/kuhsaft)
-[![Code Climate](https://codeclimate.com/github/screenconcept/kuhsaft.png)](https://codeclimate.com/github/screenconcept/kuhsaft)
-[![Gem Version](https://badge.fury.io/rb/kuhsaft.png)](http://badge.fury.io/rb/kuhsaft)
+[![Build Status](https://travis-ci.org/screenconcept/qbrick.png)](https://travis-ci.org/screenconcept/qbrick)
+[![Code Climate](https://codeclimate.com/github/screenconcept/qbrick.png)](https://codeclimate.com/github/screenconcept/qbrick)
+[![Gem Version](https://badge.fury.io/rb/qbrick.png)](http://badge.fury.io/rb/qbrick)
 
-# Kuhsaft. A CMS as simple as it could be
+![qBrick logo](https://raw.github.com/screenconcept/qbrick/master/doc/logo.png)
 
-## The Who, What and Why?
+# qBrick - The Ruby on Rails CMS you want
+
+*Formerly known as: Kuhsaft*
 
 Kuhsaft is made by some Rails developers at Screen Concept that got tired of
 fiddling with unusable content management sytems. We are trying hard to make a
