@@ -86,7 +86,7 @@ BracesAroundHashParameters:
 
 ClassLength:
   CountComments: false  # count full line comments?
-  Max: 125
+  Max: 200
 
 # Align with the style guide.
 CollectionMethods:
@@ -109,7 +109,10 @@ CommentAnnotation:
 
 # Avoid complex methods.
 CyclomaticComplexity:
-  Max: 8
+  Max: 9
+
+PerceivedComplexity:
+  Max: 9
 
 # Multi-line method chaining should be done with leading dots.
 # DotPosition:
@@ -134,7 +137,7 @@ LineLength:
 
 MethodLength:
   CountComments: false  # count full line comments?
-  Max: 10
+  Max: 15
 
 MethodName:
   # Valid values are: snake_case, camelCase

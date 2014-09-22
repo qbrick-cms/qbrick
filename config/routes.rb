@@ -3,6 +3,7 @@ Kuhsaft::Engine.routes.draw do
   namespace :cms do
     resources :pages, except: :show do
       post :sort, on: :collection
+      get :mirror
     end
 
     resources :bricks, except: [:edit, :index] do
@@ -26,5 +27,5 @@ Kuhsaft::Engine.routes.draw do
   end
 
   get '/pages/:id' => 'pages#lookup_by_id'
-  get '/sitemap.format' => 'sitemaps#index', format: 'xml'
+  get '/sitemap' => 'sitemaps#index', format: 'xml'
 end
