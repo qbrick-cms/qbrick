@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Kuhsaft::Gridded do
+describe Qbrick::Gridded do
 
   context 'included gridded module' do
     class GridClass
-      include Kuhsaft::Gridded
+      include Qbrick::Gridded
     end
 
     it 'returns an array for the gridded class' do

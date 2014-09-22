@@ -8,7 +8,7 @@
 
 * Start merging in shoestrap functionality (for now, only admin_helper form methods)
 * Clean up README
-* Add helper for detecting if we are on a kuhsaft page
+* Add helper for detecting if we are on a qbrick page
 * Fix routing error for sitemap
 * Add Helper for selecting Application URLs
 * Set locale via default_url_options instead of just url_options
@@ -25,7 +25,7 @@
 
 ## 2.4.2 - 2014-05-19
 
-* Bugfix: Check if column exists in translations migrations. Now you can always run the install:migrations tasks when updating kuhsaft in order to have all translated fields
+* Bugfix: Check if column exists in translations migrations. Now you can always run the install:migrations tasks when updating qbrick in order to have all translated fields
           + various small bugfixes to translation migrations
 
 ## 2.4.1 - 2014-05-12
@@ -34,7 +34,7 @@
 
 ### HOWTO Upgrade
 
-* Remove ck-config.js from your production.rb's precompile directive after updating kuhsaft to 2.4.1
+* Remove ck-config.js from your production.rb's precompile directive after updating qbrick to 2.4.1
 
 ## 2.4.0 - 2014-05-08
 
@@ -71,22 +71,22 @@
 
 ## 2.3.1 - 2014-04-01
 
-* New Module added that simplifies invalidating cached placeholder bricks when a non-kuhsaft model changes. Consult the readme for instructions!
+* New Module added that simplifies invalidating cached placeholder bricks when a non-qbrick model changes. Consult the readme for instructions!
 
 ## 2.3.0 - 2014-03-26
 
 ### HOWTO Upgrade
 
-* `bundle update kuhsaft`
-* `rake kuhsaft:install:migrations`
+* `bundle update qbrick`
+* `rake qbrick:install:migrations`
 * `rake db:migrate`
 * recreate versions for all bricks with uploaders:
 
   ```ruby
     # You need to do this for every locale you are using as bricks have a default_scope on the locale:
-    I18n.with_locale(:de) { Kuhsaft::ImageBrick.all.each { |b| b.image.recreate_versions! if b.image.present? } }
-    I18n.with_locale(:de) { Kuhsaft::AssetBrick.all.each { |b| b.asset.recreate_versions! if b.asset.present? } }
-    I18n.with_locale(:de) { Kuhsaft::Asset.all.each  { |b| b.file.recreate_versions! if b.file.present? } }
+    I18n.with_locale(:de) { Qbrick::ImageBrick.all.each { |b| b.image.recreate_versions! if b.image.present? } }
+    I18n.with_locale(:de) { Qbrick::AssetBrick.all.each { |b| b.asset.recreate_versions! if b.asset.present? } }
+    I18n.with_locale(:de) { Qbrick::Asset.all.each  { |b| b.file.recreate_versions! if b.file.present? } }
   ```
 
 * update your `config.assets.precompile` array with `ckeditor/adv_link/*` if you would
@@ -128,7 +128,7 @@
 ## 2.2.3 - 2013-11-20
 
 - fix bootstrap-sass issue by locking to newest compatible version
-- Create module for kuhsaft image uploader
+- Create module for qbrick image uploader
 
 ## 2.2.2 - 2013-10-10
 
@@ -159,7 +159,7 @@
 - include page children in cache key for pages#show
 - show "Inhalt"-Tab only when page is translated
 
-  *run `rails generate kuhsaft:assets:install` when updating*
+  *run `rails generate qbrick:assets:install` when updating*
 
 ## 2.1.0 - 2013-08-21
 
@@ -171,17 +171,17 @@
 - document helper tasks
 - fix dummy app loading
 - add scope to select only translated pages
-- Keep assets in cms subdir, not kuhsaft. Added a migration that
+- Keep assets in cms subdir, not qbrick. Added a migration that
   should automatically move the assets.
 
-  *run rake kuhsaft:install:migrations when updating*
+  *run rake qbrick:install:migrations when updating*
 
 ## 1.8.6 - 2013-08-20
 
-- Keep assets in cms subdir, not kuhsaft. Added a migration that
+- Keep assets in cms subdir, not qbrick. Added a migration that
   should automatically move the assets.
 
-  *run rake kuhsaft:install:migrations when updating*
+  *run rake qbrick:install:migrations when updating*
 
 ## 2.0.3 / 1.8.5 - 2013-07-23
 
@@ -213,12 +213,12 @@ For 2.0.3 only:
 
 ## 2.0.0 - 2013-07-15
 
-- Make Kuhsaft Rails 4 Compatible
+- Make Qbrick Rails 4 Compatible
   - replace compass with bourbon
   - use lambdas in scopes
   - use jquery-ui-rails and protected_attributes
 
-**Kuhsaft >= 2.0.0 will only support Rails 4 and newer**
+**Qbrick >= 2.0.0 will only support Rails 4 and newer**
 
 ## 1.8.0 - 2013-07-15
 
@@ -235,7 +235,7 @@ For 2.0.3 only:
 
 - Postgres fulltext search
   - For details see README
-  - Important: Please install and run the new migrations with `rake kuhsaft:install:migrations db:migrate`
+  - Important: Please install and run the new migrations with `rake qbrick:install:migrations db:migrate`
 
 ## 1.6.0 - 2013-05-27
 
@@ -243,10 +243,10 @@ For 2.0.3 only:
 
 ## 1.5.0 - 2013-05-22
 
-- Allow request with empty url splat to be handled by kuhsaft router
-  - Allows root etries in host app: `root :to => 'kuhsaft/pages#show'`
+- Allow request with empty url splat to be handled by qbrick router
+  - Allows root etries in host app: `root :to => 'qbrick/pages#show'`
   - No HomeConroller needed anymore
-  - By default /:locale is handled by kuhsaft
+  - By default /:locale is handled by qbrick
 
 ## 1.4.3 - 2013-05-22
 
@@ -263,9 +263,9 @@ For 2.0.3 only:
 ## 1.4.0 - 2013-03-05
 
 - Reorg Frontend Controller Inheritance:
-  - Kuhsaft Frontend Controllers inherit from ApplicationController in the host application
-  - Kuhsaft's own ApplicationController not needed anymore
-  - **now you can use helpers defined in the guest application's ApplicationHelper on Kuhsaft Pages**
+  - Qbrick Frontend Controllers inherit from ApplicationController in the host application
+  - Qbrick's own ApplicationController not needed anymore
+  - **now you can use helpers defined in the guest application's ApplicationHelper on Qbrick Pages**
 
 - Fix Locale Handling:
   - in Backend, always pass around content_locale param, to keep the correct locale set
@@ -279,7 +279,7 @@ For 2.0.3 only:
 ## 1.3.1 - 2013-04-12
 
 - Replace redactor.js with CKEditor. To upgrade from previous versions:
-  * run `rails generate kuhsaft:assets:install`
+  * run `rails generate qbrick:assets:install`
   * make sure you remove any code that references redactor, typically the editor settings in the customizations.js file
 
 ## 1.2.15 - 2013-04-09
@@ -333,7 +333,7 @@ For 2.0.3 only:
 ## 1.2.6 - 2013-03-04
 
 - change the way custom css and js is loaded. If you are upgrading, run
-  `rails generate kuhsaft:assets:install` to get the override files.
+  `rails generate qbrick:assets:install` to get the override files.
   These files are now externally loaded and must be present!
 
 ## 1.2.5 - 2013-03-01
@@ -369,7 +369,7 @@ For 2.0.3 only:
 - disable/enable redirect_url field depending on page type dynamically
 - show inactive state in page tree
 - fix: require current rails version:
-  - prevents vulnerable rails apps with kuhsaft
+  - prevents vulnerable rails apps with qbrick
   - fixes issue where rake spec would run in development instead of test
     env.
 - fix misterious case where the ajaxSuccess event sometimes was not
@@ -379,11 +379,11 @@ For 2.0.3 only:
 - fix: Do not switch to content tab for page when there are validation errors in the meta tab
 
 ## 1.1.1 - 2013-02-06
-- Remove Kuhsaft::Cms::Admin seed
+- Remove Qbrick::Cms::Admin seed
 - Fix Migration
 
 ## 1.1.0 - 2013-02-06
-- Remove devise from kuhsaft and provide instructions on how to protect the cms backend
+- Remove devise from qbrick and provide instructions on how to protect the cms backend
 - fix: properly handle compass-rails dependency
 
 
@@ -418,7 +418,7 @@ For 2.0.3 only:
 
 ## 0.3.2 - September 15, 2011
 
-**Development of Kuhsaft for Rails 3.1 moved to master, rails30 will
+**Development of Qbrick for Rails 3.1 moved to master, rails30 will
 maintain rails 3.0 compatibility**
 
 - fix asset pipeline compatibility when in production ([@effkay][])

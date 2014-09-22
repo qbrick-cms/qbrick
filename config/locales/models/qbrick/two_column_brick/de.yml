@@ -1,0 +1,7 @@
+de:
+  activerecord:
+    models:
+      qbrick/two_column_brick: 'Zweispaltiges Element'
+    attributes:
+      qbrick/two_column_brick:
+        partitioning: 'Aufteilung'

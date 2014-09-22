@@ -1,0 +1,5 @@
+- if brick.respond_to?(:bricks)
+  .row-fluid
+    - brick.bricks.each_with_index do |b, idx|
+      %div{ :class => Qbrick::Partition.style_for_index(brick.partitioning, idx) }
+        = render 'qbrick/cms/bricks/brick_item', :brick => b

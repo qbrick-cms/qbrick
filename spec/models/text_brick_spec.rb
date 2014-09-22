@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Kuhsaft::TextBrick, type: :model do
+describe Qbrick::TextBrick, type: :model do
   let :text_brick do
-    Kuhsaft::TextBrick.new
+    Qbrick::TextBrick.new
   end
 
   describe '#bricks' do

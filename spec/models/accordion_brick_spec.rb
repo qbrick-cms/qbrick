@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::AccordionBrick, type: :model do
+describe Qbrick::AccordionBrick, type: :model do
 
   let :accordion_brick do
-    Kuhsaft::AccordionBrick.new
+    Qbrick::AccordionBrick.new
   end
 
   describe '#user_can_delete?' do
@@ -26,13 +26,13 @@ describe Kuhsaft::AccordionBrick, type: :model do
 
   describe '#to_style_class' do
     it 'includes the bootstrap classname' do
-      expect(accordion_brick.to_style_class).to eq('kuhsaft-accordion-brick accordion')
+      expect(accordion_brick.to_style_class).to eq('qbrick-accordion-brick accordion')
     end
   end
 
   describe '#allowed_brick_types' do
     it 'only allows AccordionItems' do
-      expect(accordion_brick.allowed_brick_types).to eq(%w(Kuhsaft::AccordionItemBrick))
+      expect(accordion_brick.allowed_brick_types).to eq(%w(Qbrick::AccordionItemBrick))
     end
   end
 end

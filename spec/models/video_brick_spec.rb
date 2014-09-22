@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::VideoBrick, type: :model do
+describe Qbrick::VideoBrick, type: :model do
 
   let :video_brick do
-    Kuhsaft::VideoBrick.new
+    Qbrick::VideoBrick.new
   end
 
   describe '#valid' do

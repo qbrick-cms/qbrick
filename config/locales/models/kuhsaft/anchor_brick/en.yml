@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    models:
-      kuhsaft/anchor_brick: 'Anchor'
-    attributes:
-      kuhsaft/anchor_brick:
-        caption: 'Name'

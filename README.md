@@ -6,9 +6,9 @@
 
 # qBrick - The Ruby on Rails CMS you want
 
-*Formerly known as: Kuhsaft*
+*Formerly known as: Qbrick*
 
-Kuhsaft is made by some Rails developers at Screen Concept that got tired of
+Qbrick is made by some Rails developers at Screen Concept that got tired of
 fiddling with unusable content management sytems. We are trying hard to make a
 minimalistic and developer friendly CMS. Our goal is to provide a system for
 ourselves and our customers that makes the of-the-shelf website project a
@@ -23,7 +23,7 @@ devs) on the other hand it should be easily usable by anyone.
 
 # Requirements
 
-Kuhsaft requires:
+Qbrick requires:
 
 * A Rails 4 app to be integrated into
 * ImageMagick
@@ -31,10 +31,10 @@ Kuhsaft requires:
 
 # Installation
 
-Add Kuhsaft to your Gemfile:
+Add Qbrick to your Gemfile:
 
 ```ruby
-gem 'kuhsaft'
+gem 'qbrick'
 ```
 
 And run
@@ -48,42 +48,42 @@ to get the gem
 Then install the assets and the migrations and run them:
 
 ```bash
-rake kuhsaft:install:migrations
+rake qbrick:install:migrations
 rake db:migrate
 rake db:seed
-rails generate kuhsaft:assets:install
+rails generate qbrick:assets:install
 ```
 
-You might want to change the language suffixes on the fields inside the create_kuhsaft_pages migration, depending on your app's default_locale.
+You might want to change the language suffixes on the fields inside the create_qbrick_pages migration, depending on your app's default_locale.
 
-Mount the kuhsaft engine in your routing file:
+Mount the qbrick engine in your routing file:
 
 ```ruby
 MyApp::Application.routes.draw do
   # add your app routes here
-  mount Kuhsaft::Engine => '/'
+  mount Qbrick::Engine => '/'
 end
 ```
 
-Load the Kuhsaft assets into your app, so you have working grids, widgets etc:
+Load the Qbrick assets into your app, so you have working grids, widgets etc:
 
 ```sass
 # application.css.sass
-@import 'kuhsaft/application'
+@import 'qbrick/application'
 ```
 
 ```coffee
 # application.js.coffee
-//= require 'kuhsaft/application'
+//= require 'qbrick/application'
 ```
 
 Finally, you need to define the image sizes for the image brick or use
 the defaults:
 
 ```ruby
-# your_app/config/initializers/kuhsaft.rb
+# your_app/config/initializers/qbrick.rb
 Rails.application.config.to_prepare do
-  Kuhsaft::Engine.configure do
+  Qbrick::Engine.configure do
     config.image_sizes.build_defaults! # creates 960x540 and 320x180 sizes
   end
 end
@@ -93,21 +93,21 @@ See "Configuring the image brick" for more details.
 
 ## Authentication
 
-Kuhsaft itself does not ship with any form of authentication. However, it is fairly easy to add by plugging into the Kuhsaft::Cms::AdminController. An example with [devise](https://github.com/plataformatec/devise):
+Qbrick itself does not ship with any form of authentication. However, it is fairly easy to add by plugging into the Qbrick::Cms::AdminController. An example with [devise](https://github.com/plataformatec/devise):
 
 ```ruby
-# config/initializers/kuhsaft.rb
+# config/initializers/qbrick.rb
 Rails.application.config.to_prepare do
-  Kuhsaft::Cms::AdminController.class_eval do
+  Qbrick::Cms::AdminController.class_eval do
     before_filter :authenticate_user!
   end
 end
 ```
 
-Also, be sure to have override the navigation partial in `app/views/kuhsaft/cms/admin/_main_navigation.html.haml` so you get a working logout button.
+Also, be sure to have override the navigation partial in `app/views/qbrick/cms/admin/_main_navigation.html.haml` so you get a working logout button.
 
 ## Extending the backend CSS/javascript
-Kuhsaft installs a sass file in `assets/stylesheets/kuhsaft/cms/customizations.css.sass` and a coffeescript file in `assets/javascripts/kuhsaft/cms/customizations.js.coffee` which are loaded by the backend layout. Those files can be installed by running `rails generate kuhsaft:assets:install`.
+Qbrick installs a sass file in `assets/stylesheets/qbrick/cms/customizations.css.sass` and a coffeescript file in `assets/javascripts/qbrick/cms/customizations.js.coffee` which are loaded by the backend layout. Those files can be installed by running `rails generate qbrick:assets:install`.
 
 Make sure they are in the `config.assets.precompile` array in environments like production where you usually precompile the assets. The generator will only add the necessary configs for the production env!
 
@@ -122,13 +122,13 @@ rake start_dummy
 
 # Usage
 
-## Making Kuhsaft helpers available to your app
+## Making Qbrick helpers available to your app
 
-As defined in the rails docs, load the helpers from our isolated Kuhsaft engine inside your application controller:
+As defined in the rails docs, load the helpers from our isolated Qbrick engine inside your application controller:
 
 ```ruby
 class ApplicationController < ActionController::Base
-  helper Kuhsaft::Engine.helpers
+  helper Qbrick::Engine.helpers
 end
 ```
 
@@ -138,7 +138,7 @@ Create an initializer file in your app inside `config/initializers` and set the 
 
 ```ruby
 Rails.application.config.to_prepare do
-  Kuhsaft::Engine.configure do
+  Qbrick::Engine.configure do
     # Get the token from the MySites section on the sublime video site
     config.sublime_video_token = '123abcd'
   end
@@ -157,9 +157,9 @@ sublime_video_include_tag
 The image brick can process uploaded images into specific sizes. These sizes can be configured inside the engine configuration. You can also use the built-in default sizes:
 
 ```ruby
-# your_app/config/initializers/kuhsaft.rb
+# your_app/config/initializers/qbrick.rb
 Rails.application.config.to_prepare do
-  Kuhsaft::Engine.configure do
+  Qbrick::Engine.configure do
     config.image_sizes.build_defaults! # creates 960x540 and 320x180 sizes
   end
 end
@@ -168,9 +168,9 @@ end
 You can also remove the default sizes:
 
 ```ruby
-# your_app/config/initializers/kuhsaft.rb
+# your_app/config/initializers/qbrick.rb
 Rails.application.config.to_prepare do
-  Kuhsaft::Engine.configure do
+  Qbrick::Engine.configure do
     config.image_sizes.clear! # .all is now empty
   end
 end
@@ -179,9 +179,9 @@ end
 And most importantly, you can add custom sizes:
 
 ```ruby
-# your_app/config/initializers/kuhsaft.rb
+# your_app/config/initializers/qbrick.rb
 Rails.application.config.to_prepare do
-  Kuhsaft::Engine.configure do
+  Qbrick::Engine.configure do
     config.image_sizes.add(:side_box_vertical, 180, 460)
     config.image_sizes.add(:footer_teaser, 320, 220)
   end
@@ -190,7 +190,7 @@ end
 
 The `name` option is a unique identifier, which is also used for translating the dropdown in the brick. You can add your translation by using the translation path:
 
-    activerecord.attributes.kuhsaft/image_size.sizes.#{name}
+    activerecord.attributes.qbrick/image_size.sizes.#{name}
 
 ## Configuring custom styles for bricks
 
@@ -214,7 +214,7 @@ de:
 
 ## Configuring Grid settings for Bricks
 
-Include the Kuhsaft::Gridded Module on every Brick you want to display in a grid. Default grid options are 1 to 12 (representing columns) wich can be configured via the class method `available_grid_sizes` (should return an array of integers).
+Include the Qbrick::Gridded Module on every Brick you want to display in a grid. Default grid options are 1 to 12 (representing columns) wich can be configured via the class method `available_grid_sizes` (should return an array of integers).
 Each instance of a gridded class will have a method `gridded?` wich returns true if a column size is set.
 
 If the Gridded Module is added to a Custom Brick, it should provide a col_count integer field with default value 0.
@@ -225,15 +225,15 @@ add_column :your_awesome_brick, :col_count, :integer, default: 0
 
 ## Adding custom templates with placeholder bricks
 
-* Save your partial in `views/kuhsaft/placeholder_bricks/partials/_your_partial.html.haml`
-* Add translations for your partial in `config/locales/models/kuhsaft/placeholder_brick/locale.yml`
+* Save your partial in `views/qbrick/placeholder_bricks/partials/_your_partial.html.haml`
+* Add translations for your partial in `config/locales/models/qbrick/placeholder_brick/locale.yml`
 
 ```yaml
 de:
   your_partial: Your Partial
 ```
 
-## Mixing Custom Models/Views/Controllers with Kuhsaft Pages
+## Mixing Custom Models/Views/Controllers with Qbrick Pages
 
 Use the custom page type:
 
@@ -245,14 +245,14 @@ In Custom Controller that page redirects to:
 ```ruby
   def index
     # could also be extracted into before_action
-    @page = Kuhsaft::Page.find(session[:kuhsaft_referrer]) if session[:kuhsaft_referrer]
+    @page = Qbrick::Page.find(session[:qbrick_referrer]) if session[:qbrick_referrer]
     @somestuff = Somestuff.new
   end
 ```
 
 View:
 ```
-= render file: 'kuhsaft/pages/show'
+= render file: 'qbrick/pages/show'
 ```
 
 ## Invalidating placeholder bricks containing other models on model changes
@@ -262,7 +262,7 @@ placeholder brick and define which templates it appears in:
 
 ```ruby
 class Dummy < ActiveRecord::Base
-  include Kuhsaft::TouchPlaceholders
+  include Qbrick::TouchPlaceholders
   placeholder_templates 'some_template', 'some_other_template'
 end
 ```
@@ -273,13 +273,13 @@ If you want to translate your pages into another language, generate a new transl
 
 ```bash
 # translate your pages into french
-rails g kuhsaft:translations:add fr
+rails g qbrick:translations:add fr
 ```
 Or
 
 ```bash
 # translate your pages into swiss german
-rails g kuhsaft:translations:add de-CH
+rails g qbrick:translations:add de-CH
 ```
 
 This creates a new migration file inside `db/migrate` of your app. Run the migration as you normally do:
@@ -305,7 +305,7 @@ Add scope around routes:
 
 ```ruby
 scope "(:locale)", locale: /de|en|fr/ do
-  root 'kuhsaft/pages#show'
+  root 'qbrick/pages#show'
 end
 ```
 
@@ -332,7 +332,7 @@ Make sure to have the homepage translated in every available language.
 
 ```ruby
 def localized_url(url, target_locale)
-  page = Kuhsaft::Page.find_by_url("#{I18n.locale}/#{url}")
+  page = Qbrick::Page.find_by_url("#{I18n.locale}/#{url}")
   I18n.with_locale target_locale do
     translated_url = page.try :url
     if translated_url.present?
@@ -367,7 +367,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.dom_class = 'right'
     primary.selected_class = 'active'
-    Kuhsaft::Page.find_by(slug_de: 'meta-navigation').children.published.translated.each do |page|
+    Qbrick::Page.find_by(slug_de: 'meta-navigation').children.published.translated.each do |page|
       primary.item page.id, page.title, page.link, class: 'contact icon'
     end
 
@@ -399,7 +399,7 @@ Or if your page is translated, using the `translated` scope and the `published` 
 SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     # build first level
-    Kuhsaft::Page.roots.published.translated.each do |page|
+    Qbrick::Page.roots.published.translated.each do |page|
       primary.item page.id, page.title, page.link do |sub_item|
         # build second level
         page.children.published.translated.each do |subpage|
@@ -413,7 +413,7 @@ end
 
 ## Use the `page_title` attribute in your app
 
-Kuhsaft::Pages will provide a `%title` tag containing its `page_title`
+Qbrick::Pages will provide a `%title` tag containing its `page_title`
 (or the required `title`if no title is present). Simply yield for
 `:head` in your `application.html` to use it.
 
@@ -424,29 +424,29 @@ Kuhsaft::Pages will provide a `%title` tag containing its `page_title`
 
 ## Modifying the backend navigation
 
-Simply override the default partial for the main navigation in your app with your own file at `kuhsaft/cms/admin/_main_navigation.html.haml`
+Simply override the default partial for the main navigation in your app with your own file at `qbrick/cms/admin/_main_navigation.html.haml`
 
 ## Adding your own Bricks
 
-* Create your Brick model in `app/models`, for example `CaptionBrick`, which inherits from `Kuhsaft::Brick`.
+* Create your Brick model in `app/models`, for example `CaptionBrick`, which inherits from `Qbrick::Brick`.
 * If u use a string field add a max-length validation of 255 characters.
   To prevent a `ActiveRecord::StatementInvalid` Error.
-* Create a migration which adds the necessary fields to the `kuhsaft_bricks` table.
+* Create a migration which adds the necessary fields to the `qbrick_bricks` table.
 * If your brick should be accessible via UI, add a BrickType into the seeds or add a migration:
-    `Kuhsaft::BrickType.create(:class_name => 'CaptionBrick', :group => 'elements')`
+    `Qbrick::BrickType.create(:class_name => 'CaptionBrick', :group => 'elements')`
 * Add the `edit` and `show` partials to your views, e.g: `app/views/caption_bricks/caption_brick/_edit.html.haml`
 * Add the `childs` partial to your views, if you want to render your bricks childs with your own html: `app/views/caption_bricks/caption_brick/_childs.html.haml`
 * Implement the `fulltext` method on your brick, return anything you want to be searchable.
 * Customize the edit form behaviour of your brick by overriding methods like `to_style_class?`. See the `Brick` and `BrickList` files for more methods.
 
-### Use the Kuhsaft ImageBrickImageUploader for your own Brick
+### Use the Qbrick ImageBrickImageUploader for your own Brick
 
-Kuhsaft has a module called `ImageUploaderMounting`. This module mounts the ImageBrickImageUploader
+Qbrick has a module called `ImageUploaderMounting`. This module mounts the ImageBrickImageUploader
 and includes a callback method which handles that the image sizes will be updated after save.
 
 ```ruby
 class CustomBrick < Brick
-  include Kuhsaft::ImageUploaderMounting
+  include Qbrick::ImageUploaderMounting
   ...
 end
 ```
@@ -456,11 +456,11 @@ sizes. See "Configuring the image brick" for more details on creating your own i
 
 ## Integrating search
 
-Kuhsaft supports fulltext search when using PostgreSQL with a simple
+Qbrick supports fulltext search when using PostgreSQL with a simple
 LIKE fallback for any other ActiveRecord DB.
 
 Add a call to the `search_page_form` helper in your views. This renders
-the default search form. The query will be executed by kuhsaft.
+the default search form. The query will be executed by qbrick.
 
 ```haml
 # e.g. _footer.html.haml
@@ -470,7 +470,7 @@ the default search form. The query will be executed by kuhsaft.
 To customize the search and result views you can add your own partials
 to your rails app. The following partials are overridable.
 
-    app/views/kuhsaft/search
+    app/views/qbrick/search
     ├── _form.html.haml           # Search form
     ├── _results.html.haml        # Results list (@pages)
     └── _results_entry.html.haml  # Single result entry (@page)

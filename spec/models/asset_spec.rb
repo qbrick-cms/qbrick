@@ -1,23 +1,23 @@
 require 'spec_helper'
 
-describe Kuhsaft::Asset, type: :model do
+describe Qbrick::Asset, type: :model do
 
   let :asset do
     create(:asset)
   end
 
   let :uploader do
-    u = Kuhsaft::AssetUploader.new(asset, :file)
-    u.store! File.open(Kuhsaft::Engine.root.join('spec/dummy/app/assets/images/spec-image.png'))
+    u = Qbrick::AssetUploader.new(asset, :file)
+    u.store! File.open(Qbrick::Engine.root.join('spec/dummy/app/assets/images/spec-image.png'))
     u
   end
 
   before do
-    Kuhsaft::AssetUploader.enable_processing = true
+    Qbrick::AssetUploader.enable_processing = true
   end
 
   after do
-    Kuhsaft::AssetUploader.enable_processing = false
+    Qbrick::AssetUploader.enable_processing = false
   end
 
   it 'has a thumbnail' do

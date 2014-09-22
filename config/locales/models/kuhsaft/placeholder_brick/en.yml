@@ -1,8 +1,0 @@
-en:
-  activerecord:
-    models:
-      kuhsaft/placeholder_brick: 'Placeholder'
-    attributes:
-      kuhsaft/placeholder_brick:
-        template_name: 'Template'
-        contact_form: 'Contact form'

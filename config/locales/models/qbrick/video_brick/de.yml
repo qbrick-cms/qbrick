@@ -1,0 +1,9 @@
+de:
+  activerecord:
+    models:
+      qbrick/video_brick: 'Video'
+    attributes:
+      qbrick/video_brick:
+        video: 'Quelle'
+        embed_src: 'Embed Code'
+        href: 'Video'

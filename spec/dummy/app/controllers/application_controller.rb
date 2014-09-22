@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper Kuhsaft::Engine.helpers
+  helper Qbrick::Engine.helpers
 end

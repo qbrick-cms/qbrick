@@ -1,7 +1,7 @@
 require 'spec_helper'
-require_relative '../../lib/kuhsaft/touch_placeholders'
+require_relative '../../lib/qbrick/touch_placeholders'
 
-describe Kuhsaft::TouchPlaceholders do
+describe Qbrick::TouchPlaceholders do
 
   before :all do
     m = ActiveRecord::Migration.new
@@ -11,7 +11,7 @@ describe Kuhsaft::TouchPlaceholders do
     end
 
     class DummyModel < ActiveRecord::Base
-      include Kuhsaft::TouchPlaceholders
+      include Qbrick::TouchPlaceholders
     end
 
     @page = FactoryGirl.create(:page)
@@ -37,7 +37,7 @@ describe Kuhsaft::TouchPlaceholders do
   describe 'after_save_callback' do
     it 'looks for the bricks with affected templates and touches them' do
       DummyModel.class_eval { placeholder_templates 'foo' }
-      expect_any_instance_of(Kuhsaft::PlaceholderBrick).to receive(:touch)
+      expect_any_instance_of(Qbrick::PlaceholderBrick).to receive(:touch)
       DummyModel.create
     end
   end

@@ -1,13 +1,13 @@
 class UpdateUrlAndRedirectUrlValue < ActiveRecord::Migration
   def up
-    @redirect_pages = Kuhsaft::Page.where(:page_type => 'redirect')
+    @redirect_pages = Qbrick::Page.where(:page_type => 'redirect')
     I18n.available_locales.each do |locale|
       move_url_to_redirect_url(locale.to_s.underscore)
     end
   end
 
   def down
-    @redirect_pages = Kuhsaft::Page.where(:page_type => 'redirect')
+    @redirect_pages = Qbrick::Page.where(:page_type => 'redirect')
     I18n.available_locales.each do |locale|
       move_redirect_url_to_url(locale.to_s.underscore)
     end

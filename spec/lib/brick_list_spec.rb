@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'rspec/active_model/mocks'
 
-describe Kuhsaft::BrickList do
+describe Qbrick::BrickList do
 
   class TestBrick
-    include Kuhsaft::BrickList
+    include Qbrick::BrickList
   end
 
   let :brick do
@@ -14,7 +14,7 @@ describe Kuhsaft::BrickList do
   describe '#collect_fulltext' do
     context 'with bricks' do
       it 'collects its childs fulltext' do
-        result = [mock_model(Kuhsaft::Brick, collect_fulltext: 'hallo')]
+        result = [mock_model(Qbrick::Brick, collect_fulltext: 'hallo')]
         allow(brick).to receive_message_chain(:bricks, :localized).and_return(result)
         expect(brick.collect_fulltext).to eq('hallo')
       end
@@ -45,8 +45,8 @@ describe Kuhsaft::BrickList do
   end
 
   describe '#brick_types' do
-    it 'returns a Kuhsaft::BrickTypeFilter' do
-      expect(brick.brick_types).to be_a(Kuhsaft::BrickTypeFilter)
+    it 'returns a Qbrick::BrickTypeFilter' do
+      expect(brick.brick_types).to be_a(Qbrick::BrickTypeFilter)
     end
   end
 end

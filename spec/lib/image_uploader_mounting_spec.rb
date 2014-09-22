@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::ImageUploaderMounting do
+describe Qbrick::ImageUploaderMounting do
 
   let :brick do
-    Kuhsaft::ImageBrick.new
+    Qbrick::ImageBrick.new
   end
 
   describe '#uploader_mounting' do

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::TwoColumnBrick, type: :model do
+describe Qbrick::TwoColumnBrick, type: :model do
 
   let :two_column_brick do
-    Kuhsaft::TwoColumnBrick.new
+    Qbrick::TwoColumnBrick.new
   end
 
   describe '#user_can_add_childs?' do
@@ -47,14 +47,14 @@ describe Kuhsaft::TwoColumnBrick, type: :model do
 
   describe '.partitionings' do
     it 'returns the 3 default partitions' do
-      expect(Kuhsaft::TwoColumnBrick.partitionings.size).to eq(3)
+      expect(Qbrick::TwoColumnBrick.partitionings.size).to eq(3)
     end
   end
 
   describe '#create' do
     it 'creates two single columns as childs' do
       two_column_brick.save
-      expect(two_column_brick.bricks).to be_all { |brick| expect(brick).to be_a(Kuhsaft::ColumnBrick) }
+      expect(two_column_brick.bricks).to be_all { |brick| expect(brick).to be_a(Qbrick::ColumnBrick) }
     end
   end
 
@@ -66,17 +66,17 @@ describe Kuhsaft::TwoColumnBrick, type: :model do
 
   describe '#to_style_class' do
     it 'adds the row class to the default styles' do
-      expect(Kuhsaft::TwoColumnBrick.new.to_style_class).to eq('kuhsaft-two-column-brick row-fluid')
+      expect(Qbrick::TwoColumnBrick.new.to_style_class).to eq('qbrick-two-column-brick row-fluid')
     end
   end
 
   describe '#add_columns' do
     it 'sets the position of the first column brick to 1' do
-      expect(Kuhsaft::TwoColumnBrick.new.send(:add_columns).to_a.first.position).to eq(1)
+      expect(Qbrick::TwoColumnBrick.new.send(:add_columns).to_a.first.position).to eq(1)
     end
 
     it 'sets the position of the second column brick to 2' do
-      expect(Kuhsaft::TwoColumnBrick.new.send(:add_columns).to_a.second.position).to eq(2)
+      expect(Qbrick::TwoColumnBrick.new.send(:add_columns).to_a.second.position).to eq(2)
     end
   end
 end

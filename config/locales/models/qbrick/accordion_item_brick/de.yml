@@ -1,0 +1,7 @@
+de:
+  activerecord:
+    models:
+      qbrick/accordion_item_brick: 'Akkordeon Sektion'
+    attributes:
+      qbrick/accordion_item_brick:
+        caption: 'Titel'

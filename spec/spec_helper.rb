@@ -35,7 +35,7 @@ RSpec.configure do |config|
 
   config.include RSpec::Matchers
   config.include CarrierWave::Test::Matchers
-  config.include KuhsaftSpecHelper
+  config.include QbrickSpecHelper
   config.include FactoryGirl::Syntax::Methods
 
   config.before :suite do

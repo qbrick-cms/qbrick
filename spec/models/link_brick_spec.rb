@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::LinkBrick, type: :model do
+describe Qbrick::LinkBrick, type: :model do
 
   let :link_brick do
-    Kuhsaft::LinkBrick.new
+    Qbrick::LinkBrick.new
   end
 
   describe '#valid' do
@@ -32,14 +32,14 @@ describe Kuhsaft::LinkBrick, type: :model do
 
   describe '.styles' do
     it 'returns the available link styles' do
-      expect(Kuhsaft::LinkBrick.styles).to eq(%w(pdf word excel button external))
+      expect(Qbrick::LinkBrick.styles).to eq(%w(pdf word excel button external))
     end
   end
 
   describe '#to_style_class' do
     it 'includes the link style' do
       allow(link_brick).to receive(:link_style).and_return('pdf')
-      expect(link_brick.to_style_class).to eq('kuhsaft-link-brick pdf')
+      expect(link_brick.to_style_class).to eq('qbrick-link-brick pdf')
     end
   end
 

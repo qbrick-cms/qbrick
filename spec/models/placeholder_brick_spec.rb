@@ -1,34 +1,34 @@
 require 'spec_helper'
 require 'fileutils'
 
-describe Kuhsaft::PlaceholderBrick, type: :model do
+describe Qbrick::PlaceholderBrick, type: :model do
 
   let :placeholder_brick do
-    Kuhsaft::PlaceholderBrick.new
+    Qbrick::PlaceholderBrick.new
   end
 
   before do
-    FileUtils.mkdir_p("#{Rails.root}/app/views/kuhsaft/placeholder_bricks/partials")
-    FileUtils.touch("#{Rails.root}/app/views/kuhsaft/placeholder_bricks/partials/_valid_partial.html.haml")
-    FileUtils.touch("#{Rails.root}/app/views/kuhsaft/placeholder_bricks/partials/not_a_partial.html.haml")
-    FileUtils.touch("#{Rails.root}/app/views/kuhsaft/placeholder_bricks/partials/_not_a_haml_file.txt")
+    FileUtils.mkdir_p("#{Rails.root}/app/views/qbrick/placeholder_bricks/partials")
+    FileUtils.touch("#{Rails.root}/app/views/qbrick/placeholder_bricks/partials/_valid_partial.html.haml")
+    FileUtils.touch("#{Rails.root}/app/views/qbrick/placeholder_bricks/partials/not_a_partial.html.haml")
+    FileUtils.touch("#{Rails.root}/app/views/qbrick/placeholder_bricks/partials/_not_a_haml_file.txt")
   end
 
   after do
-    FileUtils.rm_rf(Dir.glob("#{Rails.root}/app/views/kuhsaft"))
+    FileUtils.rm_rf(Dir.glob("#{Rails.root}/app/views/qbrick"))
   end
 
   describe 'available partials' do
     it 'returns haml files' do
-      expect(Kuhsaft::PlaceholderBrick.available_partials.flatten).to include('valid_partial')
+      expect(Qbrick::PlaceholderBrick.available_partials.flatten).to include('valid_partial')
     end
 
     it 'returns only partials' do
-      expect(Kuhsaft::PlaceholderBrick.available_partials.flatten).not_to include('not_a_partial')
+      expect(Qbrick::PlaceholderBrick.available_partials.flatten).not_to include('not_a_partial')
     end
 
     it 'does not return other files' do
-      expect(Kuhsaft::PlaceholderBrick.available_partials.flatten).not_to include('not_a_haml_file')
+      expect(Qbrick::PlaceholderBrick.available_partials.flatten).not_to include('not_a_haml_file')
     end
   end
 

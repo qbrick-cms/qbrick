@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      qbrick/image_size: 'Image size'
+    attributes:
+      qbrick/image_size:
+        name: 'Name'
+        label: 'Label'
+        width: 'Width'
+        height: 'Height'
+        sizes:
+          gallery: 'Gallery, 960x540'
+          teaser: 'Teaser, 320x180'

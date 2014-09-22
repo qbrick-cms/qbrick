@@ -1,0 +1,18 @@
+de:
+  qbrick:
+    cms:
+      bricks:
+        brick_item:
+          save: 'Speichern ...'
+          saved: 'Gespeichert! ✔'
+          confirm: 'Wirklich löschen?'
+          empty: 'Hier ist noch nichts.'
+        new:
+          create_new: '%{brick} erstellen'
+          save: Speichern
+          no_content: 'Dieser Brick hat keinen eigenen Inhalt. Nach dem Speichern können darin weitere Bricks erstellt werden.'
+
+        columns:
+          zero: Nicht ins Grid integrieren
+          one: "%{count} Spalte"
+          other: "%{count} Spalten"

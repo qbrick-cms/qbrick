@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Kuhsaft::Page, type: :model do
+describe Qbrick::Page, type: :model do
   # subject { described_class }
 
   describe '.search' do
@@ -9,47 +9,47 @@ describe Kuhsaft::Page, type: :model do
     end
 
     it 'should find any containing the search term' do
-      expect(Kuhsaft::Page.search('lorem').size).to be >= 0
+      expect(Qbrick::Page.search('lorem').size).to be >= 0
     end
 
     it 'should find with "English Title"' do
-      expect(Kuhsaft::Page.search('English Title').size).to be >= 1
+      expect(Qbrick::Page.search('English Title').size).to be >= 1
     end
 
     it 'should only find published results' do
-      expect(Kuhsaft::Page.search('English Title')).to be_all { |p| p.published? == true }
+      expect(Qbrick::Page.search('English Title')).to be_all { |p| p.published? == true }
     end
 
     it 'should find by using the old api' do
-      expect(Kuhsaft::Page.search('English')).to eq(Kuhsaft::Page.search('English'))
+      expect(Qbrick::Page.search('English')).to eq(Qbrick::Page.search('English'))
     end
   end
 
   describe '.position_of' do
     it 'should find the position of a page' do
       page = create(:page)
-      expect(Kuhsaft::Page.position_of(page.id)).to eq(page.position)
+      expect(Qbrick::Page.position_of(page.id)).to eq(page.position)
     end
   end
 
   describe '.find_by_url' do
     it 'should find its translated content by url' do
       page = create(:page)
-      expect(Kuhsaft::Page.find_by_url(page.url)).to eq(page)
+      expect(Qbrick::Page.find_by_url(page.url)).to eq(page)
     end
   end
 
   describe '.flat_tree' do
     it 'should create an ordered, flat list of the page tree' do
       tree = create_page_tree
-      expect(Kuhsaft::Page.flat_tree).to eq(tree)
+      expect(Qbrick::Page.flat_tree).to eq(tree)
     end
   end
 
   describe '#initialize' do
     context 'without values' do
       let :page do
-        Kuhsaft::Page.new
+        Qbrick::Page.new
       end
 
       before do
@@ -69,30 +69,30 @@ describe Kuhsaft::Page, type: :model do
   describe '#published' do
     it 'returns only published pages' do
       _p1, p2, _p3 = 3.times.map { create(:page) }
-      p2.update_attribute :published, Kuhsaft::PublishState::UNPUBLISHED
-      expect(Kuhsaft::Page.published).to be_all { |p| expect(p.published?).to be_truthy }
+      p2.update_attribute :published, Qbrick::PublishState::UNPUBLISHED
+      expect(Qbrick::Page.published).to be_all { |p| expect(p.published?).to be_truthy }
     end
   end
 
   describe '#content_page' do
     it 'returns only content pages' do
       p1, p2, p3 = 3.times.map { create(:page) }
-      p2.update_attribute :page_type, Kuhsaft::PageType::REDIRECT
-      expect(Kuhsaft::Page.content_page).to eq([p1, p3])
+      p2.update_attribute :page_type, Qbrick::PageType::REDIRECT
+      expect(Qbrick::Page.content_page).to eq([p1, p3])
     end
   end
 
   describe '#state_class' do
 
-    let(:page) { Kuhsaft::Page.new }
+    let(:page) { Qbrick::Page.new }
 
     it 'returns publsihed as string when page is published' do
-      page.published = Kuhsaft::PublishState::PUBLISHED
+      page.published = Qbrick::PublishState::PUBLISHED
       expect(page.state_class).to eq 'published'
     end
 
     it 'returns unpublsihed as string when page is unpublished' do
-      page.published = Kuhsaft::PublishState::UNPUBLISHED
+      page.published = Qbrick::PublishState::UNPUBLISHED
       expect(page.state_class).to eq 'unpublished'
     end
   end
@@ -100,7 +100,7 @@ describe Kuhsaft::Page, type: :model do
   describe '#without_self' do
     it 'returns pages but not itself' do
       2.times { create(:page) }
-      page = Kuhsaft::Page.first
+      page = Qbrick::Page.first
       expect(page.without_self).not_to include(page)
     end
   end
@@ -257,7 +257,7 @@ describe Kuhsaft::Page, type: :model do
 
     context 'when it is a navigation? page' do
       it 'returns without the parent page slug' do
-        page = create(:page, slug: 'parent-slug', page_type: Kuhsaft::PageType::NAVIGATION)
+        page = create(:page, slug: 'parent-slug', page_type: Qbrick::PageType::NAVIGATION)
         child = create(:page, slug: 'child-slug', parent: page)
         expect(child.url).to eq('en/child-slug')
       end
@@ -265,14 +265,14 @@ describe Kuhsaft::Page, type: :model do
 
     context 'when it is a redirect? page' do
       it 'returns the absolute url' do
-        page = create(:page, page_type: Kuhsaft::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
+        page = create(:page, page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
         expect(page.link).to eq('/en/news')
       end
     end
 
     context 'when url part is empty' do
       it 'strips the trailing slash' do
-        page = create(:page, page_type: Kuhsaft::PageType::NAVIGATION)
+        page = create(:page, page_type: Qbrick::PageType::NAVIGATION)
         expect(page.link).to eq('/en')
       end
     end
@@ -281,13 +281,13 @@ describe Kuhsaft::Page, type: :model do
   describe '#navigation?' do
     context 'when the page_type is navigation' do
       it 'returns true if the page_type is PageType::NAVIGATION' do
-        expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::NAVIGATION).navigation?).to be_truthy
+        expect(Qbrick::Page.new(page_type: Qbrick::PageType::NAVIGATION).navigation?).to be_truthy
       end
     end
 
     context 'when the page_type is anything else' do
       it 'returns false' do
-        expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::REDIRECT).navigation?).to be_falsey
+        expect(Qbrick::Page.new(page_type: Qbrick::PageType::REDIRECT).navigation?).to be_falsey
       end
     end
   end
@@ -295,28 +295,28 @@ describe Kuhsaft::Page, type: :model do
   describe '#redirect?' do
     context 'when the page_type is a redirect' do
       it 'returns true' do
-        expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::REDIRECT).redirect?).to be_truthy
+        expect(Qbrick::Page.new(page_type: Qbrick::PageType::REDIRECT).redirect?).to be_truthy
       end
     end
 
     context 'when the page type is anything else' do
       it 'returns false' do
-        expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::NAVIGATION).redirect?).to be_falsey
+        expect(Qbrick::Page.new(page_type: Qbrick::PageType::NAVIGATION).redirect?).to be_falsey
       end
     end
   end
 
   describe 'page types' do
     it 'returns content by default' do
-      expect(Kuhsaft::Page.new.page_type).to eq('content')
+      expect(Qbrick::Page.new.page_type).to eq('content')
     end
 
     it 'returns navigation if set' do
-      expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::NAVIGATION).page_type).to eq('navigation')
+      expect(Qbrick::Page.new(page_type: Qbrick::PageType::NAVIGATION).page_type).to eq('navigation')
     end
 
     it 'returns redirect if set' do
-      expect(Kuhsaft::Page.new(page_type: Kuhsaft::PageType::REDIRECT).page_type).to eq('redirect')
+      expect(Qbrick::Page.new(page_type: Qbrick::PageType::REDIRECT).page_type).to eq('redirect')
     end
   end
 
@@ -337,7 +337,7 @@ describe Kuhsaft::Page, type: :model do
   describe '#fulltext' do
     let :page do
       create(:page, keywords: 'key words', description: 'descrip tion', title: 'my title').tap do |p|
-        p.bricks << Kuhsaft::TextBrick.new(locale: I18n.locale, text: 'oh la la')
+        p.bricks << Qbrick::TextBrick.new(locale: I18n.locale, text: 'oh la la')
         p.save
       end
     end
@@ -360,7 +360,7 @@ describe Kuhsaft::Page, type: :model do
 
   describe '#before_validation' do
     it 'generates url automatically' do
-      page = Kuhsaft::Page.new slug: 'slug'
+      page = Qbrick::Page.new slug: 'slug'
       expect(page.url).to be_nil
       page.valid?
       expect(page.url).to be_present
@@ -373,15 +373,15 @@ describe Kuhsaft::Page, type: :model do
         @parent_page = FactoryGirl.create(:page, slug: 'le_parent')
         @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
 
-        @parent_page.update_attributes(page_type: Kuhsaft::PageType::NAVIGATION)
+        @parent_page.update_attributes(page_type: Qbrick::PageType::NAVIGATION)
         expect(@child_page.reload.url).to eq("#{I18n.locale}/le_child")
       end
 
       it 'updates the child pages url if parent is changed to content' do
-        @parent_page = FactoryGirl.create(:page, slug: 'le_parent', page_type: Kuhsaft::PageType::NAVIGATION)
+        @parent_page = FactoryGirl.create(:page, slug: 'le_parent', page_type: Qbrick::PageType::NAVIGATION)
         @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
 
-        @parent_page.update_attributes(page_type: Kuhsaft::PageType::CONTENT)
+        @parent_page.update_attributes(page_type: Qbrick::PageType::CONTENT)
         expect(@child_page.reload.url).to eq("#{I18n.locale}/le_parent/le_child")
       end
     end
@@ -404,7 +404,7 @@ describe Kuhsaft::Page, type: :model do
 
     context 'when parent is navigation' do
       let :parent do
-        create(:page, page_type: Kuhsaft::PageType::NAVIGATION)
+        create(:page, page_type: Qbrick::PageType::NAVIGATION)
       end
 
       let :child do
@@ -447,13 +447,13 @@ describe Kuhsaft::Page, type: :model do
     end
 
     it 'returns all pages that have a translation' do
-      expect(Kuhsaft::Page.translated).to eq [@page_1, @page_2, @page_3]
+      expect(Qbrick::Page.translated).to eq [@page_1, @page_2, @page_3]
     end
 
     it 'does not return untranslated pages' do
       I18n.with_locale :de do
         @page_1.update(title: 'Page 1 fr', slug: 'page_1_fr')
-        expect(Kuhsaft::Page.translated).to eq [@page_1]
+        expect(Qbrick::Page.translated).to eq [@page_1]
       end
     end
   end
@@ -466,7 +466,7 @@ describe Kuhsaft::Page, type: :model do
     end
 
     it 'should be findable via scope' do
-      expect(Kuhsaft::Page.by_identifier(cat_page.identifier)).to eq(cat_page)
+      expect(Qbrick::Page.by_identifier(cat_page.identifier)).to eq(cat_page)
     end
   end
 
@@ -482,21 +482,21 @@ describe Kuhsaft::Page, type: :model do
     end
 
     it 'should copy the asset to the cloned brick' do
-      FactoryGirl.create(:image_brick, brick_list_type: 'Kuhsaft::Page', brick_list_id: @page.id)
+      FactoryGirl.create(:image_brick, brick_list_type: 'Qbrick::Page', brick_list_id: @page.id)
 
       @page.clone_bricks_to(:en)
       expect(@page.bricks.unscoped.where(locale: :en).first).to be_valid
     end
 
     it 'should copy all child bricks' do
-      accordion = Kuhsaft::Brick.create(type: 'Kuhsaft::AccordionBrick',
-                                        brick_list_type: 'Kuhsaft::Page',
+      accordion = Qbrick::Brick.create(type: 'Qbrick::AccordionBrick',
+                                        brick_list_type: 'Qbrick::Page',
                                         brick_list_id: @page.id)
-      section   = Kuhsaft::Brick.create(type: 'Kuhsaft::AccordionItemBrick',
+      section   = Qbrick::Brick.create(type: 'Qbrick::AccordionItemBrick',
                                         caption: 'section',
-                                        brick_list_type: 'Kuhsaft::Brick',
+                                        brick_list_type: 'Qbrick::Brick',
                                         brick_list_id: accordion.id)
-      FactoryGirl.create(:text_brick, brick_list_type: 'Kuhsaft::Brick', brick_list_id: section.id)
+      FactoryGirl.create(:text_brick, brick_list_type: 'Qbrick::Brick', brick_list_id: section.id)
 
       @page.clone_bricks_to(:en)
       expect(@page.bricks.unscoped.where(locale: :en).count).to eq(3)

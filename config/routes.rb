@@ -1,4 +1,4 @@
-Kuhsaft::Engine.routes.draw do
+Qbrick::Engine.routes.draw do
 
   namespace :cms do
     resources :pages, except: :show do
