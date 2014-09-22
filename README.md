@@ -497,6 +497,12 @@ config.extraPlugins = 'adv_link'
 Do not forget to update your `config.assets.precompile` array. Add the
 following to your existing array `ckeditor/adv_link/*`.
 
+# ROADMAP
+tbd
+
+# CONTRIBUTING
+tbd
+
 # LICENSE
 
-See the file [LICENSE](https://github.com/screenconcept/kuhsaft/blob/master/LICENSE).
+See the LICENSE file.
