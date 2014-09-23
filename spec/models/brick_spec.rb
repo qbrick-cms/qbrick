@@ -96,9 +96,9 @@ describe Qbrick::Brick, type: :model do
       expect(brick.backend_label).to eq('Text')
     end
 
-    context 'with the parenthesis option given' do
+    it 'with the parenthesis option given' do
       brick = Qbrick::TextBrick.new
-      brick.backend_label(parenthesis: true).should == '(Text)'
+      expect(brick.backend_label(parenthesis: true)).to eq '(Text)'
     end
   end
 
