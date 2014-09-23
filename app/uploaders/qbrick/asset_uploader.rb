@@ -46,5 +46,6 @@ module Qbrick
     # def filename
     #   "something.jpg" if original_filename
     # end
+    permissions 0600
   end
 end

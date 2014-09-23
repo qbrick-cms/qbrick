@@ -25,8 +25,7 @@ describe Qbrick::Asset, type: :model do
   end
 
   it 'makes the image readable only to the owner and not executable' do
-    pending 'how and where do we ensure permissions?'
-    expect(uploader).to have_permissions(0600)
+    expect(uploader.permissions).to eq(0600)
   end
 
   describe '#file_type' do
