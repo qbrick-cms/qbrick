@@ -2,7 +2,6 @@
 ENV['RAILS_ENV'] = 'test'
 require_relative File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 
 [
   'factory_girl',
