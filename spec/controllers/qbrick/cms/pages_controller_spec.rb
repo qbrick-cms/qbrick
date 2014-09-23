@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe Qbrick::Cms::PagesController do
+# TODO: For some reason rspec does not recognize this as controller
+#       spec even though it is in spec/controllers?
+describe Qbrick::Cms::PagesController, type: :controller do
   subject { described_class }
 
   describe 'mirroring' do
