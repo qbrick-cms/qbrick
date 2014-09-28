@@ -1,5 +1,7 @@
 # Roadmap
 
+See 3.0 PR in kuhsaft: https://github.com/screenconcept/kuhsaft/pull/250
+
 ## Backlog from Kuhsaft, no particular order
 
 * Rethink configuration
