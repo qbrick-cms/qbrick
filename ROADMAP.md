@@ -1,7 +1,5 @@
 # Roadmap
 
-## Release 2.5 infos [here]()
-
 ## Backlog (no particular order)
 
 * Image handling Features
