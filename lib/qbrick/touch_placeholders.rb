@@ -14,7 +14,7 @@ module Qbrick
       return unless self.class.placeholder_templates.present?
       self.class.placeholder_templates.each do |template_name|
         related_templates = Qbrick::PlaceholderBrick.where(template_name: template_name)
-        related_templates.each { |p| p.touch } if related_templates
+        related_templates.each(&:touch) if related_templates
       end
     end
 

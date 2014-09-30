@@ -33,7 +33,7 @@ module Qbrick
       def edit
         @page = Qbrick::Page.find(params[:id])
         @page.published ||= Qbrick::PublishState::UNPUBLISHED
-        @page.bricks.each { |brick| brick.valid? }
+        @page.bricks.each(&:valid?)
         respond_with @page
       end
 
