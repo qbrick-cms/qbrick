@@ -1,12 +1,38 @@
 # Roadmap
 
 ## 2.5.0
-  - Rework locale handling
-    - use translation tables
-    - clean up locale vs. content_locale
-    - clean up translation keys
+  - Merge in shoestrap functionality
 
-  - Provide a rock-solid installer
+  - Site Configuration Panel
+    - stuff like:
+      - Settings field for Webmaster tools Verification
+        https://github.com/screenconcept/kuhsaft/issues/271
+      - default page type
+      - ...
+
+  - Rework Models
+    - Page has layouts, layouts have areas
+    - Index pages, inheritance
+    - older suggestions from kuhsaft:
+      Bricks & Components: https://github.com/screenconcept/kuhsaft/issues/174
+    - clean up Brick STI, maybe hstore for brick attributes
+    - Rework locale handling / General Cleanup
+      - use translation tables
+      - clean up locale vs. content_locale
+      - clean up translation keys
+      - merge migrations
+      - remove obsoleted stuff
+
+    - Rethink configuration
+      Original Issue:
+      https://github.com/screenconcept/kuhsaft/issues/254
+
+      Yaml file? Keep it in Ruby? See Comments in issue
+
+  - Workflows and Roles
+    - Ship with authentication out of the box
+    - add user management panel, user roles
+    - Workflow administration/more page states
 
   - Backend UI Improvements
     - Add label to every brick
@@ -14,18 +40,12 @@
       dragging a brick (just show the label)
     - reduce size and dynamicaly resize text inputs
     - Form inputs <textarea> with consistent sizes/margins
-    - Get rid of bootstrap?
+    - Get rid of bootstrap? Foundation? Bourbon?
     - Submit all bricks with remote true
 
-  - Split up readme / add wiki
+  - Provide a rock-solid installer
 
-  - Preview Page
-
-  - Workflows/more page states
-
-  - Ship with authentication out of the box, add user management panel, user roles
-
-  - Merge in shoestrap functionality
+  - Preview Page functionality
 
   - Extend Qbrick::Page link dialog to allow adding anchor on current page
     Original Issue: https://github.com/screenconcept/kuhsaft/issues/225
@@ -38,13 +58,6 @@
 
   - Rework frontend partials handling, provide sensible defaults
 
-  - Rework Page logic:
-    - Page has layouts, layouts have areas
-    - Index pages, inheritance
-    - older suggestions from kuhsaft:
-      Bricks & Components: https://github.com/screenconcept/kuhsaft/issues/174
-    - clean up Brick STI, maybe hstore for brick attributes
-
   - Better 404 handling / Getting started page
     https://github.com/screenconcept/kuhsaft/issues/147
 
@@ -54,22 +67,9 @@
   - Caching issues
     https://github.com/screenconcept/kuhsaft/issues/270
 
-  - Site Configuration Panel
-    - stuff like:
-      - Settings field for Webmaster tools Verification
-        https://github.com/screenconcept/kuhsaft/issues/271
-      - default page type
-      - ...
+  - Split up readme / add wiki
 
 ## Backlog (no particular order)
-
-* See 3.0 PR in kuhsaft: https://github.com/screenconcept/kuhsaft/pull/250
-
-* Rethink configuration
-  Original Issue:
-  https://github.com/screenconcept/kuhsaft/issues/254
-
-  Yaml file? Keep it in Ruby? See Comments in issue
 
 * Image handling Features
   * Configurable Responsive Images
