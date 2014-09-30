@@ -16,6 +16,10 @@
     - Allow adding custom settings via key/value
     - Provide clear API for using settings in host application
 
+  - Provide a rock-solid installer
+
+  - Qbrick demo instance that reinstalls master every night
+
 To be clarified
 
   - Rework Models
@@ -50,10 +54,6 @@ To be clarified
     - Form inputs <textarea> with consistent sizes/margins
     - Get rid of bootstrap? Foundation? Bourbon?
     - Submit all bricks with remote true
-
-  - Provide a rock-solid installer
-
-  - Qbrick demo instance that reinstalls master every night
 
   - Preview Page functionality
 
