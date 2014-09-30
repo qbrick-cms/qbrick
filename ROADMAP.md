@@ -53,7 +53,7 @@ To be clarified
 
   - Provide a rock-solid installer
 
-  - Qbrick demo instance
+  - Qbrick demo instance that reinstalls master every night
 
   - Preview Page functionality
 
