@@ -490,12 +490,12 @@ describe Qbrick::Page, type: :model do
 
     it 'should copy all child bricks' do
       accordion = Qbrick::Brick.create(type: 'Qbrick::AccordionBrick',
-                                        brick_list_type: 'Qbrick::Page',
-                                        brick_list_id: @page.id)
+                                       brick_list_type: 'Qbrick::Page',
+                                       brick_list_id: @page.id)
       section   = Qbrick::Brick.create(type: 'Qbrick::AccordionItemBrick',
-                                        caption: 'section',
-                                        brick_list_type: 'Qbrick::Brick',
-                                        brick_list_id: accordion.id)
+                                       caption: 'section',
+                                       brick_list_type: 'Qbrick::Brick',
+                                       brick_list_id: accordion.id)
       FactoryGirl.create(:text_brick, brick_list_type: 'Qbrick::Brick', brick_list_id: section.id)
 
       @page.clone_bricks_to(:en)

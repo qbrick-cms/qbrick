@@ -7,7 +7,7 @@ describe 'pages#index', type: :feature do
                  published: true,
                  title: 'Chromodorididae Ardeadoris'
       p.bricks << Qbrick::TextBrick.new(locale: I18n.locale,
-                                         text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
+                                        text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
       p.save!
       p
     end

@@ -8,7 +8,7 @@ describe Qbrick::ImageSize, type: :model do
   describe '.build_defaults!' do
     it 'sets the default sizes' do
       expect(Qbrick::ImageSize.all).to eq([Qbrick::ImageSize.gallery_size,
-                                            Qbrick::ImageSize.teaser_size])
+                                           Qbrick::ImageSize.teaser_size])
     end
   end
 
