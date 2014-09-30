@@ -1,7 +1,5 @@
 # Roadmap
 
-## Release 2.5 infos [here](https://github.com/screenconcept/qbrick/pull/2)
-
 ## Backlog (no particular order)
 
 * Image handling Features
