@@ -1,14 +1,22 @@
 # Roadmap
 
 ## 2.5.0
+
   - Merge in shoestrap functionality
+    - inherited resource controllers/views/model helpers
+    - generators
+    - clean up i18n keys from generator
 
   - Site Configuration Panel
-    - stuff like:
+    - Provide Panel for stuff like
       - Settings field for Webmaster tools Verification
         https://github.com/screenconcept/kuhsaft/issues/271
       - default page type
-      - ...
+      - ..
+    - Allow adding custom settings via key/value
+    - Provide clear API for using settings in host application
+
+To be clarified
 
   - Rework Models
     - Page has layouts, layouts have areas
@@ -45,14 +53,14 @@
 
   - Provide a rock-solid installer
 
+  - Qbrick demo instance
+
   - Preview Page functionality
 
   - Extend Qbrick::Page link dialog to allow adding anchor on current page
     Original Issue: https://github.com/screenconcept/kuhsaft/issues/225
 
   - Lock page when it is being edited
-
-  - Qbrick demo instance
 
   - Mediapool for assets
 
