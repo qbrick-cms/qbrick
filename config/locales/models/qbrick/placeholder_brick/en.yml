@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      qbrick/placeholder_brick: 'Placeholder'
+    attributes:
+      qbrick/placeholder_brick:
+        template_name: 'Template'
+        contact_form: 'Contact form'

@@ -1,0 +1,19 @@
+- unless pages.blank?
+  %ol.dd-list
+    - pages.each do |page|
+      %li.dd-item.dd3-item{ 'data-id' => page.id }
+        .dd-handle.dd3-handle
+        .dd3-content{ class: page.state_class }
+          = link_to page.title.presence, qbrick.edit_cms_page_path(page)
+
+          .button-group
+            - if page.children.empty?
+              = link_to qbrick.cms_page_path(page), confirm: t('qbrick.cms.admin.confirm_delete', name: page.title), method: :delete, class: 'btn btn-small btn-danger' do
+                %i.icon-trash.icon-white
+
+            = link_to qbrick.new_cms_page_path(parent_id: page.id), class: 'btn btn-small' do
+              %i.icon-plus-sign
+              = t('qbrick.cms.pages.index.add_page')
+
+        - unless page.children.empty?
+          = render partial: 'branch', locals: { pages:  page.children }

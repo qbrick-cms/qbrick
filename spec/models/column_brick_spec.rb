@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::ColumnBrick, type: :model do
+describe Qbrick::ColumnBrick, type: :model do
 
   let :column_brick do
-    Kuhsaft::ColumnBrick.new
+    Qbrick::ColumnBrick.new
   end
 
   describe '#user_can_delete?' do

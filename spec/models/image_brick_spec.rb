@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::ImageBrick, type: :model do
+describe Qbrick::ImageBrick, type: :model do
 
   let :image_brick do
-    Kuhsaft::ImageBrick.new
+    Qbrick::ImageBrick.new
   end
 
   describe '#valid' do

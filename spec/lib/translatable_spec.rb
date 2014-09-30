@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::Translatable do
+describe Qbrick::Translatable do
 
   class Demo
-    include Kuhsaft::Translatable
+    include Qbrick::Translatable
     translate :name
   end
 

@@ -1,0 +1,16 @@
+%ul.breadcrumb
+  %li
+    = link_to Qbrick::Page.model_name.human(:count => 2), qbrick.cms_pages_path
+    %span.divider /
+  - @page.parent_pages.each do |parent_page|
+    %li
+      - if @page.parent_pages.last == parent_page
+        .active
+          = parent_page.title
+      - else
+        = link_to parent_page.title, qbrick.edit_cms_page_path(parent_page)
+        %span.divider /
+
+%h1= @page.title
+.box-container
+  = render :partial => 'form', :locals => { :url => qbrick.cms_page_path(@page), :page_title => t('.edit_html', :title => @page.title ) }

@@ -6,7 +6,7 @@ describe 'Cms/Pages', type: :feature do
 
   context '#new' do
     before do
-      visit kuhsaft.new_cms_page_path
+      visit qbrick.new_cms_page_path
       fill_in 'Title', with: 'The Title of the page'
       fill_in 'Keywords', with: 'My keywords'
       fill_in 'Description', with: 'My Description'
@@ -15,7 +15,7 @@ describe 'Cms/Pages', type: :feature do
     describe '#create' do
       context 'when page is valid' do
         it 'creates a new page' do
-          expect { click_on 'Create Page' }.to change(Kuhsaft::Page, :count).by(1)
+          expect { click_on 'Create Page' }.to change(Qbrick::Page, :count).by(1)
         end
 
         it 'is not possible to change the value in url' do
@@ -26,7 +26,7 @@ describe 'Cms/Pages', type: :feature do
       context 'when page is invalid' do
         it 'does not create a routing error by switching the locale' do
           @page = FactoryGirl.create(:page, title: 'DummyPage', title_en: 'DummyEN', slug: 'dummy_page')
-          visit kuhsaft.edit_cms_page_path(@page)
+          visit qbrick.edit_cms_page_path(@page)
           fill_in 'page_title', with: ''
           click_on 'Update Page'
           within '.language-navigation' do
@@ -41,7 +41,7 @@ describe 'Cms/Pages', type: :feature do
       context 'when creating a redirect page' do
         before do
           @page = FactoryGirl.create(:page, url: 'de/dumdidum')
-          visit kuhsaft.edit_cms_page_path(@page)
+          visit qbrick.edit_cms_page_path(@page)
           select 'redirect', from: 'Pagetyp'
         end
 
@@ -69,7 +69,7 @@ describe 'Cms/Pages', type: :feature do
       invalid_brick = FactoryGirl.build(:text_brick, text: nil, brick_list: @page)
       invalid_brick.save(validate: false)
 
-      visit kuhsaft.edit_cms_page_path(@page)
+      visit qbrick.edit_cms_page_path(@page)
       expect(page).to have_css('.error', count: 1)
     end
   end

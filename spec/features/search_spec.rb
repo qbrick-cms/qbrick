@@ -6,8 +6,8 @@ describe 'pages#index', type: :feature do
       p = create :page,
                  published: true,
                  title: 'Chromodorididae Ardeadoris'
-      p.bricks << Kuhsaft::TextBrick.new(locale: I18n.locale,
-                                         text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
+      p.bricks << Qbrick::TextBrick.new(locale: I18n.locale,
+                                        text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
       p.save!
       p
     end
@@ -26,7 +26,7 @@ describe 'pages#index', type: :feature do
 
     context 'with fulltext' do
       before do
-        visit kuhsaft.pages_path(locale: :en, search: 'Chromodorididae')
+        visit qbrick.pages_path(locale: :en, search: 'Chromodorididae')
       end
 
       it 'highlights search term in preview' do
@@ -42,7 +42,7 @@ describe 'pages#index', type: :feature do
 
     context 'with multiple matches' do
       before do
-        visit kuhsaft.pages_path(locale: :en, search: 'Chromodorididae')
+        visit qbrick.pages_path(locale: :en, search: 'Chromodorididae')
       end
 
       it 'renders match count' do
@@ -67,7 +67,7 @@ describe 'pages#index', type: :feature do
 
     context 'without matches' do
       before do
-        visit kuhsaft.pages_path(locale: :en, search: 'foobar')
+        visit qbrick.pages_path(locale: :en, search: 'foobar')
       end
 
       it 'renders match count' do

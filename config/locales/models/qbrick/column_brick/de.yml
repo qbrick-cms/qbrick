@@ -1,0 +1,4 @@
+de:
+  activerecord:
+    models:
+      qbrick/column_brick: 'Spalte'

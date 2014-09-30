@@ -1,0 +1,11 @@
+de:
+  activerecord:
+    models:
+      qbrick/image_brick: 'Bild'
+    attributes:
+      qbrick/image_brick:
+        image: 'Bild'
+        caption: 'Beschreibung'
+        alt_text: 'Alt-Text'
+        href: 'Link'
+        image_size: 'Grösse'

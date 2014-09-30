@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Kuhsaft::Brick, type: :model do
+describe Qbrick::Brick, type: :model do
   let :brick do
-    Kuhsaft::Brick.new
+    Qbrick::Brick.new
   end
 
   describe '#valid?' do
@@ -29,14 +29,14 @@ describe Kuhsaft::Brick, type: :model do
   end
 
   describe '#brick_list_type' do
-    it 'returns Kuhsaft::Brick' do
-      expect(brick.brick_list_type).to eq('Kuhsaft::Brick')
+    it 'returns Qbrick::Brick' do
+      expect(brick.brick_list_type).to eq('Qbrick::Brick')
     end
   end
 
   describe '#parents' do
     it 'returns the chain of parents' do
-      item1, item2, item3 = double, double, Kuhsaft::Brick.new
+      item1, item2, item3 = double, double, Qbrick::Brick.new
       allow(item2).to receive(:brick_list).and_return(item1)
       allow(item3).to receive(:brick_list).and_return(item2)
       expect(item3.parents).to eq([item1, item2])
@@ -45,18 +45,18 @@ describe Kuhsaft::Brick, type: :model do
 
   describe '#to_edit_partial_path' do
     it 'returns the path to the form partial' do
-      expect(Kuhsaft::TextBrick.new.to_edit_partial_path).to eq('kuhsaft/text_bricks/text_brick/edit')
+      expect(Qbrick::TextBrick.new.to_edit_partial_path).to eq('qbrick/text_bricks/text_brick/edit')
     end
   end
 
   describe '#has_siblings?' do
     it 'returns false if the brick has no siblings' do
-      brick = Kuhsaft::Brick.new
+      brick = Qbrick::Brick.new
       expect(brick.has_siblings?).to be_falsey
     end
 
     it 'returns true if the brick has siblings' do
-      item1, item2, item3 = double, double, Kuhsaft::Brick.new
+      item1, item2, item3 = double, double, Qbrick::Brick.new
       allow(item1).to receive(:bricks).and_return([item2, item3])
       allow(item2).to receive(:brick_list).and_return(item1)
       allow(item3).to receive(:brick_list).and_return(item1)
@@ -66,7 +66,7 @@ describe Kuhsaft::Brick, type: :model do
 
   describe '#to_edit_childs_partial_path' do
     it 'returns the path to the form partial' do
-      expect(Kuhsaft::TextBrick.new.to_edit_childs_partial_path).to eq('kuhsaft/text_bricks/text_brick/childs')
+      expect(Qbrick::TextBrick.new.to_edit_childs_partial_path).to eq('qbrick/text_bricks/text_brick/childs')
     end
   end
 
@@ -78,27 +78,27 @@ describe Kuhsaft::Brick, type: :model do
 
   describe '#to_style_class' do
     it 'returns a css classname' do
-      expect(Kuhsaft::TextBrick.new.to_style_class).to eq('kuhsaft-text-brick')
+      expect(Qbrick::TextBrick.new.to_style_class).to eq('qbrick-text-brick')
     end
   end
 
   describe '#to_style_id' do
     it 'returns a unique DOM id' do
-      brick = Kuhsaft::TextBrick.new
+      brick = Qbrick::TextBrick.new
       allow(brick).to receive(:id).and_return(104)
-      expect(brick.to_style_id).to eq('kuhsaft-text-brick-104')
+      expect(brick.to_style_id).to eq('qbrick-text-brick-104')
     end
   end
 
   describe '#backend_label' do
     it 'returns the name of the brick' do
-      brick =  Kuhsaft::TextBrick.new
+      brick =  Qbrick::TextBrick.new
       expect(brick.backend_label).to eq('Text')
     end
 
-    context 'with the parenthesis option given' do
-      brick = Kuhsaft::TextBrick.new
-      brick.backend_label(parenthesis: true).should == '(Text)'
+    it 'with the parenthesis option given' do
+      brick = Qbrick::TextBrick.new
+      expect(brick.backend_label(parenthesis: true)).to eq '(Text)'
     end
   end
 
@@ -111,8 +111,8 @@ describe Kuhsaft::Brick, type: :model do
   describe '#after_save' do
     describe 'update_fulltext' do
       let! :brick do
-        Kuhsaft::Brick.new.tap do |b|
-          b.type = Kuhsaft::BrickType.new
+        Qbrick::Brick.new.tap do |b|
+          b.type = Qbrick::BrickType.new
         end
       end
 

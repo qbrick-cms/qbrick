@@ -2,7 +2,6 @@
 ENV['RAILS_ENV'] = 'test'
 require_relative File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 
 [
   'factory_girl',
@@ -35,7 +34,7 @@ RSpec.configure do |config|
 
   config.include RSpec::Matchers
   config.include CarrierWave::Test::Matchers
-  config.include KuhsaftSpecHelper
+  config.include QbrickSpecHelper
   config.include FactoryGirl::Syntax::Methods
 
   config.before :suite do

@@ -44,7 +44,7 @@ RSpec::Core::RakeTask.new(spec: :setup)
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Kuhsaft'
+  rdoc.title    = 'Qbrick'
   rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
@@ -54,8 +54,8 @@ desc 'set up the dummy app for testing'
 task :setup do
   Postgres.create_user 'screenconcept'
   within_dummy_app do
-    `bundle exec rake kuhsaft:install:migrations`
-    `bundle exec rails generate kuhsaft:install:assets`
+    `bundle exec rake qbrick:install:migrations`
+    `bundle exec rails generate qbrick:install:assets`
     `bundle exec rake db:create`
     `bundle exec rake db:migrate`
     `bundle exec rake db:test:prepare`

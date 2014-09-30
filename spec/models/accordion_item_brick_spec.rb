@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::AccordionItemBrick, type: :model do
+describe Qbrick::AccordionItemBrick, type: :model do
 
   let :accordion_item_brick do
-    Kuhsaft::AccordionItemBrick.new
+    Qbrick::AccordionItemBrick.new
   end
 
   describe '#valid' do
@@ -44,7 +44,7 @@ describe Kuhsaft::AccordionItemBrick, type: :model do
 
   describe '#to_style_class' do
     it 'includes the bootstrap classname' do
-      expect(accordion_item_brick.to_style_class).to eq('kuhsaft-accordion-item-brick accordion-group')
+      expect(accordion_item_brick.to_style_class).to eq('qbrick-accordion-item-brick accordion-group')
     end
   end
 end

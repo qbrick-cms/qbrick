@@ -1,20 +1,20 @@
-# Add default kuhsaft brick types
+# Add default qbrick brick types
 brick_types = [
-  { class_name: 'Kuhsaft::TextBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::LinkBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::VideoBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::AccordionBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::AccordionItemBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::TwoColumnBrick', group: 'layout_elements' },
-  { class_name: 'Kuhsaft::SliderBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::ImageBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::PlaceholderBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::AnchorBrick', group: 'elements' },
-  { class_name: 'Kuhsaft::AssetBrick', group: 'elements' }
+  { class_name: 'Qbrick::TextBrick', group: 'elements' },
+  { class_name: 'Qbrick::LinkBrick', group: 'elements' },
+  { class_name: 'Qbrick::VideoBrick', group: 'elements' },
+  { class_name: 'Qbrick::AccordionBrick', group: 'elements' },
+  { class_name: 'Qbrick::AccordionItemBrick', group: 'elements' },
+  { class_name: 'Qbrick::TwoColumnBrick', group: 'layout_elements' },
+  { class_name: 'Qbrick::SliderBrick', group: 'elements' },
+  { class_name: 'Qbrick::ImageBrick', group: 'elements' },
+  { class_name: 'Qbrick::PlaceholderBrick', group: 'elements' },
+  { class_name: 'Qbrick::AnchorBrick', group: 'elements' },
+  { class_name: 'Qbrick::AssetBrick', group: 'elements' }
 ]
 
 brick_types.each do |bt|
-  brick_type = Kuhsaft::BrickType.find_or_create_by(class_name: bt[:class_name])
+  brick_type = Qbrick::BrickType.find_or_create_by(class_name: bt[:class_name])
   brick_type.update! bt
 end
 

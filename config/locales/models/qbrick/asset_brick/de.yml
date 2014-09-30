@@ -1,0 +1,9 @@
+de:
+  activerecord:
+    models:
+      qbrick/asset_brick: 'Datei'
+    attributes:
+      qbrick/asset_brick:
+        caption: 'Anzeigetext'
+        link_style: 'Stil'
+        asset: 'Datei'

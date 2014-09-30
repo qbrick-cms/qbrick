@@ -1,6 +1,6 @@
 module PagesHelper
   def asset_for(id)
-    Kuhsaft::Asset.find(id)
+    Qbrick::Asset.find(id)
   end
 
   def render_markdown(text)
@@ -8,14 +8,14 @@ module PagesHelper
   end
 
   def homepage
-    Kuhsaft::Page.roots.first
+    Qbrick::Page.roots.first
   end
 
   def page_for_level(num)
     input = controller.current_url if controller.respond_to? :current_url
     input ||= params[:url].presence || ''
     url = input.split('/').take(num + 1).join('/') unless input.blank?
-    page = Kuhsaft::Page.find_by_url(url)
+    page = Qbrick::Page.find_by_url(url)
     yield page if block_given?
     page
   end
@@ -32,22 +32,22 @@ module PagesHelper
 
   def read_more_link(id)
     link_to(id, :'data-toggle' => 'collapse', :'data-target' => id, :class => 'collapsed button button-read-more') do
-      @content = content_tag(:p, t('kuhsaft.text_bricks.text_brick.read_more'), class: 'read-more-text')
-      @content << content_tag(:p, t('kuhsaft.text_bricks.text_brick.read_less'), class: 'read-less-text')
+      @content = content_tag(:p, t('qbrick.text_bricks.text_brick.read_more'), class: 'read-more-text')
+      @content << content_tag(:p, t('qbrick.text_bricks.text_brick.read_less'), class: 'read-less-text')
     end
   end
 
   def search_page_form
-    form_tag kuhsaft.pages_path, method: :get, class: 'form-inline' do
+    form_tag qbrick.pages_path, method: :get, class: 'form-inline' do
       if block_given?
         yield
       else
-        render 'kuhsaft/search/form'
+        render 'qbrick/search/form'
       end
     end
   end
 
-  def on_kuhsaft_page?
-    controller.is_a? Kuhsaft::PagesController
+  def on_qbrick_page?
+    controller.is_a? Qbrick::PagesController
   end
 end

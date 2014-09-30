@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    models:
-      kuhsaft/accordion_item_brick: 'Accorion section'
-    attributes:
-      kuhsaft/accordion_item_brick:
-        caption: 'Title'

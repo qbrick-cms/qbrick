@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  database: kuhsaft_development
+  database: qbrick_development
   username: screenconcept
   password:
   host: localhost
@@ -10,7 +10,7 @@ development:
 
 test:
   adapter: postgresql
-  database: kuhsaft_test
+  database: qbrick_test
   username: screenconcept
   password:
   host: localhost

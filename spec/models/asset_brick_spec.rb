@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::AssetBrick, type: :model do
+describe Qbrick::AssetBrick, type: :model do
 
   let :asset_brick do
-    Kuhsaft::AssetBrick.new
+    Qbrick::AssetBrick.new
   end
 
   describe '#valid' do
@@ -26,14 +26,14 @@ describe Kuhsaft::AssetBrick, type: :model do
 
   describe '.styles' do
     it 'returns the available link styles' do
-      expect(Kuhsaft::AssetBrick.styles).to eq(%w(pdf word excel button))
+      expect(Qbrick::AssetBrick.styles).to eq(%w(pdf word excel button))
     end
   end
 
   describe '#to_style_class' do
     it 'includes the link style' do
       allow(asset_brick).to receive(:link_style).and_return('pdf')
-      expect(asset_brick.to_style_class).to eq('kuhsaft-asset-brick pdf')
+      expect(asset_brick.to_style_class).to eq('qbrick-asset-brick pdf')
     end
   end
 

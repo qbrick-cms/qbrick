@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::AnchorBrick, type: :model do
+describe Qbrick::AnchorBrick, type: :model do
 
   let :anchor_brick do
-    Kuhsaft::AnchorBrick.new(caption: 'test-anchor')
+    Qbrick::AnchorBrick.new(caption: 'test-anchor')
   end
 
   describe '#bricks' do

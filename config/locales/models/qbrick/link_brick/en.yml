@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      qbrick/link_brick: 'Link'
+    attributes:
+      qbrick/link_brick:
+        caption: 'Linktext'
+        href: 'Link'
+        link_style: 'Style'
+        open_in_new_window: 'Open in a new window?'

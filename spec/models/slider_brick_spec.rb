@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Kuhsaft::SliderBrick, type: :model do
+describe Qbrick::SliderBrick, type: :model do
 
   let :slider_brick do
-    Kuhsaft::SliderBrick.new
+    Qbrick::SliderBrick.new
   end
 
   describe '#bricks' do
@@ -14,13 +14,13 @@ describe Kuhsaft::SliderBrick, type: :model do
 
   describe '#to_style_class' do
     it 'includes the bootstrap styles' do
-      expect(slider_brick.to_style_class).to eq('kuhsaft-slider-brick carousel slide')
+      expect(slider_brick.to_style_class).to eq('qbrick-slider-brick carousel slide')
     end
   end
 
   describe '#allowed_brick_types' do
     it 'only allows ImageBricks and VideoBricks' do
-      expect(slider_brick.allowed_brick_types).to eq(%w(Kuhsaft::ImageBrick Kuhsaft::VideoBrick))
+      expect(slider_brick.allowed_brick_types).to eq(%w(Qbrick::ImageBrick Qbrick::VideoBrick))
     end
   end
 end

@@ -1,9 +1,0 @@
-en:
-  activerecord:
-    models:
-      kuhsaft/video_brick: 'Video'
-    attributes:
-      kuhsaft/video_brick:
-        video: 'Source'
-        embed_src: 'Embed Code'
-        href: 'Video'

@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe Kuhsaft::Searchable do
+describe Qbrick::Searchable do
 
   context 'with missing includes' do
-    it 'raises exteption when class does not include Kuhsaft::Bricklist' do
+    it 'raises exteption when class does not include Qbrick::Bricklist' do
       expect do
         class Foo
-          include Kuhsaft::Searchable
+          include Qbrick::Searchable
         end
-      end.to raise_error(/needs Kuhsaft::BrickList to be included/)
+      end.to raise_error(/needs Qbrick::BrickList to be included/)
     end
   end
 
   context 'with Bricklist included' do
     class SearchableDemo < ActiveRecord::Base
-      include Kuhsaft::BrickList
+      include Qbrick::BrickList
     end
 
     context 'without postgresql' do
@@ -22,7 +22,7 @@ describe Kuhsaft::Searchable do
         expect(ActiveRecord::Base.connection.instance_values).not_to eq('postgresql')
         expect(SearchableDemo).to receive :scope
         SearchableDemo.class_eval do
-          include Kuhsaft::Searchable
+          include Qbrick::Searchable
         end
       end
     end

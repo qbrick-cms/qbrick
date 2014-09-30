@@ -1,0 +1,4 @@
+de:
+  activerecord:
+    models:
+      qbrick/slider_brick: 'Slider / Karussel'

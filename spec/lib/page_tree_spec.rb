@@ -1,10 +1,10 @@
 require 'spec_helper'
-require_relative '../../lib/kuhsaft/page_tree'
-require_relative '../../app/models/kuhsaft/page'
+require_relative '../../lib/qbrick/page_tree'
+require_relative '../../app/models/qbrick/page'
 
 # TODO: THESE SPECS ONLY WORK WHEN THE FULL SUITE IS RUN. FIX THAT!
 
-module Kuhsaft
+module Qbrick
   describe PageTree do
     let(:page_tree) do
       {
