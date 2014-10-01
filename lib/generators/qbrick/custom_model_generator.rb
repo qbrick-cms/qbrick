@@ -26,8 +26,37 @@ module Qbrick
       nav_file = 'app/views/qbrick/cms/admin/_main_navigation.html.haml'
 
       inject_into_file nav_file, after: '%li= link_to Qbrick::Page.model_name.human(:count => 2), qbrick.cms_pages_path' do
-        "\n  %li= link_to t('cms.#{plural_name}.navigation_title'), #{route_name}_path\n"
+        "\n  %li= link_to t('cms.#{plural_name}.navigation_title'), #{route_name}_path"
       end
+    end
+
+    def add_model_and_migration
+      generate 'model', model_name, ARGV[1..-1].join(' ')
+      inject_into_file "app/models/#{model_name}.rb", before: 'class' do
+        "require 'qbrick/cms_model'\n\n"
+      end
+
+      inject_into_file "app/models/#{model_name}.rb", before: 'end' do
+        <<-eos.gsub(/^ {8}/, '').chomp
+          include Qbrick::CMSModel
+
+          # TODO: Define what attributes are shown in the form and permitted by strong parameters
+          editable_attributes #{attribute_keys_as_string}
+
+          # TODO: Define what attributes are shown in the index view
+          index_attributes #{attribute_keys_as_string}
+
+         eos
+      end
+    end
+
+    def add_resource_translations
+      template 'translations/resource.yml.erb', "config/locales/de/#{model_name}.yml"
+    end
+
+    def add_controller
+      generate 'controller', controller_name, ' --controller-specs=no --view-specs=no'
+      gsub_file "app/controllers/#{controller_name}_controller.rb", 'ApplicationController', 'Qbrick::BaseController'
     end
 
     private
@@ -71,6 +100,10 @@ module Qbrick
 
     def route_name
       controller_name.gsub('/', '_')
+    end
+
+    def attribute_keys_as_string
+      ARGV[1..-1].map { |a| ":#{a.split(':').first}" }.join(', ')
     end
   end
 end
