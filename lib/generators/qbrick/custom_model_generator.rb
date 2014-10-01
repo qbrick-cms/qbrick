@@ -1,7 +1,7 @@
 require 'rails/generators'
 
 module Qbrick
-  class CustomModelGenerator < Rails::Generators::Base
+  class CustomModelGenerator < Rails::Generators::NamedBase
     def source_paths
       [
         File.join(File.dirname(__FILE__), '../../../app/views/qbrick/cms/admin/'),
@@ -18,6 +18,9 @@ module Qbrick
       end
     end
 
+    def add_route
+      generate 'resource_route', resource_route_name
+    end
 
     private
 
@@ -44,6 +47,22 @@ module Qbrick
     def setup_translation_file
       empty_directory 'config/locales/de'
       copy_file 'translations/qbrick_base.yml', 'config/locales/de/qbrick_base.yml'
+    end
+
+    def resource_route_name
+      "cms/#{model_name}"
+    end
+
+    def model_name
+      ARGV.first.downcase
+    end
+
+    def controller_name
+      "cms/#{model_name.pluralize}"
+    end
+
+    def route_name
+      controller_name.gsub('/', '_')
     end
   end
 end
