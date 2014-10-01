@@ -1,15 +1,17 @@
-class Qbrick::BaseController < Qbrick::Cms::AdminController
-  inherit_resources
+module Qbrick
+  class BaseController < Qbrick::Cms::AdminController
+    inherit_resources
 
-  def show
-    super do |format|
-      format.html { redirect_to collection_path }
+    def show
+      super do |format|
+        format.html { redirect_to collection_path }
+      end
     end
-  end
 
-  private
+    private
 
-  def permitted_params
-    params.permit(resource_instance_name => collection.editable_attributes)
+    def permitted_params
+      params.permit(resource_instance_name => collection.editable_attributes)
+    end
   end
 end

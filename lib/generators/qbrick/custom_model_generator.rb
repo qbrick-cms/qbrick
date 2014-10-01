@@ -10,12 +10,12 @@ module Qbrick
     end
 
     def set_up_custom_models_base
-      unless custom_models_base_already_installed?
-        setup_base_controller
-        setup_base_views
-        setup_navigation
-        setup_translation_file
-      end
+      return if custom_models_base_already_installed?
+
+      setup_base_controller
+      setup_base_views
+      setup_navigation
+      setup_translation_file
     end
 
     def add_route
@@ -62,7 +62,7 @@ module Qbrick
     private
 
     def custom_models_base_already_installed?
-      File.exists?('app/controllers/qbrick/base_controller.rb') && File.exists?('app/views/qbrick/cms/admin/_main_navigation.html.haml')
+      File.exist?('app/controllers/qbrick/base_controller.rb') && File.exist?('app/views/qbrick/cms/admin/_main_navigation.html.haml')
     end
 
     def setup_base_controller

@@ -133,7 +133,7 @@ LambdaCall:
   EnforcedStyle: call
 
 LineLength:
-  Max: 120
+  Max: 140
 
 MethodLength:
   CountComments: false  # count full line comments?
