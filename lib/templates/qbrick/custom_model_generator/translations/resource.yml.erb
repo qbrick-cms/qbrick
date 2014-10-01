@@ -8,10 +8,9 @@ de:
   activerecord:
     attributes:
       <%= model_name %>:
-        <% attributes.each do |attr| -%>
-          <%= "#{attr}: TRANSLATE ME" %>
-        <% end -%>
-
+        <% attributes.each do |attr|-%>
+<%= "#{attr}: TRANSLATE ME" %>
+<% end %>
     models:
       <%= model_name %>:
         one: TRANSLATEME

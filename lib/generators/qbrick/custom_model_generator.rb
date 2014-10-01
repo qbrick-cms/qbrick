@@ -102,6 +102,10 @@ module Qbrick
       controller_name.gsub('/', '_')
     end
 
+    def attributes
+      ARGV[1..-1].map { |x| x.split(':').first }
+    end
+
     def attribute_keys_as_string
       ARGV[1..-1].map { |a| ":#{a.split(':').first}" }.join(', ')
     end
