@@ -1,0 +1,5 @@
+%h1= t("cms.edit_title", singular_name: t("cms.#{resource_collection_name}.singular_name"))
+
+= render 'form'
+
+= link_to t('cms.back'), collection_path
