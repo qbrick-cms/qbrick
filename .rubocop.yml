@@ -133,11 +133,11 @@ LambdaCall:
   EnforcedStyle: call
 
 LineLength:
-  Max: 140
+  Max: 155
 
 MethodLength:
   CountComments: false  # count full line comments?
-  Max: 15
+  Max: 20
 
 MethodName:
   # Valid values are: snake_case, camelCase

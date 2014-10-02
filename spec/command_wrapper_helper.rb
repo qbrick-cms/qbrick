@@ -1,7 +1,7 @@
 require 'active_support/all'
 
 [:rails, :rake].each do |command|
-  define_method command do |task, options = nil|
+  define_method command do |task|
     Dir.chdir test_app_path do
       # this is commented bc the output is annoying and not useful imho
       # if you cant provide a reason to keep this i'll delete

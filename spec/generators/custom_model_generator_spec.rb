@@ -33,7 +33,7 @@ describe 'rails generate qbrick:custom_model', generator: true do
 
       it 'generates inherited resource views' do
         views = Dir[File.join(test_app_path, 'app/views/qbrick/base/*.html.haml')]
-        views.map! { |v| v.scan(/^.+app\/views\/qbrick\/base\/(.*).html.haml/).flatten.first.to_sym }
+        views.map! { |v| v.scan(%r{^.+app/views/qbrick/base/(.*).html.haml}).flatten.first.to_sym }
         expected_action_views = [:edit, :index, :new, :"_form"]
         expect(expected_action_views - views).to be_empty
       end
@@ -64,17 +64,17 @@ describe 'rails generate qbrick:custom_model', generator: true do
 
     it 'does not generate routing specs' do
       routing_spec = File.join(test_app_path, 'spec/routing/cars_routing_spec.rb')
-      expect(File.exists? routing_spec).to be(false)
+      expect(File.exist? routing_spec).to be(false)
     end
 
     it 'does not generate view specs' do
       view_specs = File.join(test_app_path, 'spec/views/cars')
-      expect(File.exists? view_specs).to be(false)
+      expect(File.exist? view_specs).to be(false)
     end
 
     it 'does not generate controller specs' do
       controller_specs = File.join(test_app_path, 'spec/controllers/cars_controller_spec.rb')
-      expect(File.exists? controller_specs).to be(false)
+      expect(File.exist? controller_specs).to be(false)
     end
 
     it 'does not generate json views' do

@@ -18,7 +18,7 @@ end
 
 def drop_qbrick_scaffold_for(name)
   app_path = test_app_path
-  unless File.exists? app_path
+  unless File.exist? app_path
     puts "won't destroy scaffold for #{name.inspect} while app #{app_path} doesn't exist."
     return
   end
