@@ -120,6 +120,12 @@ rake setup
 rake start_dummy
 ```
 
+``` bundle exec rspec spec``` will not run generator specs per default.
+
+use ``` bundle exec rspec spec -t generator``` to run generator specs
+
+
+
 # Usage
 
 ## Making Qbrick helpers available to your app
