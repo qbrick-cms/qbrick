@@ -12,16 +12,16 @@ module Qbrick
         
         if args.size > 0
           method = method.chop
-          value = {:value => args[0]}
+          value = args[0]
           setting = self.where(key: method).first
-          if value[:value].nil?
+          if value.nil?
             setting.destroy if setting
           else
             setting = self.new if !setting
             setting.key = method.to_s
-            setting.value = value[:value]
+            setting.value = value
             if setting.save
-              return value[:value]
+              return value
             end
           end
         end
