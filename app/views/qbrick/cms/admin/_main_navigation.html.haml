@@ -9,4 +9,5 @@
     = link_to t('.logout'), '', :method => :delete
 
 %ul.nav
+  %li= link_to t('.settings'), qbrick.edit_cms_settings_path
   %li= link_to Qbrick::Page.model_name.human(:count => 2), qbrick.cms_pages_path

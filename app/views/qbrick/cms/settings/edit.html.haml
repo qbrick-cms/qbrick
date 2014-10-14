@@ -1,0 +1,11 @@
+%h1 les settings
+
+%ul
+  - @settings.each do |s|
+    %li= "#{s.key} - #{s.value}"
+
+- @settings.each do |s|
+
+  = simple_form_for [:cms, s] do |f|
+    = f.input :value, label: s.key
+    = f.submit

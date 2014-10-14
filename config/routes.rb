@@ -1,6 +1,8 @@
 Qbrick::Engine.routes.draw do
 
   namespace :cms do
+    resource :settings, only: :edit
+    resources :settings, only: :update
     resources :pages, except: :show do
       post :sort, on: :collection
       get :mirror
