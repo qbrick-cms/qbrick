@@ -28,4 +28,9 @@ FactoryGirl.define do
   factory :asset, class: Qbrick::Asset do |a|
     a.file File.open("#{Qbrick::Engine.root}/spec/dummy/app/assets/images/spec-image.png")
   end
+
+  factory :setting, class: Qbrick::Setting do |s|
+    s.key 'code'
+    s.value 'SomeContent'
+  end
 end
