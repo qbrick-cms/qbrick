@@ -2,11 +2,11 @@
 [![Code Climate](https://codeclimate.com/github/screenconcept/qbrick.png)](https://codeclimate.com/github/screenconcept/qbrick)
 [![Gem Version](https://badge.fury.io/rb/qbrick.png)](http://badge.fury.io/rb/qbrick)
 
-![qBrick logo](https://raw.github.com/screenconcept/qbrick/master/doc/logo.png)
+![qBrick logo](doc/logo.png)
 
 # qBrick - The Ruby on Rails CMS you want
 
-*Formerly known as: Qbrick*
+*Formerly known as: Kuhsaft*
 
 Qbrick is made by some Rails developers at Screen Concept that got tired of
 fiddling with unusable content management sytems. We are trying hard to make a
@@ -498,11 +498,11 @@ Do not forget to update your `config.assets.precompile` array. Add the
 following to your existing array `ckeditor/adv_link/*`.
 
 # ROADMAP
-tbd
+See our [roadmap](doc/ROADMAP.md)
 
 # CONTRIBUTING
-tbd
+See our [contributing guidelines](CONTRIBUTING.md)
 
 # LICENSE
 
-See the LICENSE file.
+See the [LICENSE file](LICENSE)
