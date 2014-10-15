@@ -1,6 +1,6 @@
 # Roadmap
 
-You can find the planned features for the current release in [this pull
+You can find the planned features for the next release in [this pull
 request](https://github.com/screenconcept/qbrick/pull/2)
 
 ## Backlog (no particular order)
