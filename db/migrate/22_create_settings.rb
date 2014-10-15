@@ -3,6 +3,7 @@ class CreateSettings < ActiveRecord::Migration
     create_table :qbrick_settings do |t|
       t.string :key
       t.text :value
+      t.integer :settings_collection_id
     end
     
     add_index :qbrick_settings, :key, :unique => true
