@@ -1,6 +1,5 @@
 module Qbrick
   class Setting < ActiveRecord::Base
-
     belongs_to :settings_collection
 
     default_scope { order('id ASC') }

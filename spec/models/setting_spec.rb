@@ -12,7 +12,7 @@ module Qbrick
 
       context 'setting exists' do
         it 'returns the set value' do
-          expect(Setting[:code]).to eq('SomeContent')
+          expect(Setting[:code]).to eq('SomeValue')
         end
 
         it 'returns empty string for empty setting' do

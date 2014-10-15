@@ -1,7 +1,6 @@
 module Qbrick
   module Cms
     class SettingsCollectionsController < AdminController
-
       def edit
         @settings_collection = Qbrick::SettingsCollection.find(params[:id])
       end
