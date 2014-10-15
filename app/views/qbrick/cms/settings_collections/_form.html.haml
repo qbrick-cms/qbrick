@@ -1,7 +1,4 @@
-%h1= t('.title')
-%hr
-
-= simple_form_for @settings_collection, url: cms_settings_collection_path, method: :patch, wrapper: :bootstrap, html: { class: 'form-horizontal' } do |f|
+= simple_form_for settings, url: cms_settings_collection_path(settings), method: :patch, wrapper: :bootstrap, html: { class: 'form-horizontal' } do |f|
 
   .form-inputs
     = f.simple_fields_for :settings do |nf|

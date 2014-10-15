@@ -20,16 +20,20 @@ end
 
 # Add default settings
 
+site_collection = Qbrick::SettingsCollection.find_or_create_by(collection_type: 'site')
+page_collection = Qbrick::SettingsCollection.find_or_create_by(collection_type: 'page')
 global_collection = Qbrick::SettingsCollection.find_or_create_by(collection_type: 'global')
 
-default_settings = [
-  { key: 'default_page_title', value: 'Default Page Title', settings_collection_id: global_collection.id },
-  { key: 'default_page_description', value: 'Default Page Description', settings_collection_id: global_collection.id },
+settings = [
+  { key: 'site_title', value: 'Default Site Title', settings_collection_id: site_collection.id },
+  { key: 'site_description', value: 'Default Site Description', settings_collection_id: site_collection.id },
+  { key: 'default_page_title', value: 'Default Page Title', settings_collection_id: page_collection.id },
+  { key: 'default_page_description', value: 'Default Page Description', settings_collection_id: page_collection.id },
   { key: 'google_analytics_key', value: 'UA-xxxx-x', settings_collection_id: global_collection.id },
   { key: 'typekit_id', value: 'xxxxxxx', settings_collection_id: global_collection.id }
 ]
 
-default_settings.each do |s|
+settings.each do |s|
   setting = Qbrick::Setting.find_or_create_by(key: s[:key])
   setting.update! s
 end
