@@ -6,7 +6,7 @@ require 'rspec/rails'
 [
   'factory_girl',
   'capybara/rails',
-  'pry-debugger',
+  'pry-byebug',
   'database_cleaner'
 ].each { |lib| require lib }
 
