@@ -56,10 +56,10 @@ task :setup do
   within_dummy_app do
     `bundle exec rake qbrick:install:migrations`
     `bundle exec rails generate qbrick:install:assets`
+    `bundle exec rake db:drop`
     `bundle exec rake db:create`
     `bundle exec rake db:migrate`
     `bundle exec rake db:test:prepare`
-    `bundle exec rake db:seed`
   end
 end
 
