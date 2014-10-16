@@ -31,7 +31,7 @@ module Qbrick
     end
 
     def add_model_and_migration
-      generate 'model', model_name, ARGV[1..-1].join(' ')
+      generate 'model', model_name, ARGV[1..-1].join(' '), '--no-test-framework'
       inject_into_file "app/models/#{model_name}.rb", before: 'class' do
         "require 'qbrick/cms_model'\n\n"
       end
@@ -55,7 +55,7 @@ module Qbrick
     end
 
     def add_controller
-      generate 'controller', controller_name, ' --controller-specs=no --view-specs=no'
+      generate 'controller', controller_name, '--no-helper --no-assets --no-test-framework'
       gsub_file "app/controllers/#{controller_name}_controller.rb", 'ApplicationController', 'Qbrick::BaseController'
     end
 
