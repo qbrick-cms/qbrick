@@ -51,7 +51,11 @@ module Qbrick
     end
 
     def add_resource_translations
-      template 'translations/resource.yml.erb', "config/locales/de/#{model_name}.yml"
+      I18n.available_locales.each do |locale|
+        I18n.with_locale(locale) do
+          template 'translations/resource.yml.erb', "config/locales/#{locale}/#{model_name}.yml"
+        end
+      end
     end
 
     def add_controller
