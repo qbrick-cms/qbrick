@@ -1,0 +1,14 @@
+en:
+  qbrick:
+    cms:
+      settings_collections:
+        index:
+          title: Settings
+        form:
+          save: Save
+          site_title: Site Title
+          site_description: Site Description
+          default_page_title: Default Title
+          default_page_description: Default Description
+          google_analytics_key: Google Analytics Key
+          typekit_id: Typekit ID

@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  sequence(:title) { |n| n }
+  sequence(:title) { |n| "English Title #{n}" }
 
   factory :page, class: 'Qbrick::Page' do |p|
     p.parent nil
     p.position 1
-    p.title { "English Title #{FactoryGirl.generate(:title)}" }
+    p.title { FactoryGirl.generate(:title) }
     p.published 1
     p.body 'lorem ipsum'
     p.url ''
@@ -27,5 +27,10 @@ FactoryGirl.define do
 
   factory :asset, class: Qbrick::Asset do |a|
     a.file File.open("#{Qbrick::Engine.root}/spec/dummy/app/assets/images/spec-image.png")
+  end
+
+  factory :setting, class: Qbrick::Setting do |s|
+    s.key 'code'
+    s.value 'SomeValue'
   end
 end
