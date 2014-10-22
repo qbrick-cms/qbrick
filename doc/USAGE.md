@@ -22,3 +22,7 @@ settings via seeds.
 Settings can be used in your code by calling
 `Qbrick::Setting[:key_of_your_setting]`.  This will return the value of your
 setting or a blank string if it is not set or does not exist.
+
+## qBrick Generators
+
+See our [qBrick generators](doc/GENERATORS.md) guide.
