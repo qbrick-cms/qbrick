@@ -1,4 +1,4 @@
-%h1= t("cms.new_title", singular_name: t("cms.#{resource_collection_name}.singular_name"))
+%h1= t("cms.new_title", singular_name: resource_class.model_name.human)
 
 = render 'form'
 

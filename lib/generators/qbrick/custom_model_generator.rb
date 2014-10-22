@@ -26,7 +26,7 @@ module Qbrick
       nav_file = 'app/views/qbrick/cms/admin/_main_navigation.html.haml'
 
       inject_into_file nav_file, after: '%li= link_to Qbrick::Page.model_name.human(:count => 2), qbrick.cms_pages_path' do
-        "\n  %li= link_to t('cms.#{plural_name}.navigation_title'), #{route_name}_path"
+        "\n  %li= link_to t('cms.navigation_title.#{model_name}'), #{route_name}_path"
       end
     end
 

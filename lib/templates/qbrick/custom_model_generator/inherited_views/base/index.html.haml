@@ -1,10 +1,10 @@
-%h1= t("cms.index_title", plural_name: t("cms.#{resource_collection_name}.plural_name"))
+%h1= t("cms.index_title", plural_name: resource_class.model_name.human(count: 2))
 
 .row-fluid.actions
   .pull-right.padded
     = link_to new_resource_path, :class => 'btn btn-primary' do
       %i.icon-plus-sign.icon-white
-      = t("cms.#{resource_collection_name}.new", plural_name: resource_collection_name, default: t('cms.default.new'))
+      = t("cms.#{resource_collection_name}.new", plural_name: resource_class.model_name.human, default: t('cms.default.new'))
 
 %table.table.table-bordered.table-striped
   %thead
