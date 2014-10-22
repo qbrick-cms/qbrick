@@ -18,3 +18,4 @@ Gemfile.lock
 tags
 .idea
 spec/dummy/.sass-cache
+qbrick.xcworkspace/
