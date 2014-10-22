@@ -2,13 +2,15 @@
 
 ## Custom Model Generator
 
-QBrick comes with a custom model generator which has basically the same syntax
+qBrick comes with a custom model generator which has basically the same syntax
 as the default rails scaffold generator:
 
 ```
   bundle exec rails generate qbrick:custom_model NAME [field[:type][:index]
   field[:type][:index]] [options]
 ```
+
+Consider it a minimalistic kind of rails_admin.
 
 You can use it to scaffold a CRUD interface for managing a custom model through
 the CMS Backend. The generated scaffolding uses
