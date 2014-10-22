@@ -25,4 +25,4 @@ setting or a blank string if it is not set or does not exist.
 
 ## qBrick Generators
 
-See our [qBrick generators](doc/GENERATORS.md) guide.
+See our [qBrick generators](GENERATORS.md) guide.
