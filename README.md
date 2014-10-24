@@ -94,11 +94,16 @@ mount Qbrick::Engine => '/'
 # Using and Customizing qBrick
 See our [wiki](https://github.com/screenconcept/qbrick/wiki)
 
+# Issues
+
+Before reporiting a problem, please read how to [File an
+issue](CONTRIBUTING.md#file-an-issue).
+
 # Roadmap
 See our [roadmap](doc/ROADMAP.md)
 
 # Contributing
-See our [contributing guidelines](CONTRIBUTING.md)
+See the [Contributing Guidelines](CONTRIBUTING.md)
 
 # License
 
