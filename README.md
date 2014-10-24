@@ -2,7 +2,8 @@
 [![Code Climate](https://codeclimate.com/github/screenconcept/qbrick.png)](https://codeclimate.com/github/screenconcept/qbrick)
 [![Gem Version](https://badge.fury.io/rb/qbrick.png)](http://badge.fury.io/rb/qbrick)
 
-![qBrick logo](doc/logo.png)
+![qBrick
+logo](https://github.com/screenconcept/qbrick.wiki/blob/master/logo.png)
 
 # qBrick - The Ruby on Rails CMS you want
 
