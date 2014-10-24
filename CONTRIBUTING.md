@@ -15,12 +15,10 @@ Issues](https://github.com/screenconcept/qbrick/issues).
 
 Pull requests are very welcome! Please try to follow these simple rules if applicable:
 
-* Please create a topic branch for every separate change you make.  TIP: run
-* rubocop locally before pushing Make sure your patches are well tested. All
-* specs must pass when run on Travis CI.  Update the README if necessary or
-* provide additional documentation via a PR to the [qBrick
-* wiki](https://github.com/screenconcept/qbrick/wiki).  Please do not change
-* the version number.
+* Please create a topic branch for every separate change you make. 
+* run rubocop locally before pushing Make sure your patches are well tested.
+* All specs must pass when run on Travis CI.  Update the README if necessary or provide additional documentation via a PR to the [qBrick wiki](https://github.com/screenconcept/qbrick/wiki).
+* Please do not change the version number.
 
 ### Testing / Specs
 
