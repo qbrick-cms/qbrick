@@ -20,7 +20,7 @@ have to build your Rails application, while still providing some
 sensible defaults and the basic functionality you would expect form a
 CMS system.
 
-# Dependencies 
+# Dependencies
 
 * A Rails 4 application
 * ImageMagick
@@ -48,6 +48,32 @@ rake db:migrate
 rake db:seed
 rails generate qbrick:assets:install
 ```
+
+Load the Qbrick assets into your app, so you have working grids, widgets etc:
+
+```sass
+# application.css.sass
+@import 'qbrick/application'
+```
+
+```coffee
+# application.js.coffee
+//= require 'qbrick/application'
+```
+
+Also, you need to define the image sizes for the image brick or use
+the defaults:
+
+```ruby
+# your_app/config/initializers/qbrick.rb
+Rails.application.config.to_prepare do
+  Qbrick::Engine.configure do
+    config.image_sizes.build_defaults! # creates 960x540 and 320x180 sizes
+  end
+end
+```
+
+See "Configuring the image brick" for more details.
 
 Finally, mount the qBrick engine in your routes file:
 
