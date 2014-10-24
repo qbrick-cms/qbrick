@@ -75,15 +75,23 @@ end
 
 See "Configuring the image brick" for more details.
 
+If you would like to use the qBrick helpers in your app, include them in
+your application controller:
+
+```ruby
+class ApplicationController < ActionController::Base
+  helper Qbrick::Engine.helpers
+end
+```
+
 Finally, mount the qBrick engine in your routes file:
 
 ```ruby
 mount Qbrick::Engine => '/'
 ```
 
-## Usage
-See our [usage guide](doc/USAGE.md) for information on how to use and
-customize qBrick.
+# Using and Customizing qBrick
+See our [wiki](https://github.com/screenconcept/qbrick/wiki)
 
 # Roadmap
 See our [roadmap](doc/ROADMAP.md)
