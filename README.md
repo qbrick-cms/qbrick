@@ -74,8 +74,6 @@ Rails.application.config.to_prepare do
 end
 ```
 
-See "Configuring the image brick" for more details.
-
 If you would like to use the qBrick helpers in your app, include them in
 your application controller:
 
