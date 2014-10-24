@@ -57,4 +57,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form', '~> 3.0.1'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'bourbon'
+  s.add_dependency 'inherited_resources'
 end
