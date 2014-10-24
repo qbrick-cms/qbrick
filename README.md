@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/qbrick.png)](http://badge.fury.io/rb/qbrick)
 
 ![qBrick
-logo](https://github.com/screenconcept/qbrick.wiki/blob/master/logo.png)
+logo](https://raw.githubusercontent.com/wiki/screenconcept/qbrick/logo.png)
 
 # qBrick - The Ruby on Rails CMS you want
 
