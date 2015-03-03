@@ -23,6 +23,8 @@ module Qbrick
 
       def update
         @brick = Qbrick::Brick.find(params[:id])
+        @brick.image_size ||= ImageSize.all.first.name_to_s
+        params['brick'].delete('image_cache') if params['brick']['image']
         @brick.update_attributes(brick_params)
 
         #
