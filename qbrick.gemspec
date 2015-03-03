@@ -29,7 +29,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'i18n-tasks'
   s.add_development_dependency 'rake'
-  # s.add_development_dependency 'nyan-cat-formatter'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'pry-rails'
+  s.add_development_dependency 'pry-byebug'
+  s.add_development_dependency 'better_errors'
+  s.add_development_dependency 'binding_of_caller'
+  s.add_development_dependency 'rubocop'
 
   s.add_dependency 'coffee-rails'
   s.add_dependency 'remotipart'
@@ -42,17 +47,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'ckeditor_rails', '4.2'
   s.add_dependency 'pg_search'
   s.add_dependency 'htmlentities'
-
   s.add_dependency 'jquery-rails'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'pry-rails'
-  s.add_development_dependency 'pry-byebug'
-  s.add_development_dependency 'better_errors'
-  s.add_development_dependency 'binding_of_caller'
-  s.add_development_dependency 'rubocop'
-  s.add_dependency 'sass-rails', '~> 4.0.2'
-
-  # Rails 4 compatibility
+  s.add_dependency 'sass-rails'
   s.add_dependency 'rails', '~> 4.2.0'
   s.add_dependency 'simple_form', '~> 3.0.1'
   s.add_dependency 'jquery-ui-rails'
