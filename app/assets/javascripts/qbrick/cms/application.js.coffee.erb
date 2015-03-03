@@ -15,9 +15,6 @@
 root = exports ? this
 root.CKEDITOR.timestamp = null
 
-# As @ryabrody & @k-graefenhain found out there is obviously a bug which causes the asset_path_helper to return paths always without digest:
-# https://github.com/rails/sprockets-rails/issues/66
-# That's why we need the environment switch here:
 CKEDITOR.config.customConfig = "<%= asset_path('qbrick/cms/ck-config.js') %>"
 
 loadTextEditor = ->
