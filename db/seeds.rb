@@ -37,3 +37,7 @@ settings.each do |s|
   setting = Qbrick::Setting.find_or_create_by(key: s[:key])
   setting.update! s
 end
+
+unless  Qbrick::Admin.any?
+  Qbrick::Admin.create(email: 'admin@admin.com', password: 'change-me-soon!')
+end
