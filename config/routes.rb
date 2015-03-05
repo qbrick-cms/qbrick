@@ -1,5 +1,7 @@
 Qbrick::Engine.routes.draw do
 
+  devise_for :admins, class_name: 'Qbrick::Admin', module: :devise
+
   namespace :cms do
     resources :settings_collections, only: [:update, :index]
     resources :pages, except: :show do
