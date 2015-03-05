@@ -54,4 +54,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'bourbon'
   s.add_dependency 'inherited_resources'
+  s.add_dependency 'devise'
 end
