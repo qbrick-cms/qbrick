@@ -1,3 +1,3 @@
 [submodule "docs"]
 	path = docs
-	url = git@github.com:screenconcept/qbrick.wiki.git
+  url = https://github.com/screenconcept/qbrick.wiki.git
