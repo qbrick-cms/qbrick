@@ -79,4 +79,5 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.filter_run_excluding generator: true
+  config.active_record.raise_in_transactional_callbacks = true
 end
