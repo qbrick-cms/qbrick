@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'rspec/active_model/mocks'
 
 describe Qbrick::BrickList do
-
   class TestBrick
     include Qbrick::BrickList
   end

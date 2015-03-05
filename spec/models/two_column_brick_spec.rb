@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::TwoColumnBrick, type: :model do
-
   let :two_column_brick do
     Qbrick::TwoColumnBrick.new
   end

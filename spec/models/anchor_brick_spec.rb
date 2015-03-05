@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::AnchorBrick, type: :model do
-
   let :anchor_brick do
     Qbrick::AnchorBrick.new(caption: 'test-anchor')
   end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::SliderBrick, type: :model do
-
   let :slider_brick do
     Qbrick::SliderBrick.new
   end

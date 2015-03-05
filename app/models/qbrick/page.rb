@@ -159,7 +159,7 @@ module Qbrick
     end
 
     def as_json
-      Hash.new.tap do |json|
+      {}.tap do |json|
         json['title'] = send("title_#{I18n.locale.to_s.underscore}")
         json['pretty_url'] = '/' + send("url_#{I18n.locale.to_s.underscore}")
         json['url'] = "/pages/#{id}"

@@ -32,7 +32,7 @@ module Qbrick
       process :resize_images
       def resize_images
         resize_to_fill(100, 100) if @file.present? && @file.content_type.present? &&
-                                      @file.content_type.include?('image')
+                                    @file.content_type.include?('image')
       end
     end
 

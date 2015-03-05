@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Qbrick::Engine do
-
   describe '.configure' do
-
     describe '.image_sizes' do
       it 'delegates .clear to ImageSize' do
         expect(Qbrick::ImageSize).to receive(:clear!)
@@ -19,7 +17,5 @@ describe Qbrick::Engine do
         end
       end
     end
-
   end
-
 end

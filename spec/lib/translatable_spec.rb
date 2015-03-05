@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::Translatable do
-
   class Demo
     include Qbrick::Translatable
     translate :name

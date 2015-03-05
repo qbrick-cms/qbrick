@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::Searchable do
-
   context 'with missing includes' do
     it 'raises exteption when class does not include Qbrick::Bricklist' do
       expect do

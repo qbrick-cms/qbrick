@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::ImageBrick, type: :model do
-
   let :image_brick do
     Qbrick::ImageBrick.new
   end

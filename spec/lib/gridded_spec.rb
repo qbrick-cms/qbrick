@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::Gridded do
-
   context 'included gridded module' do
     class GridClass
       include Qbrick::Gridded

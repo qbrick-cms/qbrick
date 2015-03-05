@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe PagesHelper, type: :helper do
   describe '#search_page_form' do
-
     context 'without block' do
       it 'renders the default search form' do
         form = search_page_form

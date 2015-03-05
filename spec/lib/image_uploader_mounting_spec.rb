@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::ImageUploaderMounting do
-
   let :brick do
     Qbrick::ImageBrick.new
   end

@@ -2,14 +2,12 @@ require 'spec_helper'
 
 module Qbrick
   describe Setting, type: :model do
-
     before do
       create(:setting)
       create(:setting, key: 'stuff', value: nil)
     end
 
     describe '[](key)' do
-
       context 'setting exists' do
         it 'returns the set value' do
           expect(Setting[:code]).to eq('SomeValue')

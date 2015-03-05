@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::VideoBrick, type: :model do
-
   let :video_brick do
     Qbrick::VideoBrick.new
   end
