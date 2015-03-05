@@ -6,7 +6,7 @@
       %li{ :class => (:active if I18n.locale.to_s == locale.to_s) }
         = link_to_content_locale(locale)
   %li
-    = link_to t('.logout'), '', :method => :delete
+    = link_to t('.logout'), destroy_admin_session_path, :method => :delete
 
 %ul.nav
   %li= link_to t('.settings'), qbrick.cms_settings_collections_path
