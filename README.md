@@ -91,7 +91,7 @@ mount Qbrick::Engine => '/'
 
 You can now access the qBrick interface by visiting `/cms` in your
 browser. By default, qBrick creates the first admin user with the
-email `admin@admin.com` and passowrd: `change-me-soon!`. Which you can
+email `admin@admin.com` and password: `change-me-soon!`. Which you can
 use to log in the first time.
 
 # Using and Customizing qBrick
