@@ -3,6 +3,12 @@
 require 'spec_helper'
 
 describe 'Cms/Pages', type: :feature do
+
+  before do
+    admin = FactoryGirl.create(:admin)
+    login_as(admin, :scope => :admin)
+  end
+
   context '#new' do
     before do
       visit qbrick.new_cms_page_path

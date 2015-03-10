@@ -25,6 +25,9 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require_relative f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema! if ActiveRecord::Migration.respond_to? :maintain_test_schema!
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not
   # methods or matchers
