@@ -39,6 +39,7 @@ RSpec.configure do |config|
   config.include CarrierWave::Test::Matchers
   config.include QbrickSpecHelper
   config.include FactoryGirl::Syntax::Methods
+  config.include Rails.application.routes.url_helpers
 
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
