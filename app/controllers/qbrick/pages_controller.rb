@@ -10,7 +10,7 @@ module Qbrick
     end
 
     def show
-      if @page.present? && @page.redirect? && @page.redirect_url.present?
+      if redirect_page?
         redirect_url = @page.redirect_url.sub(/\A\/+/, '') # remove all preceding slashes
         session[:qbrick_referrer] = @page.id
         redirect_to "/#{redirect_url}"
@@ -29,6 +29,10 @@ module Qbrick
     end
 
     private
+
+    def redirect_page?
+      @page.present? && @page.redirect? && @page.redirect_url.present?
+    end
 
     def find_page_by_url
       url = locale.to_s
