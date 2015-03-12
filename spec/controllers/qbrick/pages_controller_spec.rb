@@ -39,9 +39,7 @@ describe Qbrick::PagesController, type: :controller do
 
         context 'without matching locale' do
           it 'raises a routing error' do
-            I18n.with_locale(:en) do
-              expect { get(:show,   use_route: :qbrick) }.to raise_error(ActionController::RoutingError)
-            end
+            expect { get(:show, use_route: :qbrick, locale: :en) }.to raise_error(ActionController::RoutingError)
           end
         end
       end
