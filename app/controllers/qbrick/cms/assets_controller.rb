@@ -1,6 +1,6 @@
 module Qbrick
   module Cms
-    class AssetsController < AdminController
+    class AssetsController < BackendController
       def index
         @assets = Qbrick::Asset.by_date
         respond_with @assets

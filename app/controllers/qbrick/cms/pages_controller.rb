@@ -2,7 +2,7 @@ require 'qbrick/page_tree'
 
 module Qbrick
   module Cms
-    class PagesController < AdminController
+    class PagesController < BackendController
       def index
         @pages = Qbrick::Page.roots
         respond_with @pages

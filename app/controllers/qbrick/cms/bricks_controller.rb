@@ -1,6 +1,6 @@
 module Qbrick
   module Cms
-    class BricksController < AdminController
+    class BricksController < BackendController
       respond_to :html, :js
       before_action :delete_iamge_cache_params_if_params_has_image, only: :update
 
