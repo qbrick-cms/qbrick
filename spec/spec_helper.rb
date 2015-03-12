@@ -47,6 +47,7 @@ RSpec.configure do |config|
 
   config.before do
     DatabaseCleaner.start
+    Qbrick::ImageSize.build_defaults!
     I18n.available_locales = [:en, :de]
   end
 
