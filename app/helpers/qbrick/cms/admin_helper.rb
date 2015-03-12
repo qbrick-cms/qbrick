@@ -1,3 +1,4 @@
+# FIXME: this file is currently ignored by rubocop and could use some cleaning up
 module Qbrick
   module Cms
     module AdminHelper
