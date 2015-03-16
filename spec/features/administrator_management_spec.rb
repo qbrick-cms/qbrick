@@ -47,10 +47,6 @@ describe 'Administrator Management', type: :feature do
     end
   end
 
-
-
-
-  # - change my password
   # - create admin
   #   - mail notification?
   # - edit admin (can not edit password)
