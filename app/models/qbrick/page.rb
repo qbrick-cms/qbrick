@@ -94,6 +94,16 @@ module Qbrick
       send("url_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
     end
 
+    def translated_link_for(locale)
+      if translated_to? locale
+        I18n.with_locale locale do
+          url_with_locale
+        end
+      else
+        Qbrick::Page.roots.first.link
+      end
+    end
+
     def link
       if bricks.count == 0 && children.count > 0
         children.first.link
