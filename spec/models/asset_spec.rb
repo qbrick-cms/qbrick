@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::Asset, type: :model do
-
   let :asset do
     create(:asset)
   end

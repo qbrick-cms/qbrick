@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::LinkBrick, type: :model do
-
   let :link_brick do
     Qbrick::LinkBrick.new
   end

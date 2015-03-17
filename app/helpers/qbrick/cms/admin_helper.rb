@@ -1,3 +1,4 @@
+# FIXME: this file is currently ignored by rubocop and could use some cleaning up
 module Qbrick
   module Cms
     module AdminHelper
@@ -60,9 +61,9 @@ module Qbrick
         routes = Rails.application.routes.routes
         routes = routes.select do |r|
           r.verb.match('GET') && !r.requirements.blank? &&
-            !r.requirements[:controller].to_s.start_with?('cms') &&
-            !r.required_parts.any? &&
-            !r.requirements[:controller].to_s.start_with?('rails/')
+          !r.requirements[:controller].to_s.start_with?('cms') &&
+          !r.required_parts.any? &&
+          !r.requirements[:controller].to_s.start_with?('rails/')
         end
 
         routes.map { |r| _routes.url_for(r.requirements.merge only_path: true).strip }.uniq.sort

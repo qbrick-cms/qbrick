@@ -32,6 +32,7 @@ module Qbrick
 
     after_initialize do
       self.position ||= has_siblings? ? brick_list.bricks.maximum(:position).to_i + 1 : 1
+      self.image_size ||= ImageSize.all.first.name.to_s
     end
 
     after_save do

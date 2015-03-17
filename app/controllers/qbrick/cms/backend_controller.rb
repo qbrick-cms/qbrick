@@ -1,9 +1,9 @@
 module Qbrick
   module Cms
-    class AdminController < ActionController::Base
+    class BackendController < ActionController::Base
       respond_to :html
       layout 'qbrick/cms/application'
-      before_action :set_content_locale
+      before_action :set_content_locale, :authenticate_admin!
 
       def set_content_locale
         return if params[:content_locale].blank?

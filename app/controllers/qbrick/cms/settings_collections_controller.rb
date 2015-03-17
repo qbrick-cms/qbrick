@@ -1,6 +1,6 @@
 module Qbrick
   module Cms
-    class SettingsCollectionsController < AdminController
+    class SettingsCollectionsController < BackendController
       def index
         @settings_collections = [
           Qbrick::SettingsCollection.find_by(collection_type: 'site'),

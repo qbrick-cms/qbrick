@@ -89,6 +89,11 @@ Finally, mount the qBrick engine in your routes file:
 mount Qbrick::Engine => '/'
 ```
 
+You can now access the qBrick interface by visiting `/cms` in your
+browser. By default, qBrick creates the first admin user with the
+email `admin@admin.com` and password: `change-me-soon!`. Which you can
+use to log in the first time.
+
 # Using and Customizing qBrick
 See our [wiki](https://github.com/screenconcept/qbrick/wiki)
 

@@ -83,7 +83,6 @@ describe Qbrick::Page, type: :model do
   end
 
   describe '#state_class' do
-
     let(:page) { Qbrick::Page.new }
 
     it 'returns publsihed as string when page is published' do

@@ -2,7 +2,6 @@ require 'spec_helper'
 require_relative '../../lib/qbrick/touch_placeholders'
 
 describe Qbrick::TouchPlaceholders do
-
   before :all do
     m = ActiveRecord::Migration.new
     m.verbose = false

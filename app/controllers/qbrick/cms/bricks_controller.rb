@@ -1,11 +1,11 @@
 module Qbrick
   module Cms
-    class BricksController < AdminController
+    class BricksController < BackendController
       respond_to :html, :js
+      before_action :delete_iamge_cache_params_if_params_has_image, only: :update
 
       def create
-        @brick = params[:brick][:type].constantize.create(brick_params)
-        @brick.image_size ||= ImageSize.all.first.name.to_s
+        create_brick_from_type_param
 
         if @brick.valid?
           respond_with @brick do |format|
@@ -23,15 +23,8 @@ module Qbrick
 
       def update
         @brick = Qbrick::Brick.find(params[:id])
-        @brick.image_size ||= ImageSize.all.first.name_to_s
-        params['brick'].delete('image_cache') if params['brick']['image']
         @brick.update_attributes(brick_params)
 
-        #
-        # rails will fall back to html if ajax can't be used
-        # this is the case with the image brick, because ajax does not
-        # support image uploads
-        #
         respond_with @brick do |format|
           format.js
           format.html { redirect_to edit_cms_page_path(@brick.parents.first) }
@@ -54,6 +47,14 @@ module Qbrick
       end
 
       private
+
+      def delete_iamge_cache_params_if_params_has_image
+        params['brick'].delete('image_cache') if params['brick']['image']
+      end
+
+      def create_brick_from_type_param
+        @brick = params[:brick][:type].constantize.create(brick_params)
+      end
 
       def brick_params
         params.require(:brick).permit!

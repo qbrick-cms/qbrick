@@ -20,4 +20,5 @@ module Qbrick
   require 'haml'
   require 'ckeditor_rails'
   require 'inherited_resources'
+  require 'devise'
 end

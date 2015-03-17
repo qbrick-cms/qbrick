@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'fileutils'
 
 describe Qbrick::PlaceholderBrick, type: :model do
-
   let :placeholder_brick do
     Qbrick::PlaceholderBrick.new
   end

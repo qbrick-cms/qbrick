@@ -1,4 +1,5 @@
 Qbrick::Engine.routes.draw do
+  devise_for :admins, class_name: 'Qbrick::Admin', module: :devise
 
   namespace :cms do
     resources :settings_collections, only: [:update, :index]
@@ -13,6 +14,13 @@ Qbrick::Engine.routes.draw do
 
     resources :assets
     resources :ckimages, only: [:create, :index, :destroy]
+
+    resource :account, only: :edit do
+      collection do
+        patch 'update_password'
+      end
+    end
+
     root to: 'pages#index'
   end
 

@@ -2,7 +2,7 @@ require 'qbrick/page_tree'
 
 module Qbrick
   module Cms
-    class PagesController < AdminController
+    class PagesController < BackendController
       def index
         @pages = Qbrick::Page.roots
         respond_with @pages
@@ -59,19 +59,21 @@ module Qbrick
 
       def mirror
         @page = Qbrick::Page.find(params[:page_id])
-
-        unless @page.bricks.empty?
-          if params[:rutheless] == 'true' || @page.bricks.unscoped.where(locale: params[:target_locale]).empty?
-            @page.clear_bricks_for_locale(params[:target_locale])
-            params[:failed_bricks] = @page.clone_bricks_to(params[:target_locale])
-            params[:rutheless] = 'true'
-          end
-        end
-
+        mirror_page if page_can_be_mirrored?
         respond_to :js, :html
       end
 
       private
+
+      def page_can_be_mirrored?
+        !@page.bricks.empty? && (params[:rutheless] == 'true' || @page.bricks.unscoped.where(locale: params[:target_locale]).empty?)
+      end
+
+      def mirror_page
+        @page.clear_bricks_for_locale(params[:target_locale])
+        params[:failed_bricks] = @page.clone_bricks_to(params[:target_locale])
+        params[:rutheless] = 'true'
+      end
 
       def page_params
         safe_params = [

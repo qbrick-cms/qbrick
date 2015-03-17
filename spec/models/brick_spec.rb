@@ -112,7 +112,7 @@ describe Qbrick::Brick, type: :model do
     describe 'update_fulltext' do
       let! :brick do
         Qbrick::Brick.new.tap do |b|
-          b.type = Qbrick::BrickType.new
+          b.type = 'Qbrick::TextBrick'
         end
       end
 

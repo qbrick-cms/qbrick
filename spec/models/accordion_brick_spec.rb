@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::AccordionBrick, type: :model do
-
   let :accordion_brick do
     Qbrick::AccordionBrick.new
   end

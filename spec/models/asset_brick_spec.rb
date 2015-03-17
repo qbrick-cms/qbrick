@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::AssetBrick, type: :model do
-
   let :asset_brick do
     Qbrick::AssetBrick.new
   end

@@ -3,7 +3,6 @@ require 'features_helper'
 require_relative '../command_wrapper_helper.rb'
 
 describe 'rails generate qbrick:custom_model', generator: true do
-
   let(:cars_controller) { application_file 'app/controllers/cms/cars_controller.rb' }
 
   it 'is available in the generated app' do
@@ -80,6 +79,5 @@ describe 'rails generate qbrick:custom_model', generator: true do
     it 'does not generate json views' do
       expect(Dir.glob("#{test_app_path}/app/views/cars/*.jbuilder").size).to be 0
     end
-
   end
 end

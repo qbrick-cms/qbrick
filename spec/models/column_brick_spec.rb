@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Qbrick::ColumnBrick, type: :model do
-
   let :column_brick do
     Qbrick::ColumnBrick.new
   end

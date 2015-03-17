@@ -33,4 +33,9 @@ FactoryGirl.define do
     s.key 'code'
     s.value 'SomeValue'
   end
+
+  factory :admin, class: Qbrick::Admin do
+    email 'test@test.com'
+    password 'somel33tPW'
+  end
 end

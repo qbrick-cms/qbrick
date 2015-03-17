@@ -12,12 +12,16 @@ module PagesHelper
   end
 
   def page_for_level(num)
-    input = controller.current_url if controller.respond_to? :current_url
-    input ||= params[:url].presence || ''
-    url = input.split('/').take(num + 1).join('/') unless input.blank?
+    url = resolve_page_url_for_nav_level(num)
     page = Qbrick::Page.find_by_url(url)
     yield page if block_given?
     page
+  end
+
+  def resolve_page_url_for_nav_level(level)
+    input = controller.current_url if controller.respond_to? :current_url
+    input ||= params[:url].presence || ''
+    input.split('/').take(level + 1).join('/') unless input.blank?
   end
 
   def active_page_class(page)

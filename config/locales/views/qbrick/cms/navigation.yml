@@ -1,0 +1,8 @@
+en:
+  qbrick:
+    cms:
+      backend:
+        main_navigation:
+          change_passowrd: "Change Password"
+          logout: "Log out"
+          account: "Account"

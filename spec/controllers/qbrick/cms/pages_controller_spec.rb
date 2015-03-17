@@ -18,6 +18,10 @@ describe Qbrick::Cms::PagesController, type: :controller do
                                   brick_list_id: @page.id,
                                   brick_list_type: 'Qbrick::Page',
                                   text: 'DEUTSCH')
+      admin = double('admin')
+      allow_message_expectations_on_nil
+      allow(request.env['warden']).to receive(:authenticate!) { admin }
+      allow(controller).to receive(:current_admin) { admin }
     end
 
     context 'with no bricks on target locale' do
