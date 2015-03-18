@@ -1,0 +1,114 @@
+fieldset
+  border: 0
+  padding: 0
+  margin: 0 0 rem(18)
+
+legend
+  @extend %h4-styles-s
+  text-transform: uppercase
+  font-weight: $header-font-weight
+  margin-bottom: rem(6)
+
+label
+  display: inline-block
+  max-width: 100%
+  margin-bottom: rem(6)
+  cursor: pointer
+  color: $grey-dark
+  font-size: rem(16)
+  line-height: 1.5
+
+input
+  +placeholder
+    color: $grey-dark
+
+#{$all-text-inputs},
+textarea
+  display: block
+  width: 100%
+  background-color: white
+  border: rem(1) solid white
+  border-radius: 0
+  padding: rem(9) rem(12)
+  font-size: rem(16)
+  line-height: 1.5
+
+  &:focus
+    outline: 0
+    border-color: $grey-dark
+
+input[type="search"]
+  +appearance(none)
+  +box-sizing(border-box)
+
+select
+  width: 100%
+  height: rem(40)
+  padding: rem(9) rem(30) rem(9) rem(12)
+  background-color: $white
+  background-image: url(data:image/svg+xml;charset=US-UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2214%22%20viewBox%3D%22-293%20390%2024%2014%22%20enable-background%3D%22new%20-293%20390%2024%2014%22%3E%3Cpath%20d%3D%22M-285.5%20395l5-5%205%205h-10zm10%204l-5%205-5-5h10z%22%2F%3E%3C%2Fsvg%3E)
+  background-position: right rem(5) center
+  background-repeat: no-repeat
+  border: 0
+  border-radius: 0
+  color: $grey-dark
+  font-size: rem(16)
+  line-height: 1.5
+  +appearance(none)
+
+  .lt-ie10 &
+    background-image: none
+    padding-right: rem(12)
+
+  &::-ms-expand
+    display: none
+
+  &:hover
+    color: $primary-color
+    cursor: pointer
+
+// ----------------------------------------------------------
+// INPUT WITH BUTTON ON THE SIDE
+// ----------------------------------------------------------
+.input-addon
+  +display(flex)
+
+.input-addon__field
+  +flex(1)
+
+.input-addon__item
+  margin-bottom: 0
+
+// ----------------------------------------------------------
+// INPUT WITH ICON BUTTON INSIDE
+// ----------------------------------------------------------
+.input-overlay
+  position: relative
+
+  .input-overlay__input
+    padding-right: rem(50)
+
+.input-overlay__button
+  position: absolute
+  right: 0
+  bottom: rem(2)
+  margin-bottom: 0
+  color: $body-font-color
+
+  &:hover
+    color: $grey-dark
+
+  &,
+  &:hover,
+  &:active
+    background-color: transparent
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.form--field-error
+  label
+    color: $alert-color
+
+  input
+    border-color: $alert-color

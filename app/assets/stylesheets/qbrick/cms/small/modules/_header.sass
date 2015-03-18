@@ -1,9 +1,50 @@
-.header__info-row
-  background-color: $primary-color
+.header__meta
+  +row()
   color: white
 
-  a
-    color: currentColor
-
+.header__inner
+  +outer-container()
 .header__nav-row
   background-color: $grey-light
+
+.header__title
+  display: inline-block
+  color: white
+  padding: rem(9) space(.5)
+  margin: space(.5) 0
+
+  h1
+    display: inline-block
+    color: white
+    margin: 0
+    font-size: rem(20)
+
+.header__languages,
+.header__account
+  float: right
+  margin-left: space(2)
+
+  a
+    color: $grey-dark
+
+    &:hover
+      color: white
+
+.header__account
+  font-size: rem(18)
+  padding: rem(9) 0
+  margin: space(.5) 0
+
+.header__languages
+  .button__group
+    margin: space(.5) 0 rem(5) 0
+
+  .button
+    margin-bottom: 0
+
+  .button:hover,
+  .button--active
+    background-color: mix($primary-color, $black, 80%)
+
+  .button--active a
+    color: white

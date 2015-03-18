@@ -1,20 +1,25 @@
-.header__info-row
-  = link_to 'Qbrick CMS', qbrick.cms_root_path, :class => 'brand'
-  %ul.nav.pull-right.language-navigation
-    - if render_language_switch?
-      - I18n.available_locales.each do |locale|
-        %li{ :class => (:active if I18n.locale.to_s == locale.to_s) }
-          = link_to_content_locale(locale)
+.header__meta
+  .header__inner
+    = link_to qbrick.cms_root_path, :class => 'header__title' do
+      %h1 Qbrick CMS
 
-    %li.dropdown
-      = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
-        = t('.account')
-        %b.caret
-      %ul.dropdown-menu
-        %li= link_to t('.change_password'), edit_cms_account_path
-        %li= link_to t('.logout'), destroy_admin_session_path, :method => :delete
+    - if render_language_switch?
+      .header__languages
+        .button__group
+          - I18n.available_locales.each do |locale|
+            .button.button--tertiary{ :class => (:'button--active' if I18n.locale.to_s == locale.to_s) }
+              = link_to_content_locale(locale)
+
+      .header__account
+        -# .dropdown
+        -#   %button.button{ type: 'button', }
+        -#     = t('.account')
+          -# %ul.dropdown__menu
+        = link_to t('.change_password'), edit_cms_account_path
+        = link_to t('.logout'), destroy_admin_session_path, :method => :delete
 
 .header__nav-row
-  = render 'main_navigation'
+  .header__inner
+    = render 'main_navigation'
 
   #toolbar

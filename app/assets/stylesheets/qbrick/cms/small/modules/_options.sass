@@ -1,0 +1,117 @@
+$radio-size: rem(24)
+$checkbox-size: rem(20)
+$option-border-size: rem(2)
+$option-label-size: rem(42)
+
+$radio-label-padding: ($option-label-size - $radio-size) / 2
+$checkbox-label-padding: ($option-label-size - $checkbox-size) / 2
+$radio-knuble-size: $radio-size/2
+$checkbox-knuble-size: $checkbox-size/2
+$radio-knuble-distance: $radio-knuble-size/2
+$checkbox-knuble-distance: $checkbox-knuble-size/2
+
+[type="radio"],
+[type="checkbox"]
+  position: absolute
+  overflow: hidden
+  width: rem(1)
+  height: rem(1)
+  padding: 0
+  margin: rem(-1)
+  border: 0
+  clip: rect(0 0 0 0)
+
+  + label
+    position: relative
+    vertical-align: top
+    padding: $radio-label-padding $radio-label-padding $radio-label-padding $option-label-size
+    margin-bottom: 0
+
+    i
+      position: absolute
+
+      &:before
+        content: ''
+        display: block
+        border: $option-border-size solid $grey
+        background-color: $white
+
+      &:after
+        content: ''
+        display: none
+        position: absolute
+        background-color: $primary-color
+
+  &:checked,
+  &:checked:hover
+    + label
+      color: $primary-color
+
+      i
+        &:before
+          color: $primary-color
+          border-color: currentColor
+
+        &:after
+          display: inline-block
+
+  &:not(:checked) + label:hover
+    i:before
+      color: $grey-dark
+      border-color: currentColor
+
+[type="radio"]
+  + label i
+    display: block
+    top: ($option-label-size - $radio-size) / 2
+    left: ($option-label-size - $radio-size) / 2
+
+    &:before
+      width: $radio-size
+      height: $radio-size
+
+    &:after
+      width: $radio-knuble-size
+      height: $radio-knuble-size
+      left: $radio-knuble-distance
+      top: $radio-knuble-distance
+
+    &:before,
+    &:after
+      border-radius: 100%
+
+[type="checkbox"]
+  + label i
+    top: ($option-label-size - $checkbox-size) / 2
+    left: ($option-label-size - $checkbox-size) / 2
+
+    &:before
+      width: $checkbox-size
+      height: $checkbox-size
+
+    &:after
+      width: $checkbox-knuble-size
+      height: $checkbox-knuble-size
+      left: $checkbox-knuble-distance
+      top: $checkbox-knuble-distance
+
+// ----------------------------------------------------------
+// IE8 Fallback
+// ----------------------------------------------------------
+.lt-ie9
+  [type="radio"],
+  [type="checkbox"]
+    position: inherit
+    overflow: visible
+    width: 20px
+    height: 20px
+    padding: inherit
+    margin: inherit
+    border: inherit
+    clip: auto
+
+    + label
+      padding: 0
+
+      i
+        display: none

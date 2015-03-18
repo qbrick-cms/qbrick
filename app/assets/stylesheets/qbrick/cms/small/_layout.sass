@@ -2,17 +2,33 @@ html,
 body
   height: 100%
 
+body
+  background-color: $primary-color
+
 main
-  +outer-container
+  background-color: $grey-light
 
   + footer
-    height: rem(100)
-    background-color: $primary-color
+    min-height: rem(50)
 
-article
-  +span-columns(12)
-  padding: 0 rem(12)
+.main__inner
+  +outer-container()
+
+.main__header
+  +row()
+
+  h1
+    display: inline-block
+
+    + .button
+      vertical-align: middle
+
+.main__content
+  padding: 0 space(1)
 
 .page__header
   +outer-container
-  padding: 0 rem(12)
+  padding: 0 space(1)
+
+.spacer
+  padding-top: 4%

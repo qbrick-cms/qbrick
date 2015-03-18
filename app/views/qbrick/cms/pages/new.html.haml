@@ -1,1 +1,4 @@
-= render :partial => 'form', :locals => { :url => qbrick.cms_pages_path, :page_title => t('.new') }
+%header.main__header
+
+.main__content
+  = render :partial => 'form', :locals => { :url => qbrick.cms_pages_path, :page_title => t('.new') }

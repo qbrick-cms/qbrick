@@ -1,14 +1,12 @@
-%h1= controller.request.host
-.actions.row
-  .span5
-  .span3
-    = link_to qbrick.new_cms_page_path, class: 'btn btn-primary' do
-      %i.icon-plus-sign.icon-white
-      = t('.add_page')
-  .span4
+%header.main__header
+  %h1= controller.request.host
+  = link_to qbrick.new_cms_page_path, class: 'button' do
+    %i.icon-plus-sign.icon-white
+    = t('.add_page')
 
-.row
-  .span8.pages-list
-    .dd
-      = render partial: 'branch', locals: { pages: @pages }
-  .span4
+.main__content
+  .row
+    .span8.pages-list
+      .dd
+        = render partial: 'branch', locals: { pages: @pages }
+    .span4

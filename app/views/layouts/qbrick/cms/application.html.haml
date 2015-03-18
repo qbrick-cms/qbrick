@@ -12,11 +12,10 @@
       = render 'layouts/qbrick/cms/header'
 
     %main
-      .container.cms
-        .row
-          .span12
-            = render 'flash', :flash => flash
-            = yield
+      .spacer
+      .main__inner
+        = render 'flash', :flash => flash
+        = yield
 
     %footer{role: "contentinfo"}
 

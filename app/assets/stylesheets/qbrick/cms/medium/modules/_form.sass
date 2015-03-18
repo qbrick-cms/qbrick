@@ -1,0 +1,24 @@
+legend
+  @extend %h4-styles-m
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.form--horizontal
+  +clearfix
+  +outer-container
+  margin-bottom: rem(18)
+
+  label
+    +span-columns(3)
+    padding-top: rem(9)
+
+  input,
+  select,
+  textarea
+    +span-columns(9)
+    +omega
+
+  .form__help-block
+    display: block
+    +shift(3)

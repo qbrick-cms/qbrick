@@ -12,9 +12,9 @@
       - else
         = link_to locale.to_s.upcase, url_for(:action => params[:action], :content_locale => locale), 'data-toggle' => 'tooltip', 'title' => t('.not_translated'), :class => 'not-translated'
 
-.tab-content
+.main__content-form.tab-content
   #page-metadata.tab-pane{ class: metadata_tab_active(@page) }
-    = simple_form_for @page, url: url, html: { class: 'form-horizontal' }, wrapper: :bootstrap do |form|
+    = simple_form_for @page, url: url, html: { class: '' }, wrapper: :'form--horizontal' do |form|
       = form.input :title, required: false, input_html: { class: :span5 }
       = form.input :slug, required: false, input_html: { class: :span5 }
       = form.input :page_title, required: false, input_html: { class: :span5 }
@@ -29,7 +29,7 @@
       = form.input :published, as: :boolean
 
       .form-actions
-        = form.button :submit, class: 'btn btn-primary'
+        = form.button :submit, class: 'button'
 
   - unless hide_content_tab?(@page)
     #brick-form.modal.hide.fade{ :tabindex => '-1', :role => 'dialog' }
