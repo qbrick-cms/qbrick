@@ -1,7 +1,7 @@
 module Qbrick
   module Cms
     class AccountsController < BackendController
-      before_filter :authenticate_admin!
+      before_action :authenticate_admin!
 
       def edit
         @admin = current_admin
@@ -11,10 +11,10 @@ module Qbrick
         @admin = Admin.find(current_admin.id)
         if @admin.update_with_password(admin_params)
           # Sign in the admin by passing validation in case their password changed
-          sign_in @admin, :bypass => true
+          sign_in @admin, bypass: true
           redirect_to cms_pages_path
         else
-          render "edit"
+          render 'edit'
         end
       end
 

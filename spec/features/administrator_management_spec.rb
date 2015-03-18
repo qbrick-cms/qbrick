@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Administrator Management', type: :feature do
-
   before :all do
     @page = FactoryGirl.create(:page, page_type: 'navigation', published: true, title: 'home')
   end
@@ -12,7 +11,6 @@ describe 'Administrator Management', type: :feature do
   end
 
   describe 'admin' do
-
     let!(:admin) { FactoryGirl.create(:admin) }
     let(:new_password) { 'newAdminPW!' }
 
@@ -43,7 +41,7 @@ describe 'Administrator Management', type: :feature do
       fill_in 'Current password', with: admin.password
       fill_in 'Password', with: new_password
       fill_in 'Password confirmation', with: new_password
-      expect{ click_on 'Update Admin' }.to change{ Qbrick::Admin.find_by_email(admin.email).encrypted_password }
+      expect { click_on 'Update Admin' }.to change { Qbrick::Admin.find_by_email(admin.email).encrypted_password }
     end
   end
 
@@ -51,5 +49,4 @@ describe 'Administrator Management', type: :feature do
   #   - mail notification?
   # - edit admin (can not edit password)
   # - delete an admin
-
 end
