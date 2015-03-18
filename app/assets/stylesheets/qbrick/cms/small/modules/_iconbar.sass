@@ -1,0 +1,41 @@
+// ----------------------------------------------------------
+// ICONBAR
+// ----------------------------------------------------------
+.iconbar__list
+  +display(flex)
+  +flex-wrap(wrap)
+  margin: 0
+  padding: 0
+  list-style: none
+
+.iconbar__item
+  display: block
+  min-width: 33%
+  +flex(1 0 33%)
+
+  a
+    display: block
+    padding: rem(12)
+    background-color: $grey-light
+    color: $grey-dark
+    text-align: center
+    border-bottom: rem(3) solid currentColor
+
+  .icon
+    display: block
+    margin: 0 auto rem(5)
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.iconbar__item
+
+  a:hover
+    background-color: $white
+    color: $body-font-color
+    +transition( all .1s linear )
+
+.iconbar__item a:focus,
+.iconbar__item--active a,
+.iconbar__item--active a:hover
+  color: $primary-color

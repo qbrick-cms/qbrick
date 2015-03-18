@@ -1,0 +1,129 @@
+// This is the the base for the em/rem mixins and the grid calculation.
+$em-base: 16px
+
+//////////////////////////////
+// GRID
+// --------------------------
+
+// Since the typical default browser font-size is 16px,
+// that makes the calculation for grid size.
+$gutter: em(20)
+$grid-columns: 12
+$max-width: rem(1200)
+$border-box-sizing: true
+
+// Debug Grid
+$visual-grid: false  // a helper to show the columns
+$visual-grid-color: #ff0000
+$visual-grid-index: back // or front
+$visual-grid-opacity: 0.1
+
+//////////////////////////////
+// MEDIA QUERIES & BREAKPOINTS
+// --------------------------
+
+// Media Query Ranges
+$medium-point: 33.75em // 540px
+$large-point:  50em    // 800px
+
+
+$medium: new-breakpoint(min-width $medium-point 12)
+$large: new-breakpoint(min-width $medium-point 12)
+
+
+//////////////////////////////
+// COLOR & BASE
+// --------------------------
+
+// COLOR variables
+$black:       #333
+$white:       #fff
+$grey-dark:   rgb(172,172,172)
+$grey:        rgb(215,215,215)
+$grey-light:  rgb(240,240,240)
+$orange:      #F08A24
+$red:         #D60051
+$blue-light:  #A0D3E8
+$green:       #43AC6A
+
+// COLOR NAMING
+$primary-color:   $red
+$secondary-color: $grey
+$tertiary-color:  $black
+$alert-color:     $red
+$success-color:   $green
+$warning-color:   $orange
+$info-color:      $blue-light
+
+// Use these to control various global styles
+$body-bg: $white
+$body-font-color: $black
+
+
+//////////////////////////////
+// TYPOGRAPHY
+// --------------------------
+$line-height-factor: 1.2
+
+$body-font-family:  "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
+$body-font-size:    100%
+$body-font-weight:  normal
+$body-font-style:   normal
+$body-line-height:  $line-height-factor
+
+// HEADINGS font styles
+$header-font-family:    $body-font-family
+$header-font-weight:    900
+$header-font-style:     normal
+$header-font-color:     $body-font-color
+$header-text-rendering: optimizeLegibility
+
+// HEADINGS sizes
+// Set here the font-sizes for small,
+// use the variable in small/base and redefine it in medium/large
+$h1-font-size: rem(36)
+$h2-font-size: rem(24)
+$h3-font-size: rem(19)
+$h4-font-size: rem(16)
+
+// HEADINGS line-heights
+$h1-line-height: 1
+$h2-line-height: 1
+$h3-line-height: 1.26
+$h4-line-height: 1.125
+
+// PARAGRAPHS
+$paragraph-font-family: inherit
+$paragraph-font-weight: normal
+$paragraph-font-size: rem(16)
+$paragraph-line-height: 1.5
+$paragraph-margin-bottom: rem(12)
+$paragraph-text-rendering: optimizeLegibility
+
+// <SMALL>
+$small-font-color: $grey-dark
+
+// ANCHORS
+$anchor-text-decoration: none
+$anchor-font-color: $primary-color
+$anchor-font-color-hover: $secondary-color
+
+// <HR>
+$hr-margin-top: rem(18)
+$hr-margin-bottom: $hr-margin-top
+$hr-border-width: rem(1)
+$hr-border-style: solid
+$hr-border-color: $body-font-color
+
+// LISTS
+$list-style-position: outside
+$list-side-margin: 0
+$list-nested-margin: 0
+$list-side-padding: rem(18)
+$list-ol-side-padding: rem(23)
+
+// BLOCKQUOTE
+$blockquote-font-family: inherit
+$blockquote-font-size: rem(16)
+$blockquote-font-style: italic
+$blockquote-margin: 0 0 $paragraph-margin-bottom 0

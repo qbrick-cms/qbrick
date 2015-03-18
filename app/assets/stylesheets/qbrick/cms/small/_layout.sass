@@ -1,0 +1,18 @@
+html,
+body
+  height: 100%
+
+main
+  +outer-container
+
+  + footer
+    height: rem(100)
+    background-color: $primary-color
+
+article
+  +span-columns(12)
+  padding: 0 rem(12)
+
+.page__header
+  +outer-container
+  padding: 0 rem(12)

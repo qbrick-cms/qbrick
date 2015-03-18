@@ -3,22 +3,22 @@
   %head
     %meta{ charset: 'utf-8' }
     %title Screen Concept CMS
-    = stylesheet_link_tag 'qbrick/cms/application.css', media: 'screen, projection'
-    = stylesheet_link_tag 'qbrick/cms/customizations.css', media: 'screen, projection'
+    = stylesheet_link_tag 'qbrick/cms/application.css', media: 'all'
+    = stylesheet_link_tag 'qbrick/cms/customizations.css', media: 'all'
     = csrf_meta_tag
 
   %body{ :class => "#{controller_name}" }
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          = render 'main_navigation'
+    %header.header{role: "banner"}
+      = render 'layouts/qbrick/cms/header'
 
-      #toolbar
-    .container.cms
-      .row
-        .span12
-          = render 'flash', :flash => flash
-          = yield
+    %main
+      .container.cms
+        .row
+          .span12
+            = render 'flash', :flash => flash
+            = yield
+
+    %footer{role: "contentinfo"}
 
     = javascript_include_tag 'qbrick/cms/application.js'
     = javascript_include_tag 'qbrick/cms/customizations.js'

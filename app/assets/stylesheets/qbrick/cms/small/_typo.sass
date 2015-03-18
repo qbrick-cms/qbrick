@@ -1,0 +1,81 @@
+body
+  font-family: $body-font-family
+  font-weight: $body-font-weight
+  font-style: $body-font-style
+  font-size: $body-font-size
+  line-height: $body-line-height
+  background-color: $body-bg
+  color: $body-font-color
+
+h1, h2, h3, h4, h5, h6
+  font-family: $header-font-family
+  font-weight: $header-font-weight
+  font-style: $header-font-style
+  text-rendering: $header-text-rendering
+  color: $header-font-color
+  text-transform: uppercase
+
+h1
+  font-size: $h1-font-size
+  line-height: $h1-line-height
+  margin: rem(30) 0 rem(12)
+
+h2
+  font-size: $h2-font-size
+  line-height: $h2-line-height
+  margin: rem(27) 0 rem(9)
+
+h3
+  font-size: $h3-font-size
+  line-height: $h3-line-height
+  margin: rem(24) 0 rem(3)
+
+%h4-styles-s,
+h4, h5, h6
+  font-size: $h4-font-size
+  line-height: $h4-line-height
+  margin: rem(21) 0 rem(3)
+
+p
+  font-family: $paragraph-font-family
+  font-weight: $paragraph-font-weight
+  font-size: $paragraph-font-size
+  line-height: $paragraph-line-height
+  margin-top: 0
+  margin-bottom: $paragraph-margin-bottom
+  text-rendering: $paragraph-text-rendering
+
+a
+  text-decoration: $anchor-text-decoration
+  color: $anchor-font-color
+
+  &:hover
+    color: $anchor-font-color-hover
+
+ul, ol
+  list-style-position: $list-style-position
+  margin-left: $list-side-margin
+  padding-left: $list-side-padding
+
+ol
+  padding-left: $list-ol-side-padding
+
+ul ul,
+ol ol
+  margin-left: $list-nested-margin
+
+hr
+  border-width: $hr-border-width
+  border-style: $hr-border-style
+  border-color: $hr-border-color
+  margin-top: $hr-margin-top
+  margin-bottom: $hr-margin-bottom
+
+small
+  color: $small-font-color
+
+blockquote
+  font-family: $blockquote-font-family
+  font-size: $blockquote-font-size
+  font-style: $blockquote-font-style
+  margin: $blockquote-margin
