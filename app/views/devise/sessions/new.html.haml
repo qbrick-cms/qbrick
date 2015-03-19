@@ -1,0 +1,22 @@
+.devise__container
+  .main__content
+    %header
+      %h1 Log in
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      %p.form--horizontal
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      %p.form--horizontal
+        = f.label :password
+        = f.password_field :password, autocomplete: "off"
+
+      - if devise_mapping.rememberable?
+        %p.form--horizontal
+          = f.check_box :remember_me
+          = f.label :remember_me do
+            %i
+            = t("helpers.label.qbrick/admin.remember_me")
+      .form__indent--horizontal
+        = f.submit "Log in", class: 'button'
+    .form__indent--horizontal
+      = render "devise/shared/links"

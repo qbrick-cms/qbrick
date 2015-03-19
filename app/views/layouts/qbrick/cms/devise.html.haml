@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{ 'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
+    %title Screen Concept CMS
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+
+    = stylesheet_link_tag 'qbrick/cms/application.css', media: 'all'
+    = stylesheet_link_tag 'qbrick/cms/customizations.css', media: 'all'
+
+    -# JavaScripts
+    = render 'layouts/qbrick/cms/icon_loader'
+
+    = csrf_meta_tag
+
+  %body{ :class => "#{controller_name}" }
+    %header.header{role: "banner"}
+      .header__meta
+        .header__inner
+          = link_to qbrick.cms_root_path, :class => 'header__title' do
+            %h1 Qbrick CMS
+
+    %main
+      .spacer
+      .main__inner
+        = render 'qbrick/cms/backend/flash', :flash => flash
+        = yield
+      .spacer
+      .spacer
+
+    %footer{role: "contentinfo"}
+
+    = javascript_include_tag 'qbrick/cms/application.js'
+    = javascript_include_tag 'qbrick/cms/customizations.js'

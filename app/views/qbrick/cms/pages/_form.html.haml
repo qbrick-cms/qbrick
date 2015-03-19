@@ -28,7 +28,7 @@
       = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
       = form.input :published, as: :boolean
 
-      .form-actions
+      .form__actions
         = form.button :submit, class: 'button'
 
   - unless hide_content_tab?(@page)

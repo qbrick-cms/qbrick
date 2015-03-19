@@ -23,5 +23,13 @@ module Dummy
     config.i18n.available_locales = [:de, :en]
     #config.i18n.default_locale = :de
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.to_prepare do
+      Devise::SessionsController.layout "qbrick/cms/devise"
+      Devise::RegistrationsController.layout "qbrick/cms/devise"
+      Devise::ConfirmationsController.layout "qbrick/cms/devise"
+      Devise::UnlocksController.layout "qbrick/cms/devise"
+      Devise::PasswordsController.layout "qbrick/cms/devise"
+    end
   end
 end
