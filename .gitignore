@@ -19,3 +19,8 @@ tags
 .idea
 spec/dummy/.sass-cache
 qbrick.xcworkspace/
+
+# Ignore Node/Grunt Modules
+node_modules
+npm-debug.log
+grunticon.loader.js

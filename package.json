@@ -1,0 +1,22 @@
+{
+  "name": "qbrick",
+  "description": "qBrick CMS",
+  "version": "1.0.0",
+  "author": "Screen Concept",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/screenconcept/qbrick.git"
+  },
+  "bugs": {
+    "url": "https://github.com/screenconcept/qbrick/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-imagemin": "^0.9.2",
+    "grunt-grunticon": "~2.1.2",
+    "grunt-shell": "^1.1.1",
+    "grunt-svgstore": "^0.5.0",
+    "grunt-text-replace": "^0.4.0",
+    "load-grunt-tasks": "^3.1.0"
+  }
+}
