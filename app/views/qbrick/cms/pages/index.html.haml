@@ -1,7 +1,7 @@
 %header.main__header
   %h1= controller.request.host
-  = link_to qbrick.new_cms_page_path, class: 'button' do
-    %i.icon-plus-sign.icon-white
+  = link_to qbrick.new_cms_page_path, class: 'button button--icon button--icon-big-white' do
+    - streusel_icon('item-new', 'icon--m')
     = t('.add_page')
 
 .main__content
