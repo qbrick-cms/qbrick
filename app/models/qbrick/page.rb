@@ -57,7 +57,7 @@ module Qbrick
 
       def all_urls
         url_columns = column_names.select { |col| col.start_with? 'url_' }
-        pluck(url_columns).flatten.compact.sort.uniq.map { |r| "/#{r}" }
+        pluck(*url_columns).flatten.compact.sort.uniq.map { |r| "/#{r}" }
       end
     end
 
