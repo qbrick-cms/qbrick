@@ -53,8 +53,8 @@ module.exports = (grunt) ->
         ]
         options:
           cssprefix: ".icon--"
-          pngpath: "icons/png"
-          pngfolder: "../../../../images/icons/png"
+          pngpath: "qbrick/cms/icons/png"
+          pngfolder: "../../../../images/qbrick/cms/icons/png"
           urlpngcss: "icons.fallback.css.scss"
           template: "<%= config.icons_styleheets %>/_icons_stylesheet_template.hbs"
 
