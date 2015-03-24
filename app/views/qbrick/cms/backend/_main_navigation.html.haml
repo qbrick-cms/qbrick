@@ -11,8 +11,8 @@
       = t('.account')
       %b.caret
     %ul.dropdown-menu
-      %li= link_to t('.change_password'), edit_cms_account_path
-      %li= link_to t('.logout'), destroy_admin_session_path, :method => :delete
+      %li= link_to t('.change_password'), qbrick.edit_cms_account_path
+      %li= link_to t('.logout'), qbrick.destroy_admin_session_path, :method => :delete
 
 %ul.nav
   %li= link_to t('.settings'), qbrick.cms_settings_collections_path

@@ -1,5 +1,5 @@
 module Qbrick
-  class BaseController < Qbrick::Cms::AdminController
+  class BaseController < Qbrick::Cms::BackendController
     inherit_resources
 
     def show
