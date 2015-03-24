@@ -1,0 +1,131 @@
+.page-tree
+  position: relative
+  margin: 0 space(2)
+  border-top: rem(2) solid $grey
+
+.page-tree__list
+  display: block
+  position: relative
+  margin: 0
+  padding: 0
+  list-style: none
+
+  .page-tree__list
+    padding-left: rem(30)
+
+.page-tree__item,
+.page-tree__empty,
+.page-tree__placeholder
+  display: block
+  position: relative
+  margin: 0
+  padding: 0
+
+.page-tree__handle
+  display: block
+  position: absolute
+  margin: rem(10) 0
+  padding: rem(5) rem(10)
+  color: $body-font-color
+  background-color: transparent
+  border: 0
+
+  .icon
+    height: rem(20)
+    width: rem(20)
+
+  &:hover
+    color: $grey-dark
+
+  &:active
+    color: $primary-color
+
+.page-tree__item
+  +clearfix
+
+  .btn__group
+    float: right
+    margin: 0
+
+  .btn--icon
+    background-color: $grey-light
+    border-radius: 100%
+    color: $grey-darker
+
+    &:hover
+      color: $body-font-color
+
+    &:active
+      color: $primary-color
+
+.page-tree__btn-collapse,
+.page-tree__btn-expand
+  display: inline-block
+  position: relative
+  cursor: pointer
+  float: left
+  width: rem(25)
+  height: rem(30)
+  margin: rem(5) 0 rem(5) rem(30)
+  padding: 0
+  white-space: nowrap
+  overflow: hidden
+  border: 0
+  background: transparent
+  text-align: center
+  font-weight: bold
+
+.page-tree__placeholder,
+.page-tree__empty
+  margin: rem(6) 0
+  padding: 0
+  background: $white
+  border: rem(1) dashed $grey-dark
+
+.page-tree__empty
+  border: rem(1) dashed $grey-dark
+  min-height: rem(100)
+  background-color: $white
+
+.page-tree__dragel
+  position: absolute
+  pointer-events: none
+  z-index: 9999
+
+  > .page-tree__item
+    .page-tree__handle
+      margin-top: 0
+
+  > .page-tree__item
+    > .page-tree__content
+      margin: 0
+
+.page-tree__content
+  display: block
+  padding: rem(6) rem(6) rem(6) rem(38)
+  text-decoration: none
+  font-size: rem(20)
+  line-height: 2
+  background-color: $grey-light
+  border-bottom: rem(2) solid $grey
+  line-height: rem(40)
+  +clearfix
+
+  > a
+    color: $body-font-color
+
+    &:hover
+      color: $primary-color
+
+  &:hover
+    background: $white
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.page-tree--collapsed
+  .page-tree__list
+    display: none
+
+.page-tree__content.unpublished
+  color: $grey

@@ -129,13 +129,19 @@ $(document).ready ->
   $('#page_page_type').change ->
     checkPageType()
 
-  $('.dd').nestable(
-    collapseBtnHTML: '<button data-action="collapse"><i class="icon-minus-sign"></i></button>'
-    expandBtnHTML: '<button data-action="expand"><i class="icon-plus-sign"></i></button>'
+  $('.page-tree').nestable(
+    rootClass: 'page-tree'
+    listClass: 'page-tree__list'
+    itemClass: 'page-tree__item'
+    handleClass: 'page-tree__handle'
+    dragClass: 'page-tree__dragel'
+    placeClass: 'page-tree__placeholder'
+    collapseBtnHTML: '<button data-action="collapse" class="btn btn--icon page-tree__btn-collapse">-</button>'
+    expandBtnHTML: '<button data-action="expand" class="btn btn--icon page-tree__btn-expand">+</button>'
   )
 
-  $('.dd').on('change', ->
-    pageTree = $('.dd').nestable('serialize')
+  $('.page-tree').on('change', ->
+    pageTree = $('.page-tree').nestable('serialize')
     url = '/cms/pages/sort'
     $.post(url, { page_tree: pageTree }, "json")
   )
