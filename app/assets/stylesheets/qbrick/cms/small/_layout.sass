@@ -13,22 +13,17 @@ main
 
 .main__inner
   +outer-container()
+  padding: 0 space(1)
 
 .main__header
+  border-bottom: rem(2) solid $grey
   +row()
 
   h1
     display: inline-block
 
-    + .button
+    + .btn
       vertical-align: middle
 
-.main__content
-  padding: 0 space(1)
-
-.page__header
-  +outer-container
-  padding: 0 space(1)
-
 .spacer
-  padding-top: 4%
+  padding-top: space(2)

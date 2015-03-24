@@ -4,6 +4,8 @@
 
 .header__inner
   +outer-container()
+  padding: 0 space(1)
+
 .header__nav-row
   background-color: $grey-light
 
@@ -36,15 +38,15 @@
   margin: space(.5) 0
 
 .header__languages
-  .button__group
+  .btn__group
     margin: space(.5) 0 rem(5) 0
 
-  .button
+  .btn
     margin-bottom: 0
 
-  .button:hover,
-  .button--active
+  .btn:hover,
+  .btn--active
     background-color: mix($primary-color, $black, 80%)
 
-  .button--active a
+  .btn--active a
     color: white

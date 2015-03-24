@@ -1,6 +1,6 @@
 .pull-left
   - if brick_content.present? || brick.user_can_save?
-    .resize-toggler.btn.btn-small{ 'data-toggle' => 'collapse', 'data-target' => "#brick-content-#{brick.id}" }
+    .resize-toggler.btn.btn--small{ 'data-toggle' => 'collapse', 'data-target' => "#brick-content-#{brick.id}" }
       %i.icon-resize-full
       %i.icon-resize-small
   - if brick.caption.present?
@@ -13,13 +13,13 @@
 
       - # addable child dropdown menu
       - if brick.respond_to?(:brick_list)
-        .btn-group
+        .btn__group
           = render('brick_type_dropdown', brick_list: brick)
 
       - # grid selection
       - if brick.class.include? Qbrick::Gridded
         .btn-group
-          %a.btn.btn-small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+          %a.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
             %i.icon-th
             %span.caret
           %ul.dropdown-menu.pull-right
@@ -28,8 +28,8 @@
 
       - # possible styles
       - unless brick.available_display_styles.empty?
-        #display-styles.btn-group
-          %a.btn.btn-small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+        #display-styles.btn__group
+          %a.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
             %i.icon-tint
             %span.caret
           %ul.dropdown-menu.pull-right
@@ -38,6 +38,6 @@
 
       -# delete button
       - if brick.user_can_delete?
-        .btn-group
+        .btn__group
           = link_to qbrick.cms_brick_path(brick), class: 'btn btn-small btn-danger', data: { confirm: t('qbrick.cms.bricks.brick_item.confirm') }, method: :delete, remote: true do
             %i.icon-trash.icon-white

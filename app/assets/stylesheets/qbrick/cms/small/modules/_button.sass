@@ -1,4 +1,4 @@
-.button
+.btn
   $button-size: rem(23)
 
   display: inline-block
@@ -87,7 +87,10 @@
     background: transparent
     border: none
     box-shadow: none
-    color: $secondary-color
+    color: $grey-dark
+
+    font: 0/0 a
+    text-shadow: none
 
     &:hover,
     &:active
@@ -103,14 +106,22 @@
   &--icon-big-white
     width: rem(60)
     height: rem(60)
+    padding: rem(10) 0 rem(8)
     background-color: $white
     border-radius: 100%
     +hide-text
+
+    span
+      display: none
 
     .icon
       display: block
       width: rem(40)
       height: rem(40)
+      margin: 0 auto
+
+    &:hover
+      background-color: $white
 
   // ----------------------------------------------------------
   // SMALL STYLE
@@ -134,7 +145,7 @@
     vertical-align: middle
     margin: rem(12) 0 rem(18)
 
-    > .button
+    > .btn
       position: relative
       float: left
       margin-right: rem(1)

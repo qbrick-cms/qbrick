@@ -13,8 +13,8 @@
     - brick_content = render(@brick.to_edit_partial_path, :brick => @brick, :form => form)
 
     - unless @brick.available_display_styles.empty?
-      #display-styles.btn-group.pull-right
-        %a.btn.btn-small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+      #display-styles.btn__group.pull-right
+        %a.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
           %i.icon-tint
           %span.caret
         %ul.dropdown-menu.pull-right
@@ -22,8 +22,8 @@
             = form.input :display_styles, :collection => @brick.translated_available_display_styles, :as => :check_boxes
 
     - if brick.class.include? Qbrick::Gridded
-      .btn-group.pull-right
-        %a.btn.btn-small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+      .btn__group.pull-right
+        %a.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
           %i.icon-th
           %span.caret
         %ul.dropdown-menu.pull-right

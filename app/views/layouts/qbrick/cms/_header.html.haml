@@ -5,14 +5,14 @@
 
     - if render_language_switch?
       .header__languages
-        .button__group
+        .btn__group
           - I18n.available_locales.each do |locale|
-            .button.button--tertiary{ :class => (:'button--active' if I18n.locale.to_s == locale.to_s) }
+            .btn.btn--tertiary{ :class => (:'btn--active' if I18n.locale.to_s == locale.to_s) }
               = link_to_content_locale(locale)
 
       .header__account
         -# .dropdown
-        -#   %button.button{ type: 'button', }
+        -#   %button.btn{ type: 'button', }
         -#     = t('.account')
           -# %ul.dropdown__menu
         = link_to t('.change_password'), edit_cms_account_path

@@ -29,7 +29,7 @@
       = form.input :published, as: :boolean
 
       .form__actions
-        = form.button :submit, class: 'button'
+        = form.button :submit, class: 'btn'
 
   - unless hide_content_tab?(@page)
     #brick-form.modal.hide.fade{ :tabindex => '-1', :role => 'dialog' }
@@ -37,12 +37,12 @@
       - if @page.persisted?
         .clearfix
           .actions
-            .btn-group.pull-left#collapse-bricks-nav{ class: @page.bricks.present? ? '' : 'hidden' }
-              .btn.btn-small#expand-all
+            .btn__group.pull-left#collapse-bricks-nav{ class: @page.bricks.present? ? '' : 'hidden' }
+              .btn.btn--small#expand-all
                 %i.icon-resize-full
                 = t('.expand_all')
 
-              .btn.btn-small#collapse-all
+              .btn.btn--small#collapse-all
                 %i.icon-resize-small
                 = t('.collapse_all')
 

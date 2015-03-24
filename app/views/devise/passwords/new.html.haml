@@ -2,12 +2,14 @@
   .main__content
     %header
       %h1 Forgot your password?
-      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-        = devise_error_messages!
-        %p.form--horizontal
-          = f.label :email
-          = f.email_field :email, autofocus: true
-        .form__indent--horizontal
-          = f.submit "Send me reset password instructions", class: 'button'
+    .spacer
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      %p.form--horizontal
+        = f.label :email
+        = f.email_field :email, autofocus: true
       .form__indent--horizontal
-        = render "devise/shared/links"
+        = f.submit "Send me reset password instructions", class: 'btn'
+    .form__indent--horizontal
+      = render "devise/shared/links"

@@ -19,10 +19,10 @@
       = render 'layouts/qbrick/cms/header'
 
     %main
-      .spacer
       .main__inner
         = render 'flash', :flash => flash
         = yield
+      .spacer
 
     %footer{role: "contentinfo"}
 

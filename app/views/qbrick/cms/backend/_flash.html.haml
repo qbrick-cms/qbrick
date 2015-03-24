@@ -1,7 +1,7 @@
-#flash
+#flash.flash
   - flash.each do |key, value|
-    .alert{ :class => "#{key} alert-#{key}" }
-      %button.close{ :type => :button, 'data-dismiss' => :alert }
-        ×
+    .flash__message{ :class => "flash--#{key}" }
       = value
+      %button.btn.btn--icon{ :type => :button, 'data-dismiss' => :alert }
+        - streusel_icon('close')
 

@@ -1,7 +1,7 @@
 - unless brick_list.brick_types.empty?
-  .btn-group
+  .btn__group
     - if brick_list.brick_types.allowed.count > 1
-      %a.btn.btn-small.btn-primary.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+      %a.btn.btn--small.btn-primary.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
         = t('.add_element')
         %span.caret
       %ul.dropdown-menu.pull-right

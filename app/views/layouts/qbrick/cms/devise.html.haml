@@ -22,12 +22,11 @@
             %h1 Qbrick CMS
 
     %main
-      .spacer
-      .main__inner
+      .main__inner.devise
         = render 'qbrick/cms/backend/flash', :flash => flash
         = yield
-      .spacer
-      .spacer
+        .spacer
+        .spacer
 
     %footer{role: "contentinfo"}
 

@@ -1,12 +1,18 @@
-= form_for(@admin, :url => { :action => "update_password" } ) do |f|
-  .field
-    = f.label :current_password
-    = f.password_field :current_password
-  .field
-    = f.label :password, "Password"
-    = f.password_field :password, :autocomplete => "off"
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .action_container
-    = f.submit
+.main__content
+  %header.main__header
+    %h1 Change Password
+
+  .main__content.form__container
+    .form__inner
+      = form_for(@admin, :url => { :action => "update_password" } ) do |f|
+        %p.form--horizontal
+          = f.label :current_password
+          = f.password_field :current_password
+        %p.form--horizontal
+          = f.label :password, "Password"
+          = f.password_field :password, :autocomplete => "off"
+        %p.form--horizontal
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+        .form__indent--horizontal
+          = f.submit class: 'btn'

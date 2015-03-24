@@ -1,12 +1,9 @@
 %header.main__header
   %h1= controller.request.host
-  = link_to qbrick.new_cms_page_path, class: 'button button--icon button--icon-big-white' do
+  = link_to qbrick.new_cms_page_path, class: 'btn btn--icon btn--icon-big-white' do
     - streusel_icon('item-new', 'icon--m')
-    = t('.add_page')
+    %span= t('.add_page')
 
 .main__content
-  .row
-    .span8.pages-list
-      .dd
-        = render partial: 'branch', locals: { pages: @pages }
-    .span4
+  .dd
+    = render partial: 'branch', locals: { pages: @pages }

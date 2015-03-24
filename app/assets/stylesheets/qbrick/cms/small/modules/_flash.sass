@@ -1,0 +1,34 @@
+.flash
+  +row
+  min-height: space(3.5)
+  padding-top: space(.5)
+
+  .flash__message
+    padding: space(1)
+    margin-bottom: space(.5)
+    color: $white
+    font-weight: bold
+
+  .btn
+    margin-top: space(-1)
+    margin-bottom: 0
+    float: right
+    background-color: transparent
+    color: $white
+
+    &:hover,
+    &:active
+      color: $body-font-color
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.flash--success
+  background-color: $success-color
+
+.flash--alert,
+.flash--warning
+  background-color: $warning-color
+
+.flash--info
+  background-color: $info-color

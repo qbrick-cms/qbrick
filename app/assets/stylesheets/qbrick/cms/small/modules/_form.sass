@@ -1,3 +1,8 @@
+.form__container
+  +row
+  background-color: $white
+  padding: space(1)
+
 fieldset
   border: 0
   padding: 0
@@ -26,20 +31,22 @@ input
 textarea
   display: block
   width: 100%
-  background-color: white
-  border: rem(1) solid white
+  background-color: $grey-light
+  border: rem(1) solid $grey-light
   border-radius: 0
+  box-shadow: inset rem(1) rem(1) rem(3) 0 $secondary-color
   padding: rem(9) rem(12)
   font-size: rem(16)
   line-height: 1.5
 
   &:focus
     outline: 0
-    border-color: $grey-dark
+    background-color: $white
+    box-shadow: rem(0) rem(1) rem(2) 0 $secondary-color
 
 input[type="search"]
   +appearance(none)
-  +box-sizing(border-box)
+  box-sizing: border-box
 
 select
   width: 100%
@@ -49,7 +56,7 @@ select
   background-image: url(data:image/svg+xml;charset=US-UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2214%22%20viewBox%3D%22-293%20390%2024%2014%22%20enable-background%3D%22new%20-293%20390%2024%2014%22%3E%3Cpath%20d%3D%22M-285.5%20395l5-5%205%205h-10zm10%204l-5%205-5-5h10z%22%2F%3E%3C%2Fsvg%3E)
   background-position: right rem(5) center
   background-repeat: no-repeat
-  border: 0
+  border: rem(1) solid $grey
   border-radius: 0
   color: $grey-dark
   font-size: rem(16)
