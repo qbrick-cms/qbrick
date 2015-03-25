@@ -21,6 +21,8 @@ Qbrick::Engine.routes.draw do
       end
     end
 
+    resources :admins
+
     root to: 'pages#index'
   end
 

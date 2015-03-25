@@ -1,0 +1,10 @@
+= simple_form_for([:cms, @admin], wrapper: :bootstrap) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+
+  .form-actions
+    = f.button :submit
