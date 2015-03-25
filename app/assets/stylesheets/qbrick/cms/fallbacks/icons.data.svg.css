@@ -79,6 +79,9 @@
 .icon--reload { background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M11.7%206v3l4-4-4-4v3c-4.4%200-8%203.6-8%208%200%201.6.5%203%201.2%204.3l1.5-1.5C6%2014%205.7%2013%205.7%2012c0-3.3%202.7-6%206-6zm6.8%201.7L17%209.2c.4.8.7%201.8.7%202.8%200%203.3-2.7%206-6%206v-3l-4%204%204%204v-3c4.4%200%208-3.6%208-8%200-1.6-.4-3-1.2-4.3z%22%2F%3E%3C%2Fsvg%3E'); }
 
 
+.icon--remove { background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%22-293%20385%2024%2024%22%20enable-background%3D%22new%20-293%20385%2024%2024%22%3E%3Cpath%20d%3D%22M-274%20398h-14v-2h14%22%2F%3E%3C%2Fsvg%3E'); }
+
+
 .icon--search { background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M15.5%2014h-.8l-.3-.3c1-1.1%201.6-2.6%201.6-4.2C16%205.9%2013.1%203%209.5%203S3%205.9%203%209.5%205.9%2016%209.5%2016c1.6%200%203.1-.6%204.2-1.6l.3.3v.8l5%205%201.5-1.5-5-5zm-6%200C7%2014%205%2012%205%209.5S7%205%209.5%205%2014%207%2014%209.5%2012%2014%209.5%2014z%22%2F%3E%3C%2Fsvg%3E'); }
 
 
