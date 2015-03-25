@@ -16,7 +16,7 @@ describe 'Administrator Management', type: :feature do
 
     it 'can log in with his/her credentials' do
       visit qbrick.cms_pages_path
-      fill_in 'Email', with: admin.email
+      fill_in 'E-Mail', with: admin.email
       fill_in 'Password', with: admin.password
       click_on 'Log in'
       expect(page).to have_content 'Signed in successfully'
@@ -24,7 +24,7 @@ describe 'Administrator Management', type: :feature do
 
     it 'can log out' do
       visit qbrick.cms_pages_path
-      fill_in 'Email', with: admin.email
+      fill_in 'E-Mail', with: admin.email
       fill_in 'Password', with: admin.password
       click_on 'Log in'
       click_on 'Log out'
@@ -34,13 +34,13 @@ describe 'Administrator Management', type: :feature do
 
     it 'can change his/her password' do
       visit qbrick.cms_pages_path
-      fill_in 'Email', with: admin.email
+      fill_in 'E-Mail', with: admin.email
       fill_in 'Password', with: admin.password
       click_on 'Log in'
       click_on 'Change Password'
-      fill_in 'Current password', with: admin.password
+      fill_in 'Current Password', with: admin.password
       fill_in 'Password', with: new_password
-      fill_in 'Password confirmation', with: new_password
+      fill_in 'Password Confirmation', with: new_password
       expect { click_on 'Update Admin' }.to change { Qbrick::Admin.find_by_email(admin.email).encrypted_password }
     end
   end
