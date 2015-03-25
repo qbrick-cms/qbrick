@@ -136,8 +136,13 @@ $(document).ready ->
     handleClass: 'page-tree__handle'
     dragClass: 'page-tree__dragel'
     placeClass: 'page-tree__placeholder'
-    collapseBtnHTML: '<button data-action="collapse" class="btn btn--icon page-tree__btn-collapse">-</button>'
-    expandBtnHTML: '<button data-action="expand" class="btn btn--icon page-tree__btn-expand">+</button>'
+    collapseBtnHTML: '<button data-action="collapse" class="btn btn--icon page-tree__btn-collapse">
+      <svg class="icon icon--remove " title="remove" xmlns="http://www.w3.org/2000/svg">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon--remove"></use>
+      </svg></button>'
+    expandBtnHTML: '<button data-action="expand" class="btn btn--icon page-tree__btn-expand"><svg class="icon icon--add " title="add" xmlns="http://www.w3.org/2000/svg">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon--add"></use>
+      </svg></button>'
   )
 
   $('.page-tree').on('change', ->

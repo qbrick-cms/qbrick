@@ -1,6 +1,6 @@
 .page-tree
   position: relative
-  margin: 0 space(2)
+  margin: 0 space(1)
   border-top: rem(2) solid $grey
 
 .page-tree__list
@@ -11,7 +11,7 @@
   list-style: none
 
   .page-tree__list
-    padding-left: rem(30)
+    padding-left: space(1.5)
 
 .page-tree__item,
 .page-tree__empty,
@@ -24,7 +24,8 @@
 .page-tree__handle
   display: block
   position: absolute
-  margin: rem(10) 0
+  left: space(.5)
+  margin: rem(4) 0
   padding: rem(5) rem(10)
   color: $body-font-color
   background-color: transparent
@@ -37,8 +38,8 @@
   &:hover
     color: $grey-dark
 
-  &:active
-    color: $primary-color
+    + .page-tree__content
+      background-color: $white
 
 .page-tree__item
   +clearfix
@@ -60,26 +61,26 @@
 
 .page-tree__btn-collapse,
 .page-tree__btn-expand
-  display: inline-block
+  display: block
   position: relative
   cursor: pointer
   float: left
-  width: rem(25)
-  height: rem(30)
-  margin: rem(5) 0 rem(5) rem(30)
+  width: rem(40)
+  height: rem(40)
+  margin: rem(4) space(1) 0 space(4)
   padding: 0
-  white-space: nowrap
-  overflow: hidden
   border: 0
   background: transparent
-  text-align: center
-  font-weight: bold
+
+  &:hover
+    ~ .page-tree__content
+      background-color: $white
 
 .page-tree__placeholder,
 .page-tree__empty
   margin: rem(6) 0
   padding: 0
-  background: $white
+  background: $grey
   border: rem(1) dashed $grey-dark
 
 .page-tree__empty
@@ -87,28 +88,14 @@
   min-height: rem(100)
   background-color: $white
 
-.page-tree__dragel
-  position: absolute
-  pointer-events: none
-  z-index: 9999
-
-  > .page-tree__item
-    .page-tree__handle
-      margin-top: 0
-
-  > .page-tree__item
-    > .page-tree__content
-      margin: 0
-
 .page-tree__content
   display: block
-  padding: rem(6) rem(6) rem(6) rem(38)
+  padding: rem(4) space(.5) rem(4) space(6)
   text-decoration: none
   font-size: rem(20)
   line-height: 2
   background-color: $grey-light
   border-bottom: rem(2) solid $grey
-  line-height: rem(40)
   +clearfix
 
   > a
@@ -129,3 +116,14 @@
 
 .page-tree__content.unpublished
   color: $grey
+
+.page-tree__dragel
+  position: absolute
+  pointer-events: none
+  z-index: 9999
+
+  .page-tree__content
+    background-color: $white
+
+  > li:first-child > .page-tree__handle
+    color: $primary-color

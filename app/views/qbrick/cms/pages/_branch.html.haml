@@ -1,8 +1,9 @@
+
 - unless pages.blank?
   %ol.page-tree__list
     - pages.each do |page|
       %li.page-tree__item{ 'data-id' => page.id }
-        %button.page-tree__handle
+        %button.btn.btn--icon.page-tree__handle
           - streusel_icon('order')
         .page-tree__content{ class: page.state_class }
           = link_to page.title.presence, qbrick.edit_cms_page_path(page)
@@ -13,7 +14,7 @@
                 - streusel_icon('trash')
 
             = link_to qbrick.new_cms_page_path(parent_id: page.id), class: 'btn btn--icon' do
-              - streusel_icon('add')
+              - streusel_icon('item-new')
               = t('qbrick.cms.pages.index.add_page')
 
         - unless page.children.empty?
