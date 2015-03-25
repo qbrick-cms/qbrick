@@ -1,0 +1,10 @@
+.large-8
+  %h1 Passwort ändern
+  .form
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), wrapper: :foundation_long_label, html: { :method => :put }) do |f|
+      = f.input :reset_password_token, as: :hidden
+      = f.input :password, autofocus: true
+      = f.input :password_confirmation
+      = f.submit 'Passwort ändern', class: :button
+      %br
+      = render 'devise/shared/links'

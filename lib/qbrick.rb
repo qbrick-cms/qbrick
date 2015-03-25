@@ -1,4 +1,5 @@
 module Qbrick
+  require 'devise'
   require 'qbrick/engine'
   require 'qbrick/orderable'
   require 'qbrick/image_uploader_mounting'
@@ -20,5 +21,4 @@ module Qbrick
   require 'haml'
   require 'ckeditor_rails'
   require 'inherited_resources'
-  require 'devise'
 end
