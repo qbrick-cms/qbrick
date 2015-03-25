@@ -3,7 +3,7 @@
     ×
   %h3= t('.create_new', :brick => @brick.backend_label)
 
-= simple_form_for @brick, :as => :brick, :url => qbrick.cms_bricks_path, :method => :post, :remote => true, :html => { :id => nil }, :wrapper => :bootstrap do |form|
+= simple_form_for @brick, :as => :brick, :url => qbrick.cms_bricks_path, :method => :post, :remote => true, :html => { :id => nil }, :wrapper => :partystreusel do |form|
   .modal-body
     = form.hidden_field :position, :class => 'position-field'
     = form.hidden_field :type

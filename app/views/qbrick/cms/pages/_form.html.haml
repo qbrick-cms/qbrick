@@ -1,10 +1,4 @@
 %ul.nav.nav-tabs.js-tabs
-  %li{ class: metadata_tab_active(@page) }
-    = link_to t('.tab_metadata'), '#page-metadata', 'data-toggle' => :tab
-  - unless hide_content_tab?(@page)
-    %li{ class: content_tab_active(@page) }
-      = link_to t('.tab_content'), '#page-content', 'data-toggle' => :tab
-
   - I18n.available_locales.reverse.each do |locale|
     %li.pull-right{ :class => (:active if I18n.locale.to_s == locale.to_s) }
       - if @page.translated_to?(locale)
@@ -12,9 +6,9 @@
       - else
         = link_to locale.to_s.upcase, url_for(:action => params[:action], :content_locale => locale), 'data-toggle' => 'tooltip', 'title' => t('.not_translated'), :class => 'not-translated'
 
-.main__content-form.tab-content
-  #page-metadata.tab-pane{ class: metadata_tab_active(@page) }
-    = simple_form_for @page, url: url, html: { class: '' }, wrapper: :'form--horizontal' do |form|
+.main__content-form
+  #page-metadata{ class: metadata_tab_active(@page) }
+    = simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
       = form.input :title, required: false, input_html: { class: :span5 }
       = form.input :slug, required: false, input_html: { class: :span5 }
       = form.input :page_title, required: false, input_html: { class: :span5 }
@@ -33,7 +27,7 @@
 
   - unless hide_content_tab?(@page)
     #brick-form.modal.hide.fade{ :tabindex => '-1', :role => 'dialog' }
-    #page-content.tab-pane{ class: content_tab_active(@page) }
+    #page-content{ class: content_tab_active(@page) }
       - if @page.persisted?
         .clearfix
           .actions

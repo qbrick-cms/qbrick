@@ -1,6 +1,9 @@
-- @settings_collections.each do |sc|
-  - if sc.present?
-    %h3= "#{sc.collection_type.capitalize} #{t('.title')}"
-    %hr
+%header.main__header
+  %h1= t('.Settings')
 
-    = render 'form', settings: sc
+.main__content.form__container
+  - @settings_collections.each do |sc|
+    - if sc.present?
+      .form__inner
+        %h2= "#{sc.collection_type.capitalize} #{t('.title')}"
+        = render 'form', settings: sc

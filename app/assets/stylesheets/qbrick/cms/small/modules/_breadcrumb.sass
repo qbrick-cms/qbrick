@@ -1,0 +1,36 @@
+.breadcrumb
+  +clearfix
+  display: block
+  list-style: none
+  padding: 0
+  margin: 0 0 space(1) 0
+
+.breadcrumb__item
+  display: inline-block
+  padding: rem(8) 0
+
+  &:after
+    content: '|'
+    margin: 0 space(1)
+    color: $grey-dark
+
+  &:last-child
+    &:after
+      content: ''
+      display: none
+
+    a
+      color: $primary-color
+
+  a
+    display: inline-block
+    color: $grey-dark
+
+    &:hover
+      color: $tertiary-color
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.breadcrumb__item--active
+  color: $primary-color
