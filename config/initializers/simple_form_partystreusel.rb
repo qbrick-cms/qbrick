@@ -1,3 +1,18 @@
+module SimpleForm
+  module Components
+    # Needs to be enabled in order to do automatic lookups
+    module Label_with_i
+      # Name of the component method
+      def label_with_i(wrapper_options = nil)
+        "<i></i>".html_safe
+        label_text
+      end
+    end
+  end
+end
+
+SimpleForm::Inputs::Base.send(:include, SimpleForm::Components::Label_with_i)
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.wrappers :'partystreusel', tag: 'p', class: 'form--horizontal', error_class: 'error' do |b|
@@ -35,10 +50,14 @@ SimpleForm.setup do |config|
     end
   end
 
-  # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
-  # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
-  # to learn about the different styles for forms and inputs,
-  # buttons and other elements.
+  config.wrappers :partystreusel_boolean, tag: 'p', class: 'form--horizontal', error_class: 'error' do |b|
+    b.use :html5
+    b.use :input
+    b.use :label_with_i
+    b.use :error, wrap_with: { tag: 'span', class: 'form__help-inline' }
+    b.use :hint,  wrap_with: { tag: 'span', class: 'form__help-block' }
+  end
+
   config.default_wrapper = :partystreusel
-  config.boolean_style = :nested
+  config.boolean_style = :inline
 end
