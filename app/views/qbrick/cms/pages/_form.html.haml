@@ -20,10 +20,12 @@
       - if @page == homepage
         = form.input :google_verification_key
       = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
-      = form.input :published, as: :boolean, wrapper: :partystreusel_boolean
+      = form.input :published, as: :boolean, wrapper: :partystreusel_boolean, wrapper_html: { class: 'form__indent--horizontal'}
 
       .form__indent--horizontal
         = form.button :submit, class: 'btn'
+
+    %hr
 
   - unless hide_content_tab?(@page)
     #brick-form.modal.hide.fade{ :tabindex => '-1', :role => 'dialog' }

@@ -4,8 +4,8 @@ module SimpleForm
     module Label_with_i
       # Name of the component method
       def label_with_i(wrapper_options = nil)
-        "<i></i>".html_safe
-        label_text
+        label_options = merge_wrapper_options(label_html_options, wrapper_options)
+        @builder.label(label_target, '<i></i>'.html_safe + label_text, label_options)
       end
     end
   end
