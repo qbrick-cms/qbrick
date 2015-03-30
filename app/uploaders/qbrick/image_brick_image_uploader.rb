@@ -29,7 +29,7 @@ module Qbrick
     def process_brick_image_size
       image_size = Qbrick::ImageSize.find_by_name(model.image_size)
       return unless image_size.present?
-      resize_to_fill(image_size.width, image_size.height)
+      resize_to_fit(image_size.width, image_size.height)
     end
   end
 end
