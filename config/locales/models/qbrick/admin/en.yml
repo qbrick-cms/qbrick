@@ -10,4 +10,4 @@ en:
     models:
       qbrick/admin:
         one: Admin
-        other: Admin
+        other: Admins
