@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe 'Administrator Management', type: :feature do
-
-
   def create_admin
     @admin ||= FactoryGirl.create(:admin)
   end
@@ -21,7 +19,6 @@ describe 'Administrator Management', type: :feature do
   end
 
   describe 'admin' do
-
     it 'can log in with his/her credentials' do
       expect(page).to have_content 'Signed in successfully'
     end
@@ -33,7 +30,6 @@ describe 'Administrator Management', type: :feature do
     end
 
     context 'when logged in' do
-
       let(:new_password) { 'newAdminPW!' }
 
       it 'can change his/her password' do
@@ -67,7 +63,7 @@ describe 'Administrator Management', type: :feature do
       it 'can delete an admin' do
         FactoryGirl.create(:admin, email: 'somemail@admin.com')
         click_on 'Admins'
-        expect{ find('tr', text: 'somemail@admin.com').find_link('Delete').click }.to change { Qbrick::Admin.count}
+        expect { find('tr', text: 'somemail@admin.com').find_link('Delete').click }.to change { Qbrick::Admin.count }
       end
     end
   end
