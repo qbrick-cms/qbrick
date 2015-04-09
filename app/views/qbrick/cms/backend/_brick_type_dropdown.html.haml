@@ -1,9 +1,9 @@
 - unless brick_list.brick_types.empty?
   .btn__group
     - if brick_list.brick_types.allowed.count > 1
-      %a.btn.btn--small.btn-primary.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+      %button.btn.btn--small.btn--primary.dropdown-toggle{ 'data-toggle' => 'dropdown', type: 'button'}
         = t('.add_element')
-        %span.caret
+        - streusel_icon('item-new')
       %ul.dropdown-menu.pull-right
         - brick_list.brick_types.allowed.group_by(&:group).each do |group, types|
           - types.map { |type| cms_brick_item brick_list, type }.compact.each do |brick_type_item|

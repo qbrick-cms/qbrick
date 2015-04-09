@@ -1,10 +1,10 @@
 - unless @page.bricks.empty?
   .btn__group
-    .btn.btn--small{ 'data-toggle' => 'popover', 'data-content' => t('.brick_clone_info'), 'data-original-title' => t('.brick_clone_info_title')}
-      %i.icon-info-sign
-    %a.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
+    %button.btn.btn--small{ 'data-toggle' => 'popover', 'data-content' => t('.brick_clone_info'), 'data-original-title' => t('.brick_clone_info_title')}
+      = t('.brick_clone_info')
+    %button.btn.btn--small.dropdown-toggle{ 'data-toggle' => 'dropdown', type: 'button'}
       = t('.clone_bricks')
-      %span.caret
+      - streusel_icon('open')
     %ul.dropdown-menu.pull-right
       - I18n.available_locales.each do |locale|
         - unless I18n.locale == locale

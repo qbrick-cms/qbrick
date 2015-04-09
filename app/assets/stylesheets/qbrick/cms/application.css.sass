@@ -12,6 +12,7 @@
 @import neat
 
 // Mixins & Helpers import
+@import helpers
 @import mixins
 
 // Fonts
@@ -56,3 +57,8 @@
   @import large/modules/page_tree
   @import large/modules/breadcrumb
 
+// IMPORT STYLESHEETS FOR LARGE VIEWPORT */
+@media screen and (min-width: #{$xlarge-point})
+  @import xlarge/layout
+
+  @import xlarge/modules/header

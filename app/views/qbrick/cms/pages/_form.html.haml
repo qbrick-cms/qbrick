@@ -1,50 +1,58 @@
-%ul.nav.nav-tabs.js-tabs
-  - I18n.available_locales.reverse.each do |locale|
-    %li.pull-right{ :class => (:active if I18n.locale.to_s == locale.to_s) }
-      - if @page.translated_to?(locale)
-        = link_to_content_locale(locale)
-      - else
-        = link_to locale.to_s.upcase, url_for(:action => params[:action], :content_locale => locale), 'data-toggle' => 'tooltip', 'title' => t('.not_translated'), :class => 'not-translated'
+-# %ul.nav.nav-tabs.js-tabs
+-#   - I18n.available_locales.reverse.each do |locale|
+-#     %li.pull-right{ :class => (:active if I18n.locale.to_s == locale.to_s) }
+-#       - if @page.translated_to?(locale)
+-#         = link_to_content_locale(locale)
+-#       - else
+-#         = link_to locale.to_s.upcase, url_for(:action => params[:action], :content_locale => locale), 'data-toggle' => 'tooltip', 'title' => t('.not_translated'), :class => 'not-translated'
 
-.main__content-form
-  #page-metadata{ class: metadata_tab_active(@page) }
-    = simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
-      = form.input :title, required: false, input_html: { class: :span5 }
-      = form.input :slug, required: false, input_html: { class: :span5 }
-      = form.input :page_title, required: false, input_html: { class: :span5 }
-      = form.input :parent_id, collection: Qbrick::Page.flat_tree, label_method: :nesting_name, selected: params[:parent_id].presence || @page.parent_id.presence, prompt: t('.none'), input_html: { class: :span3 }
-      = form.input :page_type, collection: Qbrick::PageType.all, prompt: false, default: Qbrick::PageType::CONTENT, input_html: { class: :span3 }
-      = form.input :redirect_url, as: :string
-      = form.input :url, as: :string, input_html: { disabled: 'disabled' }
-      = form.input :keywords, input_html: { class: :span5 }, hint: t('.hint_keywords').html_safe
-      - if @page == homepage
-        = form.input :google_verification_key
-      = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
-      = form.input :published, as: :boolean, wrapper: :partystreusel_boolean, wrapper_html: { class: 'form__indent--horizontal'}
+= simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
+  .main__header.form__title-wrapper
+    = form.input_field :title, required: false, class: 'form__title-field'
+
+  .main__content.form__container
+    .form__inner
+      %fieldset
+        = form.input :slug, required: false
+        = form.input :page_title, required: false
+        = form.input :published, as: :boolean, wrapper: :partystreusel_boolean, wrapper_html: { class: 'form__indent--horizontal'}
 
       .form__indent--horizontal
         = form.button :submit, class: 'btn'
 
-    %hr
+  .spacer
+  .main__content.form__container
+    .form__inner
+      %fieldset
+        %legend Settings
+        = form.input :parent_id, collection: Qbrick::Page.flat_tree, label_method: :nesting_name, selected: params[:parent_id].presence || @page.parent_id.presence, prompt: t('.none'), input_html: { class: :span3 }
+        = form.input :page_type, collection: Qbrick::PageType.all, prompt: false, default: Qbrick::PageType::CONTENT, input_html: { class: :span3 }
+        = form.input :redirect_url, as: :string
+        = form.input :url, as: :string, input_html: { disabled: 'disabled' }
+        = form.input :keywords, input_html: { class: :span5 }, hint: t('.hint_keywords').html_safe
+        - if @page == homepage
+          = form.input :google_verification_key
+        = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
 
+      .form__indent--horizontal
+        = form.button :submit, class: 'btn'
+
+.spacer
+%article
   - unless hide_content_tab?(@page)
-    #brick-form.modal.hide.fade{ :tabindex => '-1', :role => 'dialog' }
+    #brick-form.modal{ tabindex: '-1', role: 'dialog' }
     #page-content{ class: content_tab_active(@page) }
       - if @page.persisted?
-        .clearfix
-          .actions
-            .btn__group.pull-left#collapse-bricks-nav{ class: @page.bricks.present? ? '' : 'hidden' }
-              .btn.btn--small#expand-all
-                %i.icon-resize-full
-                = t('.expand_all')
+        .btn__group#collapse-bricks-nav{ class: @page.bricks.present? ? '' : 'hidden' }
+          .btn.btn--small#expand-all
+            = t('.expand_all')
 
-              .btn.btn--small#collapse-all
-                %i.icon-resize-small
-                = t('.collapse_all')
+          .btn.btn--small#collapse-all
+            = t('.collapse_all')
 
-            = render 'brick_clone_menu'
-            = render 'brick_type_dropdown', :brick_list => @page
+        = render 'brick_clone_menu'
+        = render 'brick_type_dropdown', brick_list: @page
 
-        = render 'qbrick/cms/bricks/brick_list', :brick_list => @page
+      = render 'qbrick/cms/bricks/brick_list', brick_list: @page
 
-= render 'qbrick/cms/bricks/sort_form'
+  = render 'qbrick/cms/bricks/sort_form'

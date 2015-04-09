@@ -7,18 +7,18 @@
 fieldset
   border: 0
   padding: 0
-  margin: 0 0 rem(18)
+  margin: 0 0 space(1.5)
 
 legend
   @extend %h4-styles-s
   text-transform: uppercase
   font-weight: $header-font-weight
-  margin-bottom: rem(6)
+  margin-bottom: space(.5)
 
 label
   display: inline-block
   max-width: 100%
-  margin-bottom: rem(6)
+  margin-bottom: space(.5)
   cursor: pointer
   color: $grey-dark
   font-size: rem(16)
@@ -74,6 +74,16 @@ select
   &:hover
     color: $primary-color
     cursor: pointer
+
+input.form__title-field
+  background-color: $white
+  margin-bottom: space(2)
+  color: $header-font-color
+  font-family: $header-font-family
+  font-weight: $header-font-weight
+  font-style: $header-font-style
+  font-size: $h1-font-size
+  line-height: $h1-line-height
 
 // ----------------------------------------------------------
 // INPUT WITH BUTTON ON THE SIDE
