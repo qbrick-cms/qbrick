@@ -1,0 +1,68 @@
+.accordion
+  display: block
+  margin: 0
+  padding: 0
+
+.accordion__item
+  display: block
+  border-top: rem(2) solid $secondary-color
+
+.accordion__title
+  display: block
+  min-height: rem(66)
+  margin: 0
+  padding: rem(15) rem(50) rem(15) 0
+  position: relative
+  font-size: rem(16)
+  line-height: 1.125
+  font-weight: $header-font-weight
+  cursor: pointer
+  color: $body-font-color
+
+  &:before,
+  &:after
+    content: ''
+    display: block
+    position: absolute
+
+  &:before
+    width: rem(40)
+    height: rem(40)
+    position: absolute
+    top: rem(13)
+    right: 0
+    border: rem(1) solid $grey
+    border-radius: 100%
+
+  &:after
+    top: rem(31)
+    right: rem(15)
+    +triangle(rem(10), currentColor, down)
+
+  &:hover
+    color: $grey
+
+.accordion__content
+  display: none
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.accordion__item--open
+  .accordion__title
+    color: $primary-color
+
+    &:after
+      top: rem(30)
+      border-top: 0
+      +triangle(rem(10), currentColor, up)
+
+  .accordion__content
+    display: block
+
+// ----------------------------------------------------------
+// NO-JS Fallback
+// ----------------------------------------------------------
+.no-js
+  .accordion__content
+    display: block

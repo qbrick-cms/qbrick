@@ -1,15 +1,16 @@
 - unless brick_list.brick_types.empty?
   .btn__group
     - if brick_list.brick_types.allowed.count > 1
-      %button.btn.btn--small.btn--primary.dropdown-toggle{ 'data-toggle' => 'dropdown', type: 'button'}
-        = t('.add_element')
-        - streusel_icon('item-new')
-      %ul.dropdown-menu.pull-right
-        - brick_list.brick_types.allowed.group_by(&:group).each do |group, types|
-          - types.map { |type| cms_brick_item brick_list, type }.compact.each do |brick_type_item|
-            %li
-              = brick_type_item
-          .divider
+      .dropdown
+        %button.btn.btn--small.btn--primary.dropdown__toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {epanded: 'false', haspopup: 'true' }}
+          = t('.add_element')
+          - streusel_icon('item-new')
+        %ul.dropdown__menu{role: 'menu'}
+          - brick_list.brick_types.allowed.group_by(&:group).each do |group, types|
+            - types.map { |type| cms_brick_item brick_list, type }.compact.each do |brick_type_item|
+              %li
+                = brick_type_item
+
     - else
       - brick_list.brick_types.allowed.each do |type|
         = link_to t('.add_specific_element', :name => type.class_name.constantize.model_name.human), qbrick.new_cms_brick_path(:brick => { :type => type.class_name, :brick_list_id => brick_list.id, :brick_list_type => brick_list.brick_list_type }), :remote => true, :class => 'btn btn-small btn-primary'

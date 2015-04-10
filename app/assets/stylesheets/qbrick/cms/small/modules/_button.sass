@@ -31,7 +31,8 @@
     background: $grey-dark
     border-color: $grey-dark
 
-  &:active
+  &:active,
+  .dropdown.open > &
     color: $white
     background: $black
     border-color: $black
@@ -54,7 +55,8 @@
     &:active
       background-color: $grey-light
 
-    &:active
+    &:active,
+    .dropdown.open > &
       color: $primary-color
       border-color: $grey-light
 
@@ -74,7 +76,8 @@
     &:hover
       color: $body-font-color
 
-    &:active
+    &:active,
+    .dropdown.open > &
       color: $primary-color
 
   // ----------------------------------------------------------
@@ -100,7 +103,8 @@
     &:hover
       color: $body-font-color
 
-    &:active
+    &:active,
+    .dropdown.open > &
       color: $primary-color
 
   &--icon-big-white

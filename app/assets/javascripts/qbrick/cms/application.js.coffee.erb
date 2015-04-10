@@ -4,8 +4,10 @@
 #= require jquery_ujs
 #= require jquery.remotipart
 #= require jquery-ui/sortable
+#= require bootstrap
 #= require ckeditor-jquery
 #= require jquery.nestable
+#= require ./partystreusel/accordion
 #= require_tree .
 #
 # Disable timestamp for ckeditor internal asset loading. This prevents issues with Asset Pipeline on production.
@@ -127,6 +129,12 @@ $(document).ready ->
 
   $('#page_page_type').change ->
     checkPageType()
+
+  $('.dropdown__toggle').dropdown()
+
+  Streusel.selectorType = 'css_class'
+  Streusel.selectorPrefix = 'js'
+  Streusel.Accordion.init()
 
   $('.page-tree').nestable(
     rootClass: 'page-tree'

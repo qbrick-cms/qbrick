@@ -1,0 +1,19 @@
+.accordion__title
+  min-height: rem(70)
+  padding-top: rem(24)
+  font-size: rem(20)
+  line-height: 1.2
+
+  &:before
+    top: rem(15)
+
+  &:after
+    top: rem(33)
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.accordion__item--open
+  .accordion__title
+    &:after
+      top: rem(32)

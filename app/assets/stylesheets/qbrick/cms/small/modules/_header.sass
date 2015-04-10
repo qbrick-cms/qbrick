@@ -28,27 +28,32 @@
   float: right
   margin-left: space(2)
 
+.header__languages,
+.header__account
+  .btn__group
+    margin: space(.5) 0 0 0
+
+  .btn
+    margin-bottom: space(.5)
+    box-shadow: none
+    border: 0
+
+  .btn:hover,
+  .btn--active,
+  .dropdown.open .btn
+    background-color: mix($primary-color, $black, 80%)
+    color: $white
+
+  .btn--active a
+    color: white
+
+.header__languages
   a
     color: $grey-dark
 
     &:hover
       color: white
-
 .header__account
-  font-size: rem(18)
-  padding: rem(9) 0
-  margin: space(.5) 0
 
-.header__languages
-  .btn__group
-    margin: space(.5) 0 rem(5) 0
-
-  .btn
-    margin-bottom: 0
-
-  .btn:hover,
-  .btn--active
-    background-color: mix($primary-color, $black, 80%)
-
-  .btn--active a
-    color: white
+  .dropdown__menu
+    top: 120%
