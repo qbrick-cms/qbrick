@@ -21,23 +21,22 @@
         = form.button :submit, class: 'btn'
 
   .spacer
-  .main__content.form__container
-    .form__inner
-      .accordion.js-accordion{ 'data-scroll-offset' => -10 }
-        %section.accordion__item
-          %h1.accordion__title Settings
-          .accordion__content
-            = form.input :parent_id, collection: Qbrick::Page.flat_tree, label_method: :nesting_name, selected: params[:parent_id].presence || @page.parent_id.presence, prompt: t('.none'), input_html: { class: :span3 }
-            = form.input :page_type, collection: Qbrick::PageType.all, prompt: false, default: Qbrick::PageType::CONTENT, input_html: { class: :span3 }
-            = form.input :redirect_url, as: :string
-            = form.input :url, as: :string, input_html: { disabled: 'disabled' }
-            = form.input :keywords, input_html: { class: :span5 }, hint: t('.hint_keywords').html_safe
-            - if @page == homepage
-              = form.input :google_verification_key
-            = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
+  .main__content.form__container.page__settings
+    .accordion.js-accordion{ 'data-scroll-offset' => -10 }
+      %fieldset.accordion__item
+        %legend.accordion__title Settings
+        .accordion__content
+          = form.input :parent_id, collection: Qbrick::Page.flat_tree, label_method: :nesting_name, selected: params[:parent_id].presence || @page.parent_id.presence, prompt: t('.none'), input_html: { class: :span3 }
+          = form.input :page_type, collection: Qbrick::PageType.all, prompt: false, default: Qbrick::PageType::CONTENT, input_html: { class: :span3 }
+          = form.input :redirect_url, as: :string
+          = form.input :url, as: :string, input_html: { disabled: 'disabled' }
+          = form.input :keywords, input_html: { class: :span5 }, hint: t('.hint_keywords').html_safe
+          - if @page == homepage
+            = form.input :google_verification_key
+          = form.input :description, as: :text, input_html: { class: :span5, rows: 4 }, hint: t('.hint_description').html_safe
 
-            .form__indent--horizontal
-              = form.button :submit, class: 'btn'
+          .form__indent--horizontal
+            = form.button :submit, class: 'btn'
 
 .spacer
 %article
