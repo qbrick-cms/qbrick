@@ -1,6 +1,7 @@
 %header.main__header
   %h1= t('.Settings')
 
+.spacer
 - @settings_collections.each do |sc|
   - if sc.present?
     .main__content.form__container

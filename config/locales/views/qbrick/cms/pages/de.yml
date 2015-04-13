@@ -4,6 +4,7 @@ de:
       pages:
         index:
           add_page: 'Seite hinzufügen'
+          sort: 'Seiten sortieren'
         form:
           tab_metadata: 'Einstellungen'
           tab_content: 'Inhalt'

@@ -1,6 +1,1 @@
-.main__content
-  %header.main__header
-    %h1 Neue Seite
-  .main__content.form__container
-    .form__inner
-      = render :partial => 'form', :locals => { :url => qbrick.cms_pages_path, :page_title => t('.new') }
+= render :partial => 'form', :locals => { :url => qbrick.cms_pages_path, :page_title => t('.new') }

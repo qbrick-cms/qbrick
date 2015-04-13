@@ -1,0 +1,37 @@
+$table-space: rem(8)
+
+.sc-table
+  margin: 0 0 space(2) 0
+  overflow-x: auto
+  -webkit-overflow-scrolling: touch
+
+table
+  width: 100%
+
+thead
+  color: $white
+  text-align: left
+
+  th
+    background-color: $primary-color
+
+tbody
+  tr
+    background-color: $secondary-color
+    color: $body-font-color
+    +transition( all .1s linear )
+
+    &:nth-child(odd)
+      background-color: $grey-light
+
+    &:hover
+      background-color: $white
+
+td,
+th
+  min-width: rem(100)
+  padding: $table-space $table-space $table-space $table-space
+  border-right: rem(2) solid $grey-light
+
+  &:last-child
+    border-right: 0

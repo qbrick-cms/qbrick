@@ -8,7 +8,7 @@
 
 = simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
   .main__header.form__title-wrapper
-    = form.input_field :title, required: false, class: 'form__title-field'
+    = form.input_field :title, required: false, class: 'form__title-field', placeholder: 'Seitentitel'
 
   .main__content.form__container
     .form__inner
@@ -37,6 +37,7 @@
 
           .form__indent--horizontal
             = form.button :submit, class: 'btn'
+          .spacer
 
 .spacer
 %article
