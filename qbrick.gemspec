@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'poltergeist'
 
+  s.add_dependency 'sprockets', '2.12.3'
   s.add_dependency 'coffee-rails'
   s.add_dependency 'remotipart'
   s.add_dependency 'haml', '>= 4.0.3'
