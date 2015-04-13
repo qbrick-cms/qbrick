@@ -10,7 +10,7 @@ module Qbrick
     end
 
     def to_brick_item_id
-      "brick-item-#{id}-#{self.class.to_s.underscore.gsub('/', '_')}"
+      "brick__item-#{id}-#{self.class.to_s.underscore.gsub('/', '_')}"
     end
 
     def to_brick_list_id

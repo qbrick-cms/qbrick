@@ -27,7 +27,6 @@
   left: space(.5)
   margin: rem(4) 0
   padding: rem(5) rem(10)
-  color: $body-font-color
   background-color: transparent
   border: 0
 
@@ -36,8 +35,6 @@
     width: rem(20)
 
   &:hover
-    color: $grey-dark
-
     + .page-tree__content
       background-color: $white
 
@@ -51,17 +48,11 @@
   .btn--icon
     background-color: $grey-light
     border-radius: 100%
-    color: $grey-darker
-
-    &:hover
-      color: $body-font-color
 
   .btn--delete
     &:hover
       color: $warning-color
 
-  .btn--icon,
-  .btn--delete
     &:active
       color: $primary-color
 

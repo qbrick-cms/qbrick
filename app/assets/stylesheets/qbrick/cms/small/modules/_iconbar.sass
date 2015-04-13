@@ -17,9 +17,9 @@
     display: block
     padding: rem(12)
     background-color: $grey-light
-    color: $grey-dark
+    color: $grey-darker
     text-align: center
-    border-bottom: rem(3) solid currentColor
+    border-bottom: rem(3) solid $grey-dark
 
   .icon
     display: block
@@ -33,6 +33,7 @@
   a:hover
     background-color: $white
     color: $body-font-color
+    border-color: currentColor
     +transition( all .1s linear )
 
 .iconbar__item a:focus,

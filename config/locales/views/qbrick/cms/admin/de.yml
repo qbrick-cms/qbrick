@@ -2,6 +2,7 @@ de:
   qbrick:
     cms:
       backend:
+        account: Account
         confirm_delete: '"%{name}" wirklich löschen?'
         brick_type_dropdown:
           add_element: 'Element hinzufügen'

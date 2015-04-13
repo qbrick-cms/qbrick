@@ -5,6 +5,7 @@ en:
         index:
           add_page: 'Add page'
           sort: 'Sort pages'
+          edit: 'bearbeiten'
         form:
           tab_metadata: 'Settings'
           tab_content: 'Content'

@@ -57,10 +57,10 @@ checkPageType = ->
 sortableBrick = ->
   $(".brick-list").each (idx, elem) ->
     $(elem).sortable(
-      handle: '.brick-item-header',
+      handle: '.brick__item-header',
       axis: "y",
       update: (event, ui) ->
-        idList = $(this).find("> .brick-item")
+        idList = $(this).find("> .brick__item")
           .each (idx, elem) ->
             $(this).find("input.position-field").val(idx+1)
           .map ->
@@ -160,15 +160,15 @@ $(document).ready ->
 
   # collapse / expand all
   $('#expand-all').click ->
-    $('.brick-item-content').each (index, elem) ->
+    $('.brick__item-content').each (index, elem) ->
       $(elem).collapse('show')
-    $('.resize-toggler').each (index, elem) ->
+    $('.js-resize-toggler').each (index, elem) ->
       $(elem).removeClass('collapsed')
 
   $('#collapse-all').click ->
-    $('.brick-item-content').each (index, elem) ->
+    $('.brick__item-content').each (index, elem) ->
       $(elem).collapse('hide')
-    $('.resize-toggler').each (index, elem) ->
+    $('.js-resize-toggler').each (index, elem) ->
       $(elem).addClass('collapsed')
 
   $("[data-toggle=tooltip]").tooltip(placement: 'top')

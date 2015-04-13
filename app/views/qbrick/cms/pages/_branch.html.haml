@@ -8,6 +8,10 @@
           = link_to page.title.presence, qbrick.edit_cms_page_path(page)
 
           .btn__group
+            = link_to qbrick.edit_cms_page_path(page), class: 'btn btn--tertiary' do
+              - streusel_icon('edit')
+              = t('qbrick.cms.pages.index.edit')
+
             - if page.children.empty?
               = link_to qbrick.cms_page_path(page), confirm: t('qbrick.cms.backend.confirm_delete', name: page.title), method: :delete, class: 'btn btn--icon btn--delete' do
                 - streusel_icon('trash')

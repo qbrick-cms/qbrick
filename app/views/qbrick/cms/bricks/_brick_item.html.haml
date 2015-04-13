@@ -1,26 +1,26 @@
-.brick-item{ id: brick.to_brick_item_id, class: brick.to_style_class, 'data-id' => brick.id }
+%section.brick__item{ id: brick.to_brick_item_id, class: brick.to_style_class, 'data-id' => brick.id }
   = simple_form_for brick, as: :brick, url: qbrick.cms_brick_path(brick), remote: true, html: { id: nil }, wrapper: :partystreusel do |form|
     = form.hidden_field :position, class: 'position-field'
     - brick_content = render(brick.to_edit_partial_path, brick: brick, form: form)
 
-    .brick-item-header.clearfix
+    %header.brick__item-header.clearfix
       = render('qbrick/cms/bricks/brick_header', brick: brick, brick_content: brick_content, form: form)
 
     - if brick_content.present? || brick.user_can_save?
-      .brick-item-content.collapse.in{ id: "brick-content-#{brick.id}", 'data-toggle' => true }
+      .brick__item-content.collapse.in{ id: "brick-content-#{brick.id}", 'data-toggle' => true }
         - if brick_content.present?
           = brick_content
         - if brick.user_can_save?
           - # save button
           .clearfix
             .pull-right
-              %a.submit{ href: '#', class: 'btn btn-success btn-small ', 'data-title' => '', 'data-content' => t('.saved') }
+              %button.btn.btn--primary.submit{ 'data-title' => '', 'data-content' => t('.saved') }
                 = t('.save')
 
   - if brick.renders_own_childs?
-    .brick-item-childs
+    .brick__item-childs
       = render(brick.to_edit_childs_partial_path, brick: brick)
   - else
     - if brick.respond_to?(:bricks)
-      .brick-item-childs
+      .brick__item-childs
         = render('qbrick/cms/bricks/brick_list', brick_list: brick)

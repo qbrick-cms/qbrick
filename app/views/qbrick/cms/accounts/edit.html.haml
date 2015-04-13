@@ -1,6 +1,7 @@
 %header.main__header
   %h1= t('.ChangePassword')
 
+.spacer
 .main__content.form__container
   .form__inner
     = form_for(@admin, :url => { :action => "update_password" } ) do |f|

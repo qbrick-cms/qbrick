@@ -1,0 +1,30 @@
+.brick__item
+  background-color: $white
+
+.brick__item-header
+  background-color: $grey
+  padding: space(1)
+  +clearfix()
+
+  > .btn__group
+    margin-right: space(1)
+
+  .btn__group,
+  h2
+    display: inline-block
+    margin-top: 0
+    margin-bottom: 0
+
+  h2 span
+    color: $grey-darker
+    font-size: rem(18)
+
+  .btn--icon
+    background-color: $grey-light
+    border-radius: 100%
+
+    &:hover
+      background-color: $white
+
+.brick__item-actions
+  float: right
