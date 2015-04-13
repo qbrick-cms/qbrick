@@ -9,7 +9,7 @@
 
           .btn__group
             - if page.children.empty?
-              = link_to qbrick.cms_page_path(page), confirm: t('qbrick.cms.admin.confirm_delete', name: page.title), method: :delete, class: 'btn btn--icon btn--delete' do
+              = link_to qbrick.cms_page_path(page), confirm: t('qbrick.cms.backend.confirm_delete', name: page.title), method: :delete, class: 'btn btn--icon btn--delete' do
                 - streusel_icon('trash')
 
             = link_to qbrick.new_cms_page_path(parent_id: page.id), class: 'btn btn--icon' do

@@ -17,10 +17,13 @@
     - @admins.each do |admin|
       %tr
         %td= admin.email
-        %td= link_to t("cms.edit"), edit_cms_admin_path(admin)
         %td
-          =link_to cms_admin_path(admin), method: :delete, data: { confirm: t('cms.are_you_sure') }, class: 'btn btn-small btn-danger' do
-            %i.icon-trash.icon-white
+          = link_to edit_cms_admin_path(admin), class: 'btn btn-small btn--secondary' do
+            - streusel_icon('edit')
+            =t("cms.edit")
+        %td
+          =link_to cms_admin_path(admin), method: :delete, data: { confirm: t('cms.are_you_sure') }, class: 'btn btn-small btn--secondary' do
+            - streusel_icon('trash')
             =t('cms.destroy')
 
 %br

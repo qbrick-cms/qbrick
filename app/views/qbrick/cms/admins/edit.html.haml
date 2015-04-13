@@ -1,5 +1,6 @@
-%h1= t("cms.edit_title", singular_name: @admin.model_name.human)
+%header.main__header
+  %h1= t("cms.edit_title", singular_name: @admin.model_name.human)
+
+  = link_to t('cms.back'), cms_admins_path
 
 = render 'form'
-
-= link_to t('cms.back'), cms_admins_path

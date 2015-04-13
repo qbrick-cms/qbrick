@@ -1,9 +1,11 @@
 %header.main__header
   %h1= t('.Settings')
 
-.main__content.form__container
-  - @settings_collections.each do |sc|
-    - if sc.present?
+- @settings_collections.each do |sc|
+  - if sc.present?
+    .main__content.form__container
       .form__inner
         %h2= "#{sc.collection_type.capitalize} #{t('.title')}"
         = render 'form', settings: sc
+
+    .spacer
