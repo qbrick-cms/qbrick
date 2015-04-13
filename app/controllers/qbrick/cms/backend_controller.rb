@@ -6,8 +6,15 @@ module Qbrick
       before_action :set_content_locale, :authenticate_admin!
 
       def set_content_locale
-        return if params[:content_locale].blank?
-        I18n.locale = params[:content_locale]
+        # this was taken from: https://github.com/screenconcept/hieronymus_shop/pull/218/files
+        # and needs further work:
+        # TODO: document how to implement in frontend
+        # TODO: implement frontend part in our rails_template
+        # TODO: add specs
+        new_locale = params[:content_locale] || session['backend_locale'] || I18n.locale
+        session['backend_locale'] = new_locale.to_s
+        return if I18n.locale == new_locale || !I18n.locale_available?(new_locale)
+        I18n.locale = new_locale
       end
 
       def default_url_options

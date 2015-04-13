@@ -1,10 +1,14 @@
 %nav.iconbar{role: 'navigation'}
   %ul.iconbar__list
     %li.iconbar__item
+      = link_to qbrick.cms_pages_path do
+        - streusel_icon( 'page')
+        = Qbrick::Page.model_name.human(:count => 2)
+    %li.iconbar__item
       = link_to qbrick.cms_settings_collections_path do
         - streusel_icon( 'settings')
         = t('.settings')
     %li.iconbar__item
-      = link_to qbrick.cms_pages_path do
-        - streusel_icon( 'page')
-        = Qbrick::Page.model_name.human(:count => 2)
+      = link_to qbrick.cms_admins_path do
+        - streusel_icon( 'people')
+        = Qbrick::Admin.model_name.human(:count => 2)

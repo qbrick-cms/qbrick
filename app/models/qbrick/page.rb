@@ -57,7 +57,7 @@ module Qbrick
 
       def all_urls
         url_columns = column_names.select { |col| col.start_with? 'url_' }
-        pluck(url_columns).flatten.compact.sort.uniq.map { |r| "/#{r}" }
+        pluck(*url_columns).flatten.compact.sort.uniq.map { |r| "/#{r}" }
       end
     end
 
@@ -92,6 +92,16 @@ module Qbrick
     def translated_to?(raw_locale)
       locale = raw_locale.to_s.underscore
       send("url_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
+    end
+
+    def translated_link_for(locale)
+      if translated_to? locale
+        I18n.with_locale locale do
+          url_with_locale
+        end
+      else
+        Qbrick::Page.roots.first.link
+      end
     end
 
     def link

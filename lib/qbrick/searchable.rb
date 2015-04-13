@@ -7,7 +7,9 @@ module Qbrick
 
     DICTIONARIES = {
       en: 'english',
-      de: 'german'
+      de: 'german',
+      :'de-AT' => 'german',
+      :'de-CH' => 'german'
     }
 
     def update_fulltext

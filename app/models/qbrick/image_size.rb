@@ -24,7 +24,7 @@ module Qbrick
       end
 
       def add(name, width, height)
-        @all << ImageSize.new.tap do |size|
+        all << ImageSize.new.tap do |size|
           size.name = name.to_sym
           size.width = width
           size.height = height

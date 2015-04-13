@@ -1,0 +1,11 @@
+de:
+  cms:
+    are_you_sure: 'Sind Sie sicher?'
+    destroy: 'Löschen'
+    edit: 'Bearbeiten'
+    back: 'Zurück'
+    index_title: "%{plural_name} Verwalten"
+    edit_title: "%{singular_name} Bearbeiten"
+    new_title: "%{singular_name} Erstellen"
+    default:
+      new: 'Neuer Eintrag'

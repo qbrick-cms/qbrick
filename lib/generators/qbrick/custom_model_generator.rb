@@ -4,7 +4,7 @@ module Qbrick
   class CustomModelGenerator < Rails::Generators::NamedBase
     def source_paths
       [
-        File.join(File.dirname(__FILE__), '../../../app/views/qbrick/cms/admin/'),
+        File.join(File.dirname(__FILE__), '../../../app/views/qbrick/cms/backend/'),
         File.join(File.dirname(__FILE__), '../../templates/qbrick/', self.class.name.demodulize.underscore)
       ]
     end
@@ -23,7 +23,7 @@ module Qbrick
     end
 
     def add_navigation_link
-      nav_file = 'app/views/qbrick/cms/admin/_main_navigation.html.haml'
+      nav_file = 'app/views/qbrick/cms/backend/_main_navigation.html.haml'
 
       inject_into_file nav_file, after: '%li= link_to Qbrick::Page.model_name.human(:count => 2), qbrick.cms_pages_path' do
         "\n  %li= link_to t('cms.navigation_title.#{model_name}'), #{route_name}_path"
@@ -66,7 +66,7 @@ module Qbrick
     private
 
     def custom_models_base_already_installed?
-      File.exist?('app/controllers/qbrick/base_controller.rb') && File.exist?('app/views/qbrick/cms/admin/_main_navigation.html.haml')
+      File.exist?('app/controllers/qbrick/base_controller.rb') && File.exist?('app/views/qbrick/cms/backend/_main_navigation.html.haml')
     end
 
     def setup_base_controller
@@ -79,7 +79,7 @@ module Qbrick
     end
 
     def setup_navigation
-      nav_dir = 'app/views/qbrick/cms/admin'
+      nav_dir = 'app/views/qbrick/cms/backend'
       empty_directory nav_dir
 
       copy_file '_main_navigation.html.haml', "#{nav_dir}/_main_navigation.html.haml"

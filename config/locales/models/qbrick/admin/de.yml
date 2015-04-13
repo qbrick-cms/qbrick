@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    attributes:
+      qbrick/admin:
+        password: Passwort
+        password_confirmation: Passwort Bestätigung
+        current_password: Aktuelles Passwort
+        email: E-Mail
+
+    models:
+      qbrick/admin:
+        one: Administrator
+        other: Administartoren

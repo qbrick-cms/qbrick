@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
   s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'poltergeist'
 
   s.add_dependency 'coffee-rails'
   s.add_dependency 'remotipart'
@@ -56,4 +57,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'neat'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'devise'
+  s.add_dependency 'devise'
+  s.add_dependency 'devise-i18n'
 end
