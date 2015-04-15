@@ -134,7 +134,7 @@ module Qbrick
     end
 
     def cache_key
-      super +  partial_digest(to_partial_path)
+      super + partial_digest(to_partial_path)
     end
   end
 end

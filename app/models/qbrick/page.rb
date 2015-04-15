@@ -52,7 +52,7 @@ module Qbrick
       end
 
       def by_identifier(identifier)
-        where(identifier: identifier).first
+        find_by(identifier: identifier)
       end
 
       def all_urls
