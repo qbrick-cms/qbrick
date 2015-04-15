@@ -484,7 +484,7 @@ describe Qbrick::Page, type: :model do
       it 'does not affect pages other than the target page' do
         another_page = create(:page)
         FactoryGirl.create(:image_brick, brick_list_type: 'Qbrick::Page', brick_list_id: another_page.id)
-        expect{ @page.clear_bricks_for_locale(:de) }.to_not change{ another_page.bricks.count }
+        expect { @page.clear_bricks_for_locale(:de) }.to_not change { another_page.bricks.count }
       end
     end
 
