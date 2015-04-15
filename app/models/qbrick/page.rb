@@ -197,6 +197,7 @@ module Qbrick
 
     def clone_bricks_to(locale)
       failed_to_clone = []
+      clear_association_cache
 
       bricks.each do |brick|
         failed_to_clone << brick unless clone_brick_to(brick, locale, id)
@@ -205,7 +206,7 @@ module Qbrick
     end
 
     def clone_brick_to(brick, to_locale, new_brick_list_id)
-      new_brick = brick.dup
+      new_brick = brick.deep_dup
 
       copy_assets_to_cloned_brick(brick, new_brick) if brick.uploader?
 
