@@ -178,7 +178,9 @@ module Qbrick
     end
 
     def clear_bricks_for_locale(locale)
-      bricks.unscoped.where(locale: locale).destroy_all
+      I18n.with_locale locale do
+        bricks.destroy_all
+      end
     end
 
     def copy_assets_to_cloned_brick(brick, new_brick)
