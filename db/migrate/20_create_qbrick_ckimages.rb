@@ -3,7 +3,7 @@ class CreateQbrickCkimages < ActiveRecord::Migration
     create_table :qbrick_ckimages do |t|
       t.string :file
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

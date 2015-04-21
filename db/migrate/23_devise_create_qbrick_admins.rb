@@ -31,7 +31,7 @@ class DeviseCreateQbrickAdmins < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-      t.timestamps
+      t.timestamps null: true
     end
 
     add_index :qbrick_admins, :email,                unique: true
