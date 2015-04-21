@@ -32,7 +32,7 @@
 - else
   .modal-body
     .alert.alert-info
-      = t('.bricks_cloned', :brick_count => (page.bricks.unscoped.where(:locale => params[:target_locale]).count - params[:failed_bricks].count))
+      = t('.bricks_cloned', :brick_count => (page.bricks.unscoped.where(:locale => params[:target_locale], :brick_list_id => page.id).count - params[:failed_bricks].count))
     - if params[:failed_bricks].any?
       .alert.alert-error
         = t('.failed_to_clone_folowwing_bricks')
