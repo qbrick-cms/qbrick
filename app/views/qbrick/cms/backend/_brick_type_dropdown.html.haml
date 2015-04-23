@@ -1,7 +1,7 @@
 - unless brick_list.brick_types.empty?
   - if brick_list.brick_types.allowed.count > 1
     .dropdown
-      %button.btn.btn--small.btn--primary.dropdown__toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {epanded: 'false', haspopup: 'true' }}
+      %button.btn.btn--small.btn--primary.dropdown__toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {expanded: 'false', haspopup: 'true' }}
         = t('.add_element')
         - streusel_icon('item-new')
       %ul.dropdown__menu{role: 'menu'}

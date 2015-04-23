@@ -18,7 +18,7 @@
     - # grid selection
     - if brick.class.include? Qbrick::Gridded
       .dropdown
-        %button.btn.btn--icon.dropdown__toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {epanded: 'false', haspopup: 'true' }}
+        %button.btn.btn--icon.dropdown__toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {expanded: 'false', haspopup: 'true' }}
           - streusel_icon('settings')
         %ul.dropdown__menu{role: 'menu'}
           %li
@@ -28,7 +28,7 @@
     - unless brick.available_display_styles.empty?
       #display-styles
         .dropdown
-        %button.btn.btn--icon.dropdown_toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {epanded: 'false', haspopup: 'true' }}
+        %button.btn.btn--icon.dropdown_toggle{ 'data-toggle' => 'dropdown', type: 'button', aria: {expanded: 'false', haspopup: 'true' }}
           - streusel_icon('settings')
         %ul.dropdown__menu{role: 'menu'}
           %li
