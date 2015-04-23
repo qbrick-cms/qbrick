@@ -26,6 +26,7 @@ module Qbrick
           flash[:success] = t('layouts.qbrick.cms.flash.success', subject: Qbrick::Page.model_name.human)
           respond_with @page, location: qbrick.edit_cms_page_path(@page)
         else
+          flash[:error] = t('layouts.qbrick.cms.flash.error', subject: Qbrick::Page.model_name.human)
           render 'new'
         end
       end
