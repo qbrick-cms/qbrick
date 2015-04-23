@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ancestry'
   s.add_dependency 'bootstrap-sass', '2.3.2.2'
   s.add_dependency 'ckeditor_rails', '4.2'
-  s.add_dependency 'pg_search'
+  s.add_dependency 'pg_search', '0.7.9'
   s.add_dependency 'htmlentities'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'sass-rails'
