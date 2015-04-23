@@ -80,12 +80,13 @@ describe Qbrick::Translatable do
 
   describe 'country specific locale' do
     before do
+      @locales = I18n.available_locales
       I18n.available_locales = [:de, 'de-CH']
       I18n.locale = 'de-CH'
     end
 
     after do
-      I18n.available_locales = [:en]
+      I18n.available_locales = @locales
       I18n.locale = :en
     end
 

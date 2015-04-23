@@ -16,7 +16,7 @@ class CreateQbrickBricks < ActiveRecord::Migration
       t.string :image_size # ImageBrick
       t.text :embed_src # VideoBrick
       t.string :video # VideoBrick
-      t.timestamps
+      t.timestamps null: true
     end
   end
 

@@ -33,7 +33,7 @@ describe 'rails generate qbrick:custom_model', generator: true do
       it 'generates inherited resource views' do
         views = Dir[File.join(test_app_path, 'app/views/qbrick/base/*.html.haml')]
         views.map! { |v| v.scan(%r{^.+app/views/qbrick/base/(.*).html.haml}).flatten.first.to_sym }
-        expected_action_views = [:edit, :index, :new, :"_form"]
+        expected_action_views = [:edit, :index, :new, :_form]
         expect(expected_action_views - views).to be_empty
       end
     end

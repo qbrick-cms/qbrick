@@ -66,7 +66,7 @@ module Qbrick
       private
 
       def page_can_be_mirrored?
-        !@page.bricks.empty? && (params[:rutheless] == 'true' || @page.bricks.unscoped.where(locale: params[:target_locale]).empty?)
+        !@page.bricks.empty? && (params[:rutheless] == 'true' || I18n.with_locale(params[:target_locale]) { @page.bricks }.empty?)
       end
 
       def mirror_page

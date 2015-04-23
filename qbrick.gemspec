@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'
-  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop', '0.30.0'
   s.add_development_dependency 'poltergeist'
 
   s.add_dependency 'sprockets', '2.12.3'
@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rdiscount' # , '>= 1.6'
   s.add_dependency 'ancestry'
   s.add_dependency 'ckeditor_rails', '4.2'
-  s.add_dependency 'pg_search'
+  s.add_dependency 'pg_search', '0.7.9'
   s.add_dependency 'htmlentities'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'sass-rails'
