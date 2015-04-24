@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      qbrick/setting:
+        one: 'Setting'
+        other: 'Settings'
