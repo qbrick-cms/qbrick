@@ -22,5 +22,9 @@ module Qbrick
         haml_tag :use, 'xlink:href' => "#icon--#{name}"
       end
     end
+
+    def current_locale?(given_locale)
+      [I18n.locale.to_s, I18n.locale.to_sym].include? given_locale
+    end
   end
 end

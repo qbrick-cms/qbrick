@@ -13,7 +13,8 @@ module Qbrick
         # TODO: add specs
         new_locale = params[:content_locale] || session['backend_locale'] || I18n.locale
         session['backend_locale'] = new_locale.to_s
-        return if I18n.locale == new_locale || !I18n.locale_available?(new_locale)
+        return if current_locale?(new_locale) || !I18n.locale_available?(new_locale)
+
         I18n.locale = new_locale
       end
 

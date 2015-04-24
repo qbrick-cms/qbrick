@@ -1,5 +1,6 @@
 en:
   cms:
+    backend_title: Qbrick CMS
     are_you_sure: 'Are you sure?'
     destroy: 'Delete'
     edit: 'Edit'

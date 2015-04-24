@@ -7,7 +7,7 @@
       - streusel_icon('open')
     %ul.dropdown-menu.pull-right
       - I18n.available_locales.each do |locale|
-        - unless I18n.locale == locale
+        - unless current_locale? locale
           - if @page.translated_to?(locale)
             %li= link_to t('.to_locale', :locale_name => locale.upcase), cms_page_mirror_path(@page, :target_locale => locale, :rutheless => false), :remote => true
 
