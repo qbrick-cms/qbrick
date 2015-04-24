@@ -6,7 +6,12 @@ class Accordion extends Partystreusel.Base
 
   constructor: (el) ->
     super
-    @$el.find('.accordion__title').on 'click', @toggleItem
+    title = @$el.find('.accordion__title')
+    return if title.data('accordion-bound')
+
+    title.on 'click', @toggleItem unless title.data('accordion-bound')
+    title.data 'accordion-bound', 'true'
+
     @items = @$el.find('.accordion__item')
     @offset = @$el.data('scroll-offset')
 

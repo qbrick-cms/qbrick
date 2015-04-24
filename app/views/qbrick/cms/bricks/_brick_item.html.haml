@@ -1,13 +1,13 @@
-%section.brick__item{ id: brick.to_brick_item_id, class: brick.to_style_class, 'data-id' => brick.id }
+%section.brick__item.accordion__item.accordion__item--open.js-accordion{ id: brick.to_brick_item_id, class: brick.to_style_class, 'data-id' => brick.id, 'data-scroll-offset' => -10 }
   = simple_form_for brick, as: :brick, url: qbrick.cms_brick_path(brick), remote: true, html: { id: nil }, wrapper: :partystreusel do |form|
     = form.hidden_field :position, class: 'position-field'
     - brick_content = render(brick.to_edit_partial_path, brick: brick, form: form)
 
-    %header.brick__item-header.clearfix
+    %header.brick__item-header.clearfix.accordion__title
       = render('qbrick/cms/bricks/brick_header', brick: brick, brick_content: brick_content, form: form)
 
     - if brick_content.present? || brick.user_can_save?
-      .brick__item-content.collapse.in{ id: "brick-content-#{brick.id}", 'data-toggle' => true }
+      .brick__item-content.accordion__content.collapse.in{ id: "brick-content-#{brick.id}", 'data-toggle' => true }
         - if brick_content.present?
           = brick_content
         - if brick.user_can_save?
