@@ -7,14 +7,17 @@
 -#         = link_to locale.to_s.upcase, url_for(:action => params[:action], :content_locale => locale), 'data-toggle' => 'tooltip', 'title' => t('.not_translated'), :class => 'not-translated'
 
 = simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
-  .main__header.form__title-wrapper
+  .main__header.form__title-wrapper{ class: form.object.errors[:title].present? ? 'form--field-error' : '' }
     = form.input_field :title, required: false, class: 'form__title-field', placeholder: 'Seitentitel'
+    - if form.object.errors[:title].present?
+      %small.error
+        = form.error :title
 
   .main__content.form__container
     .form__inner
       %fieldset
         = form.input :slug
-        = form.input :title
+        = form.input :page_title
         = form.input :published, as: :boolean, wrapper: :partystreusel_boolean, wrapper_html: { class: 'form__indent--horizontal'}
 
       .form__indent--horizontal
@@ -24,7 +27,7 @@
   .main__content.form__container.page__settings
     .accordion.js-accordion{ 'data-scroll-offset' => -10 }
       %fieldset.accordion__item
-        %legend.accordion__title Settings
+        %legend.accordion__title= t '.settings'
         .accordion__content
           = form.input :parent_id, collection: Qbrick::Page.flat_tree, label_method: :nesting_name, selected: params[:parent_id].presence || @page.parent_id.presence, prompt: t('.none'), input_html: { class: :span3 }
           = form.input :page_type, collection: Qbrick::PageType.all, prompt: false, default: Qbrick::PageType::CONTENT, input_html: { class: :span3 }

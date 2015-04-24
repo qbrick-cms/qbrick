@@ -89,6 +89,11 @@ ClassLength:
   CountComments: false  # count full line comments?
   Max: 200
 
+Metrics/AbcSize:
+  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
+  # a Float.
+  Max: 18
+
 # Align with the style guide.
 CollectionMethods:
   PreferredMethods:

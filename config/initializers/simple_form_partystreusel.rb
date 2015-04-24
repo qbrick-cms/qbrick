@@ -1,7 +1,7 @@
 module SimpleForm
   module Components
     # Needs to be enabled in order to do automatic lookups
-    module Label_with_i
+    module LabelWithI
       # Name of the component method
       def label_with_i(wrapper_options = nil)
         label_options = merge_wrapper_options(label_html_options, wrapper_options)
@@ -11,11 +11,11 @@ module SimpleForm
   end
 end
 
-SimpleForm::Inputs::Base.send(:include, SimpleForm::Components::Label_with_i)
+SimpleForm::Inputs::Base.send(:include, SimpleForm::Components::LabelWithI)
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.wrappers :'partystreusel', tag: 'p', class: 'form--horizontal', error_class: 'error' do |b|
+  config.wrappers :partystreusel, tag: 'p', class: 'form--horizontal', error_class: 'form--field-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -24,7 +24,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'span', class: 'form__help-block' }
   end
 
-  config.wrappers :prepend, tag: 'div', class: 'control-group', error_class: 'error' do |b|
+  config.wrappers :prepend, tag: 'div', class: 'control-group', error_class: 'form--field-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -37,7 +37,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :append, tag: 'div', class: 'control-group', error_class: 'error' do |b|
+  config.wrappers :append, tag: 'div', class: 'control-group', error_class: 'form--field-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -50,7 +50,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :partystreusel_boolean, tag: 'p', class: 'form--horizontal', error_class: 'error' do |b|
+  config.wrappers :partystreusel_boolean, tag: 'p', class: 'form--horizontal', error_class: 'form--field-error' do |b|
     b.use :html5
     b.use :input
     b.use :label_with_i
