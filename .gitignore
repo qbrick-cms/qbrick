@@ -24,3 +24,4 @@ qbrick.xcworkspace/
 node_modules
 npm-debug.log
 grunticon.loader.js
+spec/dummy/log
