@@ -158,18 +158,8 @@ $(document).ready ->
     $.post(url, { page_tree: pageTree }, "json")
   )
 
-  # collapse / expand all
-  $('#expand-all').click ->
-    $('.brick__item-content').each (index, elem) ->
-      $(elem).collapse('show')
-    $('.js-resize-toggler').each (index, elem) ->
-      $(elem).removeClass('collapsed')
-
-  $('#collapse-all').click ->
-    $('.brick__item-content').each (index, elem) ->
-      $(elem).collapse('hide')
-    $('.js-resize-toggler').each (index, elem) ->
-      $(elem).addClass('collapsed')
+  $('#collapse-all').on 'click', Streusel.Accordion.closeAll
+  $('#expand-all').on 'click', Streusel.Accordion.expandAll
 
   $("[data-toggle=tooltip]").tooltip(placement: 'top')
   $("[data-toggle=popover]").popover(placement: 'left', html: true, container: 'body')
