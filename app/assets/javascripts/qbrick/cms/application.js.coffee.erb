@@ -3,10 +3,10 @@
 #= require jquery2
 #= require jquery_ujs
 #= require jquery.remotipart
-#= require jquery-ui/sortable
 #= require bootstrap
 #= require ckeditor-jquery
 #= require jquery.nestable
+#= require Sortable
 #= require ./partystreusel/accordion
 #= require_tree .
 #
@@ -19,15 +19,15 @@ CKEDITOR.config.customConfig = "<%= asset_path('qbrick/cms/ck-config.js') %>"
 loadTextEditor = ->
   CKEDITOR.replaceAll('ckeditor')
 
-reloadTextEditor = (ui) ->
-  editor_ids = ui.item.find('.ckeditor').map ->
+reloadTextEditor = (event) ->
+  editor_ids = $(event.item).find('.ckeditor').map ->
     @id
 
   for editor in editor_ids
     CKEDITOR.replace editor
 
-destroyTextEditor = (ui)->
-  editor_ids = ui.item.find('.ckeditor').map ->
+destroyTextEditor = (event)->
+  editor_ids = $(event.item).find('.ckeditor').map ->
     @id
 
   for editor in editor_ids
@@ -53,27 +53,25 @@ checkPageType = ->
     keywords.removeAttr('disabled')
     description.removeAttr('disabled')
 
-
 sortableBrick = ->
   $(".brick-list").each (idx, elem) ->
-    $(elem).sortable(
+    brickList = elem
+    Sortable.create(brickList, {
       handle: '.brick__item-header',
-      axis: "y",
-      update: (event, ui) ->
-        idList = $(this).find("> .brick__item")
+      onEnd: (event) ->
+        reloadTextEditor(event)
+      onStart: (event) ->
+        destroyTextEditor(event)
+      onUpdate: (event) ->
+        idList = $(brickList).find("> .brick__item")
           .each (idx, elem) ->
-            $(this).find("input.position-field").val(idx+1)
+            $(elem).find("input.position-field").val(idx+1)
           .map ->
             $(this).data('id')
-
         sortForm = $('#bricks-sort-form form')
         sortForm.find('input[name="bricks[ids]"]').val(idList.toArray().join(','))
         sortForm.trigger('submit')
-      stop: (event, ui) ->
-        reloadTextEditor(ui)
-      start: (event, ui) ->
-        destroyTextEditor(ui)
-    ).disableSelection()
+    })
 
 window.initSubmitLinks = (selector = null)->
   selector ||= $('body')
