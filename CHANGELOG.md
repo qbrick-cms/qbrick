@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.1 - 2015-04-30
+
+* Fix page delete button (now asks for confirmation and removes the page from the tree via js view)
+
 ## 2.5.0 - 2015-04-23
 
 Initial qBrick release (previous releases refer to [Kuhsaft](http://github.com/screenconcept/kuhsaft))
