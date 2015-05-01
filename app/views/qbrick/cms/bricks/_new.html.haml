@@ -1,12 +1,13 @@
 .modal-dialog
   .modal-content
-    .modal-header
-      %button.close{ 'data-dismiss' => 'modal' }
-        ×
+    .modal__header
       %h3= t('.create_new', :brick => @brick.backend_label)
+      .btn-wrapper
+        %button.btn.btn--icon.close{ 'data-dismiss' => 'modal' }
+          - streusel_icon('close')
 
     = simple_form_for @brick, :as => :brick, :url => qbrick.cms_bricks_path, :method => :post, :remote => true, :html => { :id => nil }, :wrapper => :partystreusel do |form|
-      .modal-body
+      .modal__body
         = form.hidden_field :position, :class => 'position-field'
         = form.hidden_field :type
         = form.hidden_field :brick_list_id
@@ -37,7 +38,6 @@
         - else
           = t('.no_content')
 
-      .modal-footer
-        .clearfix
-          .pull-right
-            = form.button :submit, t('.save'), :class => 'btn-success'
+      .modal__footer
+        .pull-right
+          = form.button :submit, t('.save'), :class => 'btn'

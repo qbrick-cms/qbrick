@@ -1,4 +1,4 @@
-= simple_form_for settings, url: cms_settings_collection_path(settings), method: :patch, wrapper: :partystreusel do |f|
+= simple_form_for settings, url: cms_settings_collection_path(settings), method: :patch, wrapper: :horizontal do |f|
 
   = f.simple_fields_for :settings do |nf|
     = nf.input :value, label: t(".#{nf.object.key}"), as: :string

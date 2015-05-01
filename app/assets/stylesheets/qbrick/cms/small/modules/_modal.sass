@@ -1,0 +1,82 @@
+.modal
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 1050
+  display: none
+  overflow: hidden
+  -webkit-overflow-scrolling: touch
+  outline: 0
+
+  .modal-dialog
+    position: relative
+    width: auto
+    margin: rem(10)
+
+  .modal-content
+    position: relative
+    background-color: $white
+    background-clip: padding-box
+    border: rem(1) solid $secondary-color
+    border: rem(1) solid rgba($black,.2)
+    outline: 0
+    box-shadow: 0 rem(3) rem(9) rgba($black,.5)
+
+.modal__header
+  +outer-container
+  padding: space(1) space(2)
+  background-color: $grey-light
+
+  h3
+    +span-columns(11)
+    margin-top: rem(10)
+    margin-bottom: 0
+
+  .btn-wrapper
+    +span-columns(1)
+    text-align: right
+    margin: 0
+
+.modal__footer
+  +clearfix
+  padding: space(1) space(2)
+
+.modal-backdrop
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 1040
+  background-color: $black
+
+// ----------------------------------------------------------
+// STATES
+// ----------------------------------------------------------
+.modal-open
+  .modal
+    overflow-x: hidden
+    overflow-y: auto
+
+// ----------------------------------------------------------
+// ANIMATION
+// ----------------------------------------------------------
+.modal
+  &.fade
+    .modal-dialog
+      +transition( transform .3s ease-out )
+      +transform( translate(0,-25%) )
+
+    &.in
+      .modal-dialog
+        +transform( translate(0,0) )
+
+.modal-backdrop
+  &.fade
+    filter: alpha(opacity=0)
+
+  &.in
+    filter: alpha(opacity=50)
+    opacity: .5

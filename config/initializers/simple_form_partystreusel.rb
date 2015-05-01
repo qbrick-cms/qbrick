@@ -15,7 +15,16 @@ SimpleForm::Inputs::Base.send(:include, SimpleForm::Components::LabelWithI)
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.wrappers :partystreusel, tag: 'p', class: 'form--horizontal', error_class: 'form--field-error' do |b|
+  config.wrappers :horizontal, tag: 'p', class: 'form--horizontal', error_class: 'form--field-error' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label
+    b.use :input
+    b.use :error, wrap_with: { tag: 'span', class: 'form__help-inline' }
+    b.use :hint,  wrap_with: { tag: 'span', class: 'form__help-block' }
+  end
+
+  config.wrappers :partystreusel, tag: 'p', error_class: 'form--field-error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label

@@ -1,7 +1,7 @@
 .large-8
   %h1 Passwort ändern
   .form
-    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), wrapper: :partystreusel, html: { :method => :put }) do |f|
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), wrapper: :horizontal, html: { :method => :put }) do |f|
       = f.input :reset_password_token, as: :hidden
       = f.input :password, autofocus: true
       = f.input :password_confirmation

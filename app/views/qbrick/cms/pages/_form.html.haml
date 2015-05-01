@@ -1,4 +1,4 @@
-= simple_form_for @page, url: url, html: { class: '' }, wrapper: :partystreusel do |form|
+= simple_form_for @page, url: url, html: { class: '' }, wrapper: :horizontal do |form|
   .main__header.form__title-wrapper{ class: form.object.errors[:title].present? ? 'form--field-error' : '' }
     = form.input_field :title, required: false, class: 'form__title-field', placeholder: form.object.class.human_attribute_name('title')
     - if form.object.errors[:title].present?

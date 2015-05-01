@@ -1,6 +1,6 @@
 .main__content.form__container
   .form__inner
-    = simple_form_for([:cms, @admin], wrapper: :partystreusel) do |f|
+    = simple_form_for([:cms, @admin], wrapper: :horizontal) do |f|
       = f.error_notification
 
       %p.form--horizontal

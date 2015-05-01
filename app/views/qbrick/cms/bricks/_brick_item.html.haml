@@ -1,5 +1,5 @@
 %section.brick__item.accordion__item.accordion__item--open.js-accordion{ id: brick.to_brick_item_id, class: brick.to_style_class, 'data-id' => brick.id, 'data-scroll-offset' => -10 }
-  = simple_form_for brick, as: :brick, url: qbrick.cms_brick_path(brick), remote: true, html: { id: nil }, wrapper: :partystreusel do |form|
+  = simple_form_for brick, as: :brick, url: qbrick.cms_brick_path(brick), remote: true, html: { id: nil }, wrapper: :horizontal do |form|
     = form.hidden_field :position, class: 'position-field'
     - brick_content = render(brick.to_edit_partial_path, brick: brick, form: form)
 
