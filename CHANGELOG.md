@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.5.2 - 2015-05-08
+
+* Speed up brick cloning
+  * A little bit of refactoring
+  * Disable validation for cloned bricks because they are already validated
+
+
 ## 2.5.1 - 2015-04-30
 
 * Fix page delete button (now asks for confirmation and removes the page from the tree via js view)

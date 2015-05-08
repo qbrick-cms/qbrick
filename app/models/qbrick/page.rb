@@ -144,7 +144,7 @@ module Qbrick
 
     def update_child_urls
       return unless children.any?
-      children.each { |child| child.update_attributes(url: child.create_url) }
+      children.each { |child| child.update_attribute(:url, child.create_url) }
     end
 
     def nesting_name
@@ -184,8 +184,18 @@ module Qbrick
     end
 
     def copy_assets_to_cloned_brick(brick, new_brick)
-      brick.class.uploaders.keys.each do |key|
-        new_brick.update_attribute(key.to_s, File.open(brick.send(key.to_s).path))
+      uploader_keys = brick.class.uploaders.keys
+      multipart_checks = uploader_keys.map { |key| [key, brick.class.uploaders.send(:[], key).ensure_multipart_form] }
+      asset_attributes = uploader_keys.map { |key| [key, brick.send(key).path] }
+
+      multipart_checks.each do |uploader_key, _multipart_check|
+        brick.class.uploaders.send(:[], uploader_key).ensure_multipart_form = false
+      end
+
+      new_brick.update_attributes Hash[asset_attributes]
+
+      multipart_checks.each do |uploader_key, multipart_check|
+        brick.class.uploaders.send(:[], uploader_key).ensure_multipart_form = multipart_check
       end
     end
 
@@ -210,12 +220,11 @@ module Qbrick
 
       copy_assets_to_cloned_brick(brick, new_brick) if brick.uploader?
 
-      new_brick.update_attribute(:locale, to_locale)
-      new_brick.update_attribute(:brick_list_id, new_brick_list_id)
+      new_brick.update_attributes(locale: to_locale, brick_list_id: new_brick_list_id)
 
       clone_child_bricks(brick, to_locale, new_brick.id) if brick.respond_to?(:bricks)
 
-      new_brick.save
+      new_brick.save validate: false
     end
   end
 end
