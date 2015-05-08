@@ -144,7 +144,7 @@ module Qbrick
 
     def update_child_urls
       return unless children.any?
-      children.each { |child| child.update_attributes(url: child.create_url) }
+      children.each { |child| child.update_attribute(:url, child.create_url) }
     end
 
     def nesting_name
@@ -224,7 +224,7 @@ module Qbrick
 
       clone_child_bricks(brick, to_locale, new_brick.id) if brick.respond_to?(:bricks)
 
-      new_brick.save
+      new_brick.save validate: false
     end
   end
 end
