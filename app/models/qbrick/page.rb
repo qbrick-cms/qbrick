@@ -188,7 +188,7 @@ module Qbrick
       multipart_checks = uploader_keys.map { |key| [key, brick.class.uploaders.send(:[], key).ensure_multipart_form] }
       asset_attributes = uploader_keys.map { |key| [key, brick.send(key).path] }
 
-      multipart_checks.each do |uploader_key, multipart_check|
+      multipart_checks.each do |uploader_key, _multipart_check|
         brick.class.uploaders.send(:[], uploader_key).ensure_multipart_form = false
       end
 
