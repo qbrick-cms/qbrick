@@ -7,6 +7,7 @@ module Qbrick
       def index
         I18n.locale = params[:locale]
         @pages = Qbrick::Page.unscoped.published.content_page.translated.order(position: :asc)
+
         render json: @pages.as_json
       end
     end

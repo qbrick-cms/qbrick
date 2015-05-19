@@ -4,9 +4,9 @@ describe Qbrick::Api::PagesController, type: :controller do
   describe '#index' do
     before do
       @pages = []
-      @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
+      @pages << @page1 = create(:page, published_de: true, published_en: true, title_de: 'foobar de',
                                        url_de: 'de/foobar-de', title_en: 'foobar en', url_en: 'en/foobar-en')
-      @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
+      @pages << @page2 = create(:page, published_de: true, published_en: true, title_de: 'barfoo de',
                                        url_de: 'de/barfoo-de', title_en: 'barfoo en', url_en: 'en/barfoo-en')
       @pages << @unpublished = create(:page, published: false, title_de: 'unpublished de',
                                              url_de: 'de/unpublished-de', title_en: 'unpublished en',
@@ -36,13 +36,13 @@ describe Qbrick::Api::PagesController, type: :controller do
 
   describe 'expected json format of a page' do
     before do
-      @pages = []
-      @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
-                                       url_de: 'de/foobar-de', title_en: 'foobar en', url_en: 'en/foobar-en')
-      @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
-                                       url_de: 'de/barfoo-de', title_en: 'barfoo en', url_en: 'en/barfoo-en')
-
       I18n.with_locale :de do
+        @pages = []
+        @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
+                                         url_de: 'de/foobar-de', title_en: 'foobar en', url_en: 'en/foobar-en')
+        @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
+                                         url_de: 'de/barfoo-de', title_en: 'barfoo en', url_en: 'en/barfoo-en')
+
         get :index, use_route: :qbrick
         @json = JSON.parse(response.body)
         @page_hash = @json.first

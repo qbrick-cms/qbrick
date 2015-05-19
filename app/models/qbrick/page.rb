@@ -10,12 +10,12 @@ module Qbrick
     acts_as_brick_list
 
     translate :title, :page_title, :slug, :keywords, :description,
-              :body, :redirect_url, :url
+              :body, :redirect_url, :url, :published
 
     default_scope { order 'position ASC' }
 
-    scope :published, -> { where published: Qbrick::PublishState::PUBLISHED }
-    scope :translated, -> { where "url_#{I18n.locale.to_s.underscore} is not null" }
+    scope :published, -> { where locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
+    scope :translated, -> { where.not locale_attr(:url) => nil }
 
     scope :content_page, -> { where page_type: Qbrick::PageType::CONTENT }
 
@@ -62,7 +62,7 @@ module Qbrick
     end
 
     def without_self
-      self.class.where 'id != ?', id
+      self.class.where.not id: id
     end
 
     def published?

@@ -68,9 +68,12 @@ describe Qbrick::Page, type: :model do
 
   describe '#published' do
     it 'returns only published pages' do
-      _p1, p2, _p3 = 3.times.map { create(:page) }
-      p2.update_attribute :published, Qbrick::PublishState::UNPUBLISHED
-      expect(Qbrick::Page.published).to be_all { |p| expect(p.published?).to be_truthy }
+      unpublished_page = 3.times.map { create :page }.last
+      unpublished_page.update_attribute :published, Qbrick::PublishState::UNPUBLISHED
+
+      published_pages = Qbrick::Page.published
+      expect(published_pages).to be_all { |p| expect(p.published?).to be_truthy }
+      expect(published_pages).not_to include unpublished_page
     end
   end
 
