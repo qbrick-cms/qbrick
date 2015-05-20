@@ -36,10 +36,12 @@ describe Qbrick::Brick, type: :model do
 
   describe '#parents' do
     it 'returns the chain of parents' do
-      item1, item2, item3 = double, double, Qbrick::Brick.new
-      allow(item2).to receive(:brick_list).and_return(item1)
-      allow(item3).to receive(:brick_list).and_return(item2)
-      expect(item3.parents).to eq([item1, item2])
+      grandparent = double
+      parent = double
+      child = Qbrick::Brick.new
+      allow(parent).to receive(:brick_list).and_return grandparent
+      allow(child).to receive(:brick_list).and_return parent
+      expect(child.parents).to eq [grandparent, parent]
     end
   end
 
@@ -56,11 +58,13 @@ describe Qbrick::Brick, type: :model do
     end
 
     it 'returns true if the brick has siblings' do
-      item1, item2, item3 = double, double, Qbrick::Brick.new
-      allow(item1).to receive(:bricks).and_return([item2, item3])
-      allow(item2).to receive(:brick_list).and_return(item1)
-      allow(item3).to receive(:brick_list).and_return(item1)
-      expect(item3.has_siblings?).to be_truthy
+      parent = double
+      sibling1 = double
+      sibling2 = Qbrick::Brick.new
+      allow(parent).to receive(:bricks).and_return([sibling1, sibling2])
+      allow(sibling1).to receive(:brick_list).and_return(parent)
+      allow(sibling2).to receive(:brick_list).and_return(parent)
+      expect(sibling2.has_siblings?).to be_truthy
     end
   end
 
