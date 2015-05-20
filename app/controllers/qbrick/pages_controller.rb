@@ -1,6 +1,7 @@
 module Qbrick
   class PagesController < ::ApplicationController
     respond_to :html
+    before_action :set_locale
     before_action :find_page_by_url, only: :show
 
     def index
@@ -30,14 +31,24 @@ module Qbrick
 
     private
 
+    def set_locale
+      new_locale = params[:locale] || session['frontend_locale'] || I18n.locale
+
+      return I18n.locale if I18n.locale == new_locale || !I18n.locale_available?(new_locale)
+
+      session['frontend_locale'] = new_locale.to_s
+      I18n.locale = new_locale
+    end
+    alias frontend_locale set_locale
+
     def redirect_page?
       @page.present? && @page.redirect? && @page.redirect_url.present?
     end
 
     def find_page_by_url
-      url = locale.to_s
+      url = frontend_locale.to_s
       url += "/#{params[:url]}" if params[:url].present?
-      @page = Qbrick::Page.find_by_url(url)
+      @page = Qbrick::Page.published.find_by_url(url)
     end
   end
 end
