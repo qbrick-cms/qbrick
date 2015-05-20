@@ -1,3 +1,3 @@
 module Qbrick
-  VERSION = '2.5.2'
+  VERSION = '3.0.0.pre1'
 end
