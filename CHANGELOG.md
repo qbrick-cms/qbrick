@@ -4,6 +4,7 @@
 
 * Enable publishing by locale
 * Fix page visibility bug
+* Fix locale switch issue: Switching cms backend affected frontend locale (inverse case of issue #10)
 
 ## 2.5.2 - 2015-05-08
 
