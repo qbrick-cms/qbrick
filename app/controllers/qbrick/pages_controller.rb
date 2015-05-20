@@ -37,7 +37,7 @@ module Qbrick
     def find_page_by_url
       url = locale.to_s
       url += "/#{params[:url]}" if params[:url].present?
-      @page = Qbrick::Page.find_by_url(url)
+      @page = Qbrick::Page.published.find_by_url(url)
     end
   end
 end
