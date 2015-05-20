@@ -25,13 +25,13 @@ describe Qbrick::PagesController, type: :controller do
     describe 'routing' do
       context 'without url' do
         before do
-          @page = FactoryGirl.create(:page, url_de: 'de')
+          @page = FactoryGirl.create(:page, url_de: 'de', published_de: true)
         end
 
         context 'with matching locale' do
           it 'sets the corresponding page' do
             I18n.with_locale(:de) do
-              get(:show,   use_route: :qbrick)
+              get :show, use_route: :qbrick
             end
             expect(assigns(:page)).to eq(@page)
           end
