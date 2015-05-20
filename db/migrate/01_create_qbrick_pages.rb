@@ -21,7 +21,7 @@ class CreateQbrickPages < ActiveRecord::Migration
       t.text :fulltext_en
       t.text :fulltext_de
       t.string :ancestry
-      t.timestamps
+      t.timestamps null: true
     end
 
     add_index :qbrick_pages, :ancestry

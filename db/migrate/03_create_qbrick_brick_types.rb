@@ -5,7 +5,7 @@ class CreateQbrickBrickTypes < ActiveRecord::Migration
       t.string :class_name
       t.string :group
       t.boolean :disabled
-      t.timestamps
+      t.timestamps null: true
     end
   end
 

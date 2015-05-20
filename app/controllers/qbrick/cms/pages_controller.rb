@@ -50,7 +50,6 @@ module Qbrick
       def destroy
         @page = Qbrick::Page.find(params[:id])
         @page.destroy
-        redirect_to qbrick.cms_pages_path
       end
 
       def sort
