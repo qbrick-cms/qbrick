@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.6.0 - 2015-05-20
+
+* Enable publishing by locale
+* Fix page visibility bug
+
 ## 2.5.2 - 2015-05-08
 
 * Speed up brick cloning
