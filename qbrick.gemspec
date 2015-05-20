@@ -58,6 +58,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'neat'
   s.add_dependency 'inherited_resources'
   s.add_dependency 'devise'
-  s.add_dependency 'devise'
   s.add_dependency 'devise-i18n'
 end

@@ -73,6 +73,9 @@ PredicateName:
 Delegate:
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: false
+
 # don't prefer 'fail' over raise
 SignalException:
   Description: 'Checks for proper usage of fail and raise.'

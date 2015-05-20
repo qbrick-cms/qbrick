@@ -13,7 +13,7 @@
               = t('qbrick.cms.pages.index.edit')
 
             - if page.children.empty?
-              = link_to qbrick.cms_page_path(page), confirm: t('qbrick.cms.backend.confirm_delete', name: page.title), method: :delete, class: 'btn btn--icon btn--delete' do
+              = link_to qbrick.cms_page_path(page), data: { confirm: t('qbrick.cms.backend.confirm_delete', name: page.title) }, method: :delete, class: 'btn btn--icon btn--delete', remote: true do
                 - streusel_icon('trash')
 
             = link_to qbrick.new_cms_page_path(parent_id: page.id), class: 'btn btn--icon', title: t('qbrick.cms.pages.index.add_page') do
