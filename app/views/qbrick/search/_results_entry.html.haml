@@ -1,7 +1,7 @@
 .link
   = link_to page.link do
     %h4= page.title
-  %h5= qbrick.page_url(:url => page.url_without_locale)
+  %h5= qbrick.page_path url: page.path
 .summary
   -if page.excerpt.present?
     .excerpt!= page.excerpt

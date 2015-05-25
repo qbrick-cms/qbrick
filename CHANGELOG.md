@@ -1,5 +1,11 @@
 # CHANGELOG
 
+* url is now path and contains a leading slash
+* url_without_locale is now path_with_prefixed_locale and contains a leading slash as well
+* visibility bugfix for sitemaps
+* removed various deprecation warnings
+* refactored spec/controllers/qbrick/pages_controller_spec.rb
+
 ## 2.6.0 - 2015-05-20
 
 * Enable publishing by locale

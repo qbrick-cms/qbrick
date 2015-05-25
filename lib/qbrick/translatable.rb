@@ -48,8 +48,12 @@ module Qbrick
         "#{attr_name}_#{locale_for_attr_name}"
       end
 
+      def attr_name_for_locale(attr_name, locale)
+        "#{attr_name}_#{locale.to_s.underscore}"
+      end
+
       def translated_columns_for(attr_name)
-        column_names & I18n.available_locales.map { |l| "#{attr_name}_#{l.to_s.underscore}" }
+        column_names & I18n.available_locales.map { |l| attr_name_for_locale attr_name, l }
       end
     end
 

@@ -2,11 +2,12 @@ module Qbrick
   class PagesController < ::ApplicationController
     respond_to :html
     before_action :set_locale
-    before_action :find_page_by_url, only: :show
+    before_action :find_page_by_path, only: :show
 
     def index
       @search = params[:search]
       return if @search.blank?
+
       @pages = Qbrick::Page.unscoped.published.content_page.search(@search)
     end
 
@@ -45,10 +46,8 @@ module Qbrick
       @page.present? && @page.redirect? && @page.redirect_url.present?
     end
 
-    def find_page_by_url
-      url = frontend_locale.to_s
-      url += "/#{params[:url]}" if params[:url].present?
-      @page = Qbrick::Page.published.find_by_url(url)
+    def find_page_by_path
+      @page = Qbrick::Page.published.find_by_path params[:url].to_s
     end
   end
 end

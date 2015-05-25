@@ -1,7 +1,7 @@
 !!! XML
 %urlset{xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9"}
   - for page in @pages
-    - locales_with_block page do |url|
+    - with_every_locale page do |url|
       %url
         %loc= url
         %lastmod= page.updated_at.utc

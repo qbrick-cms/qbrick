@@ -32,10 +32,10 @@ describe Qbrick::Page, type: :model do
     end
   end
 
-  describe '.find_by_url' do
+  describe '.find_by_path' do
     it 'should find its translated content by url' do
       page = create(:page)
-      expect(Qbrick::Page.find_by_url(page.url)).to eq(page)
+      expect(Qbrick::Page.find_by_path(page.path)).to eq(page)
     end
   end
 
@@ -253,7 +253,7 @@ describe Qbrick::Page, type: :model do
       it 'returns the concatenated slug of the whole child/parent tree' do
         page = create(:page, slug: 'parent-slug')
         child = create(:page, slug: 'child-slug', parent: page)
-        expect(child.url).to eq('en/parent-slug/child-slug')
+        expect(child.path).to eq('/parent-slug/child-slug')
       end
     end
 
@@ -261,7 +261,7 @@ describe Qbrick::Page, type: :model do
       it 'returns without the parent page slug' do
         page = create(:page, slug: 'parent-slug', page_type: Qbrick::PageType::NAVIGATION)
         child = create(:page, slug: 'child-slug', parent: page)
-        expect(child.url).to eq('en/child-slug')
+        expect(child.path).to eq('/child-slug')
       end
     end
 
@@ -361,46 +361,26 @@ describe Qbrick::Page, type: :model do
   end
 
   describe '#before_validation' do
-    it 'generates url automatically' do
+    it 'generates path automatically' do
       page = Qbrick::Page.new slug: 'slug'
-      expect(page.url).to be_nil
+      expect(page.path).to be_nil
       page.valid?
-      expect(page.url).to be_present
+      expect(page.path).to be_present
     end
   end
 
-  describe '#after_save' do
-    context 'when updating a parents page type' do
-      it 'updates the child pages url if parent is changed to navigation' do
-        @parent_page = FactoryGirl.create(:page, slug: 'le_parent')
-        @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
-
-        @parent_page.update_attributes(page_type: Qbrick::PageType::NAVIGATION)
-        expect(@child_page.reload.url).to eq("#{I18n.locale}/le_child")
-      end
-
-      it 'updates the child pages url if parent is changed to content' do
-        @parent_page = FactoryGirl.create(:page, slug: 'le_parent', page_type: Qbrick::PageType::NAVIGATION)
-        @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
-
-        @parent_page.update_attributes(page_type: Qbrick::PageType::CONTENT)
-        expect(@child_page.reload.url).to eq("#{I18n.locale}/le_parent/le_child")
-      end
-    end
-  end
-
-  describe '#url_without_locale' do
+  describe '#path' do
     let :page do
       create(:page, slug: 'page')
     end
 
     context 'without parent' do
-      it 'returns url without leading /' do
-        expect(page.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(page.path).to start_with '/'
       end
 
       it 'returns a single slug' do
-        expect(page.url_without_locale).to eq('page')
+        expect(page.path).to eq('/page')
       end
     end
 
@@ -413,12 +393,12 @@ describe Qbrick::Page, type: :model do
         create(:page, slug: 'child', parent: parent)
       end
 
-      it 'returns url without leading /' do
-        expect(child.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(child.path).to start_with '/'
       end
 
       it 'does not concatenate the parent slug' do
-        expect(child.url_without_locale).to eq('child')
+        expect(child.path).to eq('/child')
       end
     end
 
@@ -431,12 +411,12 @@ describe Qbrick::Page, type: :model do
         create(:page, slug: 'child', parent: parent)
       end
 
-      it 'returns url without leading /' do
-        expect(child.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(child.path).to start_with '/'
       end
 
       it 'does not concatenate the parent slug' do
-        expect(child.url_without_locale).to eq('parent/child')
+        expect(child.path).to eq('/parent/child')
       end
     end
   end
@@ -510,6 +490,45 @@ describe Qbrick::Page, type: :model do
 
       @page.clone_bricks_to(:en)
       expect(@page.bricks.unscoped.where(locale: :en).count).to eq(3)
+    end
+  end
+
+  describe '#create_path' do
+    context 'when parent was saved' do
+      it 'updates the child pages url if parent is changed to navigation' do
+        parent_page = create :page, slug: 'le_parent'
+        child_page = create :page, slug: 'le_child', parent: parent_page
+        parent_page.save
+        expect(child_page.reload.path).to eq '/le_parent/le_child'
+
+        parent_page.update_attributes page_type: Qbrick::PageType::NAVIGATION
+        expect(child_page.reload.path).to eq '/le_child'
+      end
+
+      it 'updates the child pages url if parent is changed to content' do
+        parent_page = create(:page, slug: 'le_parent', page_type: Qbrick::PageType::NAVIGATION)
+        child_page = create(:page, slug: 'le_child', parent: parent_page)
+
+        parent_page.update_attributes(page_type: Qbrick::PageType::CONTENT)
+        expect(child_page.reload.path).to eq '/le_parent/le_child'
+      end
+    end
+
+    it 'creates a root path' do
+      root_page = Qbrick::Page.new slug: 'ruth', page_type: Qbrick::PageType::NAVIGATION
+      expect(root_page.create_path).to eq ''
+    end
+
+    it 'creates a content page path' do
+      content_page = Qbrick::Page.new slug: 'meersaeuli', page_type: Qbrick::PageType::CONTENT
+      expect(content_page.create_path).to eq '/meersaeuli'
+    end
+
+    it 'creates a path with children' do
+      parent = create :page, slug: 'le_parent'
+      child_page = Qbrick::Page.new slug: 'le_child', parent: parent
+
+      expect(child_page.create_path).to eq '/le_parent/le_child'
     end
   end
 end

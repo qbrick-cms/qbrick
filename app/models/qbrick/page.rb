@@ -10,12 +10,12 @@ module Qbrick
     acts_as_brick_list
 
     translate :title, :page_title, :slug, :keywords, :description,
-              :body, :redirect_url, :url, :published
+              :body, :redirect_url, :path, :published
 
     default_scope { order 'position ASC' }
 
     scope :published, -> { where locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
-    scope :translated, -> { where.not locale_attr(:url) => nil }
+    scope :translated, -> { where.not locale_attr(:path) => nil }
 
     scope :content_page, -> { where page_type: Qbrick::PageType::CONTENT }
 
@@ -25,8 +25,8 @@ module Qbrick
         locale_attr(:page_type) => Qbrick::PageType::NAVIGATION)
     }
 
-    before_validation :create_slug, :create_url
-    after_save :update_child_urls
+    before_validation :create_slug, :create_path
+    after_save :update_child_paths
 
     validates :title, presence: true
     validates :slug, presence: true
@@ -55,11 +55,15 @@ module Qbrick
         find_by(identifier: identifier)
       end
 
-      def all_urls
-        url_columns = column_names.select { |col| col.start_with? 'url_' }
-        pluck(*url_columns).flatten.compact.sort.uniq.map { |r| "/#{r}" }
+      def all_paths
+        path_columns = column_names.select { |col| col.start_with? 'path_' }
+        pluck(*path_columns).flatten.compact.sort.uniq.map(&:path)
       end
-    end
+
+      def find_by_path(given_path)
+        find_by locale_attr(:path) => given_path.blank? ? '' : "/#{given_path.sub(%r{^/+}, '')}"
+      end
+    end # class methods
 
     def without_self
       self.class.where.not id: id
@@ -86,18 +90,18 @@ module Qbrick
     end
 
     def translated?
-      url.present? && title.present? && slug.present?
+      path.present? && title.present? && slug.present?
     end
 
     def translated_to?(raw_locale)
       locale = raw_locale.to_s.underscore
-      send("url_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
+      send("path_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
     end
 
     def translated_link_for(locale)
       if translated_to? locale
         I18n.with_locale locale do
-          url_with_locale
+          path_with_prefixed_locale
         end
       else
         Qbrick::Page.roots.first.link
@@ -108,30 +112,26 @@ module Qbrick
       if bricks.count == 0 && children.count > 0
         children.first.link
       else
-        url_with_locale
+        path_with_prefixed_locale
       end
     end
 
-    # TODO: needs naming and routing refactoring (url/locale/path/slug)
     def path_segments
       paths = parent.present? ? parent.path_segments : []
       paths << slug unless navigation?
       paths
     end
 
-    def url_without_locale
-      path_segments.join('/')
+    def path_with_prefixed_locale(locale = I18n.locale)
+      "/#{locale}#{send self.class.attr_name_for_locale(:path, locale)}"
     end
 
-    def url_with_locale
+    def create_path
       opts = { locale: I18n.locale }
-      url = url_without_locale
-      opts[:url] = url if url.present?
-      page_path(opts)
-    end
+      path = path_segments.join '/'
+      opts[:url] = path if path.present?
 
-    def create_url
-      self.url = url_with_locale[1..-1]
+      self.path = page_path(opts).sub(%r{^/#{I18n.locale}}, '')
     end
 
     def create_slug
@@ -142,9 +142,10 @@ module Qbrick
       end
     end
 
-    def update_child_urls
-      return unless children.any?
-      children.each { |child| child.update_attribute(:url, child.create_url) }
+    def update_child_paths
+      children.each do |child|
+        child.update_attribute :path, child.create_path
+      end
     end
 
     def nesting_name
@@ -170,11 +171,7 @@ module Qbrick
     end
 
     def as_json
-      {}.tap do |json|
-        json['title'] = send("title_#{I18n.locale.to_s.underscore}")
-        json['pretty_url'] = '/' + send("url_#{I18n.locale.to_s.underscore}")
-        json['url'] = "/pages/#{id}"
-      end
+      { 'title' => title, 'pretty_url' => path, 'url' => "/pages/#{id}" }
     end
 
     def clear_bricks_for_locale(locale)

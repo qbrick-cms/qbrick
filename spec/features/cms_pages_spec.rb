@@ -23,7 +23,7 @@ describe 'Cms/Pages', type: :feature do
         end
 
         it 'is not possible to change the value in url' do
-          expect(page.find('#page_url')['disabled']).to be_truthy
+          expect(page.find('#page_path_with_prefixed_locale')['disabled']).to be_truthy
         end
       end
 
@@ -44,7 +44,7 @@ describe 'Cms/Pages', type: :feature do
     describe '#update' do
       context 'when creating a redirect page' do
         before do
-          @page = FactoryGirl.create(:page, url: 'de/dumdidum')
+          @page = FactoryGirl.create(:page, path_de: '/dumdidum')
           visit qbrick.edit_cms_page_path(@page)
           select 'redirect', from: 'Pagetyp'
         end
@@ -59,9 +59,9 @@ describe 'Cms/Pages', type: :feature do
           expect(page).to have_css('.error', count: 1)
         end
 
-        it 'does not change the value in url' do
+        it 'does not change the value in path' do
           fill_in 'Redirect URL', with: 'target_page'
-          expect { click_on 'Update Page' }.to_not change { @page.reload.url }
+          expect { click_on 'Update Page' }.to_not change { @page.reload.path }
         end
       end
     end

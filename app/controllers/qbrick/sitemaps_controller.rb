@@ -6,7 +6,7 @@ module Qbrick
 
       respond_to do |format|
         format.html
-        format.xml { @pages = Qbrick::Page.published }
+        format.xml { @pages = Qbrick::Page.all }
       end
     end
   end

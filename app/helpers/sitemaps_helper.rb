@@ -1,11 +1,8 @@
 module SitemapsHelper
-  def locales_with_block(page)
+  def with_every_locale(page)
     I18n.available_locales.each do |locale|
       I18n.with_locale locale do
-        if page.url.present?
-          url = "http://#{request.host_with_port}/#{page.url}"
-          yield(url)
-        end
+        yield "http://#{request.host_with_port}#{page.path_with_prefixed_locale}" if page.path.present? && page.published?
       end
     end
   end
