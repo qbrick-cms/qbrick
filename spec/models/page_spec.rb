@@ -267,15 +267,19 @@ describe Qbrick::Page, type: :model do
 
     context 'when it is a redirect? page' do
       it 'returns the absolute url' do
-        page = create(:page, page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
-        expect(page.link).to eq('/en/news')
+        I18n.with_locale(:en) do
+          page = create(:page, page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
+          expect(page.link).to eq('/en/news')
+        end
       end
     end
 
     context 'when url part is empty' do
       it 'strips the trailing slash' do
-        page = create(:page, page_type: Qbrick::PageType::NAVIGATION)
-        expect(page.link).to eq('/en')
+        I18n.with_locale(:en) do
+          page = create(:page, page_type: Qbrick::PageType::NAVIGATION)
+          expect(page.link).to eq('/en')
+        end
       end
     end
   end
@@ -324,14 +328,14 @@ describe Qbrick::Page, type: :model do
 
   describe '#translated?' do
     it 'returns true when page is translated' do
-      @page = create(:page, title: 'Page 1', slug: 'page1')
-      expect(@page.translated?).to be_truthy
+      page = create(:page, title: 'Page 1', slug: 'page1')
+      expect(page.translated?).to be_truthy
     end
 
     it 'returns false when page has no translation' do
-      @page = create(:page, title: 'Page 1', slug: 'page1')
+      page = I18n.with_locale(:en) { create :page, title: 'Page 1', slug: 'page1' }
       I18n.with_locale :de do
-        expect(@page.translated?).to be_falsey
+        expect(page.translated?).to be_falsey
       end
     end
   end
@@ -370,9 +374,7 @@ describe Qbrick::Page, type: :model do
   end
 
   describe '#path' do
-    let :page do
-      create(:page, slug: 'page')
-    end
+    let(:page) { create :page, slug: 'page' }
 
     context 'without parent' do
       it 'returns path with leading /' do
@@ -423,13 +425,17 @@ describe Qbrick::Page, type: :model do
 
   describe '#translated' do
     before :each do
-      @page_1 = create(:page, title: 'Page 1', slug: 'page1')
-      @page_2 = create(:page, title: 'Page 2', slug: 'page1')
-      @page_3 = create(:page, title: 'Page 3', slug: 'page1')
+      I18n.with_locale(:en) do
+        @page_1 = create(:page, title: 'Page 1', slug: 'page1')
+        @page_2 = create(:page, title: 'Page 2', slug: 'page1')
+        @page_3 = create(:page, title: 'Page 3', slug: 'page1')
+      end
     end
 
     it 'returns all pages that have a translation' do
-      expect(Qbrick::Page.translated).to eq [@page_1, @page_2, @page_3]
+      I18n.with_locale(:en) do
+        expect(Qbrick::Page.translated).to eq [@page_1, @page_2, @page_3]
+      end
     end
 
     it 'does not return untranslated pages' do

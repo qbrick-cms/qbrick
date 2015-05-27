@@ -3,25 +3,26 @@ require 'spec_helper'
 describe 'pages#index', type: :feature do
   context 'with search parameter' do
     let! :page1 do
-      p = create :page,
-                 published: true,
-                 title: 'Chromodorididae Ardeadoris'
-      p.bricks << Qbrick::TextBrick.new(locale: I18n.locale,
-                                        text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
-      p.save!
-      p
+      main_page = nil
+      I18n.with_locale(:en) do
+        main_page = create :page, published: 1, title: 'Chromodorididae Ardeadoris'
+        main_page.bricks << Qbrick::TextBrick.new(locale: I18n.locale,
+                                                  text: "#{'foo bar' * 300} Chromodorididae #{'foo bar' * 300}")
+        main_page.save!
+      end
+      main_page
     end
 
     let! :page2 do
-      create :page,
-             published: true,
-             title: 'Chromodorididae Berlanguella'
+      I18n.with_locale(:en) do
+        create :page, published: 1, title: 'Chromodorididae Berlanguella'
+      end
     end
 
     let! :page3 do
-      create :page,
-             published: true,
-             title: 'Gastropoda'
+      I18n.with_locale(:en) do
+        create :page, published: 1, title: 'Gastropoda'
+      end
     end
 
     context 'with fulltext' do
@@ -66,11 +67,8 @@ describe 'pages#index', type: :feature do
     end
 
     context 'without matches' do
-      before do
-        visit qbrick.pages_path(locale: :en, search: 'foobar')
-      end
-
       it 'renders match count' do
+        visit qbrick.pages_path(locale: :en, search: 'foobar')
         expect(page).to have_content('No results')
       end
     end
