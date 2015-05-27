@@ -136,13 +136,19 @@ describe Qbrick::Translatable do
         before(:each) { I18n.locale = :de }
 
         it 'delegates the getter to current locale' do
+          locale_backup = I18n.locale
+          I18n.locale = :de
           expect(model).to receive(:name_de).and_return('Johannes')
           expect(model.name).to eq('Johannes')
+          I18n.locale = locale_backup
         end
 
         it 'delegates the getter to current locale' do
+          locale_backup = I18n.locale
+          I18n.locale = :de
           expect(model).to receive(:name_de=).with('Johannes')
           model.name = 'Johannes'
+          I18n.locale = locale_backup
         end
       end
     end
