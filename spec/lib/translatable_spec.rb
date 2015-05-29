@@ -11,8 +11,8 @@ describe Qbrick::Translatable do
   end
 
   describe 'normal locale' do
-    before do
-      I18n.locale = :en
+    around(:each) do |example|
+      I18n.with_locale(:en) { example.run }
     end
 
     describe '.translate' do
@@ -61,8 +61,8 @@ describe Qbrick::Translatable do
       end
 
       context 'when changing the locale' do
-        before do
-          I18n.locale = :de
+        around(:each) do |example|
+          I18n.with_locale(:de) { example.run }
         end
 
         it 'delegates the getter to current locale' do
@@ -79,15 +79,11 @@ describe Qbrick::Translatable do
   end
 
   describe 'country specific locale' do
-    before do
-      @locales = I18n.available_locales
-      I18n.available_locales = [:de, 'de-CH']
-      I18n.locale = 'de-CH'
-    end
-
-    after do
-      I18n.available_locales = @locales
-      I18n.locale = :en
+    around(:each) do |example|
+      available_locales_backup = I18n.available_locales.deep_dup
+      I18n.available_locales = [:de, 'de-CH', :en]
+      I18n.with_locale('de-CH') { example.run }
+      I18n.available_locales = available_locales_backup
     end
 
     describe '.translate' do
@@ -136,18 +132,23 @@ describe Qbrick::Translatable do
       end
 
       context 'when changing the locale' do
-        before do
-          I18n.locale = :de
-        end
+        # outer describe block encapsulates with 'with_locale' and will set correct locale again!
+        before(:each) { I18n.locale = :de }
 
         it 'delegates the getter to current locale' do
+          locale_backup = I18n.locale
+          I18n.locale = :de
           expect(model).to receive(:name_de).and_return('Johannes')
           expect(model.name).to eq('Johannes')
+          I18n.locale = locale_backup
         end
 
         it 'delegates the getter to current locale' do
+          locale_backup = I18n.locale
+          I18n.locale = :de
           expect(model).to receive(:name_de=).with('Johannes')
           model.name = 'Johannes'
+          I18n.locale = locale_backup
         end
       end
     end

@@ -1,92 +1,79 @@
 require 'spec_helper'
 
 describe Qbrick::PagesController, type: :controller do
-  subject { described_class }
+  routes { Qbrick::Engine.routes }
 
   describe '#index' do
-    before do
-      @pages = [
-        create(:page, published_de: true, fulltext_de: 'foobar'),
-        create(:page, published_de: true, fulltext_de: 'barfoo')
-      ]
-    end
+    let(:search_term) { 'foobar' }
+    let!(:matching) { create(:page, published: 1).tap { |p| p.update_attribute :fulltext, search_term } }
+    let!(:nonmatching) { create(:page, published: 1).tap { |p| p.update_attribute :fulltext, 'barfoo' } }
+    let!(:unpublished) { create(:page, published: 0).tap { |p| p.update_attribute :fulltext, search_term } }
 
     context 'with search parameter' do
       it 'assigns the search results' do
-        I18n.with_locale :de do
-          get(:index,  use_route: :qbrick, search: 'foobar')
-        end
-        expect(assigns(:pages)).to eq([@pages.first])
+        expect(matching.fulltext).to eq search_term
+        expect(unpublished.fulltext).to eq search_term
+
+        get :index, search: search_term
+
+        result = assigns :pages
+        expect(result).to include matching
+        expect(result).not_to include nonmatching
+        expect(result).not_to include unpublished
       end
     end
   end
 
   describe '#show' do
     it "doesn't show unpublished pages" do
-      I18n.with_locale(:de) do
-        unpublished_page = FactoryGirl.create :page, url_de: 'de', published_de: false
-        expect { get :show, url: unpublished_page.slug, use_route: :qbrick }.to raise_error(ActionController::RoutingError)
-      end
+      unpublished_page = FactoryGirl.create :page, published: 0
+      expect { get :show, url: unpublished_page.slug }.to raise_error(ActionController::RoutingError)
     end
 
     describe 'routing' do
-      context 'without url' do
-        before do
-          @page = FactoryGirl.create(:page, url_de: 'de', published_de: true)
-        end
+      context 'on root page' do
+        let!(:root_page) { create :root_page }
 
         context 'with matching locale' do
-          it 'sets the corresponding page' do
-            I18n.with_locale(:de) do
-              get :show, use_route: :qbrick
-            end
-            expect(assigns(:page)).to eq(@page)
+          it 'loads the page' do
+            get :show
+            expect(assigns(:page)).to eq(root_page)
           end
         end
 
         context 'without matching locale' do
           it 'raises a routing error' do
-            expect { get(:show, use_route: :qbrick, locale: :en) }.to raise_error(ActionController::RoutingError)
+            expect { get(:show, locale: :de) }.to raise_error(ActionController::RoutingError)
           end
         end
       end
     end
 
     describe 'page type' do
-      around(:each) do |example|
-        I18n.with_locale :de do
-          example.run
-        end
-      end
-
       context 'when page is not a redirect page' do
         it 'responds with page' do
-          page = FactoryGirl.create(:page, slug: 'dumdidum',
-                                           url: 'de/dumdidum')
-          get :show, url: page.slug, use_route: :qbrick
+          page = FactoryGirl.create :page, slug: 'dumdidum'
+          get :show, url: page.slug
           expect(assigns(:page)).to eq(page)
         end
       end
 
       context 'when page is a redirect page' do
         it 'redirects to the redirected url' do
-          page = FactoryGirl.create(:page, page_type: 'redirect', slug: 'dumdidum',
-                                           url: 'de/dumdidum', redirect_url: 'de/redirect_page')
-          get :show, url: page.slug, use_route: :qbrick
+          page = FactoryGirl.create :page, page_type: 'redirect', slug: 'dumdidum', redirect_url: 'de/redirect_page'
+          get :show, url: page.slug
           expect(response).to redirect_to('/de/redirect_page')
         end
 
         it 'redirects to invalid redirect urls with too many preceding slashes' do
-          page = FactoryGirl.create(:page, page_type: 'redirect', slug: 'dumdidum',
-                                           url: 'de/dumdidum', redirect_url: '///de/redirect_page')
-          get :show, url: page.slug, use_route: :qbrick
+          page = FactoryGirl.create :page, page_type: 'redirect', slug: 'dumdidum', redirect_url: '///de/redirect_page', published: 1
+          get :show, url: page.slug
           expect(response).to redirect_to('/de/redirect_page')
         end
 
         it 'redirects to root' do
-          page = FactoryGirl.create(:page, page_type: 'redirect', slug: 'dumdidum',
-                                           url: 'de/dumdidum', redirect_url: '/')
-          get :show, url: page.slug, use_route: :qbrick
+          page = FactoryGirl.create(:page, page_type: 'redirect', slug: 'dumdidum', redirect_url: '/')
+          get :show, url: page.slug
           expect(response).to redirect_to('/')
         end
       end

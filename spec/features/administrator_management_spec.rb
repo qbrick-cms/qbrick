@@ -1,21 +1,18 @@
 require 'spec_helper'
 
 describe 'Administrator Management', type: :feature do
-  def create_admin
-    @admin ||= FactoryGirl.create(:admin)
-  end
+  let!(:root_page) { create :root_page }
+  let(:admin) { create :admin }
 
-  def create_and_login_admin
-    create_admin
-    visit qbrick.cms_pages_path
-    fill_in 'E-Mail', with: @admin.email
-    fill_in 'Password', with: @admin.password
-    click_on 'Login'
+  around(:each) do |example|
+    I18n.with_locale(:en) { example.run }
   end
 
   before :each do
-    @page = FactoryGirl.create(:page, page_type: 'navigation', published: true, title: 'home')
-    create_and_login_admin
+    visit qbrick.cms_pages_path
+    fill_in 'E-Mail', with: admin.email
+    fill_in 'Password', with: admin.password
+    click_on 'Login'
   end
 
   describe 'admin' do
@@ -34,10 +31,10 @@ describe 'Administrator Management', type: :feature do
 
       it 'can change his/her password' do
         click_on 'Change Password'
-        fill_in 'Current Password', with: @admin.password
+        fill_in 'Current Password', with: admin.password
         fill_in 'Password', with: new_password
         fill_in 'Password Confirmation', with: new_password
-        expect { click_on 'Update Admin' }.to change { Qbrick::Admin.find_by_email(@admin.email).encrypted_password }
+        expect { click_on 'Update Admin' }.to change { Qbrick::Admin.find_by_email(admin.email).encrypted_password }
       end
 
       it 'can create a new admin user' do
