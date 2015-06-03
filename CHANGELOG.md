@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 2.6.1 - 2015-06-03
+
 * url is now path and contains a leading slash
 * url_without_locale is now path_with_prefixed_locale and contains a leading slash as well
 * visibility bugfix for sitemaps
