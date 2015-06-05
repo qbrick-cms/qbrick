@@ -10,7 +10,7 @@ module Qbrick
       main_app.send(method, *args, &block)
     rescue NoMethodError => exception
       bc = ::ActiveSupport::BacktraceCleaner.new
-      bc.add_silencer { |l| l =~ /#{__FILE__}.+#{__method__}'?/ }
+      bc.add_silencer { |l| l =~ /#{__FILE__}.+#{__method__}'?$/ }
       bc.clean exception.backtrace
 
       super
