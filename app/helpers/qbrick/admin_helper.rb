@@ -8,7 +8,11 @@ module Qbrick
     #
     def method_missing(method, *args, &block)
       main_app.send(method, *args, &block)
-    rescue NoMethodError
+    rescue NoMethodError => exception
+      bc = ::ActiveSupport::BacktraceCleaner.new
+      bc.add_silencer { |l| l =~ /#{__FILE__}.+#{__method__}'?$/ }
+      bc.clean exception.backtrace
+
       super
     end
 
