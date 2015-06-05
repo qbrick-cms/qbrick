@@ -8,8 +8,12 @@ module Qbrick
     #
     def method_missing(method, *args, &block)
       main_app.send(method, *args, &block)
-    rescue NoMethodError
-      super
+    rescue NoMethodError => exception
+      bc = ::ActiveSupport::BacktraceCleaner.new
+      bc.add_silencer { |l| l =~ /^#{__FILE__}.+#{__method__}'?$/ }
+      exception.set_backtrace bc.clean(exception.backtrace)
+
+      raise exception
     end
 
     def sublime_video_include_tag
