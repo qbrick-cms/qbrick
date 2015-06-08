@@ -3,6 +3,7 @@ namespace :kuhsaft do
   namespace :migrate_to_qbrick do
     desc 'Rename STI class references'
     task rename_sti_references: :environment do
+      defined?(Kuhsaft) ? Kuhsaft::Engine.eager_load! : Qbrick::Engine.eager_load!
       Rails.application.eager_load!
 
       ActiveRecord::Base.descendants.select do |model|
@@ -34,39 +35,63 @@ namespace :kuhsaft do
     end
 
     desc 'Tries to generate a migration for renaming ActiveRecord tables'
-    task generate_migration: :environment do
+    task generate_migrations: :environment do
       require 'rails/generators'
       require 'rails/generators/active_record'
       require 'rails/generators/actions/create_migration'
+
+      defined?(Kuhsaft) ? Kuhsaft::Engine.eager_load! : Qbrick::Engine.eager_load!
       Rails.application.eager_load!
-
       renames = []
-      ActiveRecord::Base.descendants.each do |model|
-        next if !model.table_exists? || !model.table_name.start_with?('kuhsaft')
 
-        renames << "rename_table '#{model.table_name}', '#{model.table_name.sub(/^kuhsaft/, 'qbrick')}'"
+      db = ActiveRecord::Base.connection
+      db.tables.each do |table_name|
+        next if !table_name.start_with? 'kuhsaft'
+
+        renames << "rename_table '#{table_name}', '#{table_name.sub(/^kuhsaft/, 'qbrick')}' if table_exists? '#{table_name}'"
+      end
+
+      migrations = []
+      ActiveRecord::Migrator.migrations_paths.each do |path|
+        Dir.foreach(path).grep(/^\d{3,}_(.+)\.rb$/) { |filename| migrations << [$1, File.join(path, filename)] }
+      end
+      migrations = Hash[migrations]
+
+      kuhsaft_migrations = migrations.select{ |name, _path| name.end_with?'.kuhsaft' }
+      kuhsaft_migrations.each do |kuhsaft_name, _path|
+        qbrick_name = kuhsaft_name.split('.').first.gsub('kuhsaft', 'qbrick').camelcase
+        next unless qbrick_name.match(/qbrick/i)
+
+        migration_path = Rails::Generators.invoke('active_record:migration', [qbrick_name]).try :first
+        migration_path = Rails.root.join migration_path
+        next if migration_path.blank? || !File.exists?(migration_path)
+
+        content = File.read(migration_path).sub(/(def change[^\z]*)/m, "def change\n  end\nend\n")
+        File.open(migration_path, 'w') { |file| file.write content }
+        File.rename migration_path, migration_path.sub(/(\.rb)$/, '.qbrick\1')
       end
 
       next unless renames.any?
 
-      migration_path = Rails::Generators.invoke('active_record:migration', ['RenameKuhsaftNamespaceToQbrick']).try :first
+      migration_name = 'RenameKuhsaftNamespaceToQbrick'
+
+      migration_path = migrations.find { |name, path| name.match(/^#{migration_name.underscore}($|\.)/) }
+      if migration_path.present?
+        migration_path = migration_path.last
+      else
+        migration_path = Rails::Generators.invoke('active_record:migration', [migration_name]).try :first
+      end
       next if migration_path.blank?
 
-      last_migration = Dir.glob(File.join File.dirname(migration_path), '*.rb').sort.last
+      migration_path = Rails.root.join migration_path
+      str = File.read migration_path
+      str.split("\n").map(&:strip)
+      renames -= str.split("\n").map(&:strip)
+      next if renames.blank?
 
-      if File.basename(migration_path).sub(/^[^_]*_/, '') != File.basename(last_migration).sub(/^[^_]*_/, '')
-        raise "Something went wrong when generating migration #{migration_path} (found #{last_migration} instead)"
-      end
+      str.sub!(/(def change$)/m, "\\1\n    #{renames.join "\n    "}")
 
-      File.open(Rails.root.join(last_migration), 'w') do |file|
-        file.write <<-RUBY
-class RenameKuhsaftNamespaceToQbrick < ActiveRecord::Migration
-  def change
-    #{renames.join "\n    "}
-  end
-end
-RUBY
-      end
+      File.open(migration_path, 'w') { |file| file.write str }
       puts 'You still have to call $ rake db:migrate manually.'
     end
 
@@ -92,7 +117,7 @@ RUBY
 
       Dir.glob('**/*').each do |filename|
         next if File.directory?(filename) || !filename.split('/').last.include?('kuhsaft') ||
-                filename.match(ignored_paths)
+                filename.match(ignored_paths) || __FILE__.end_with?(filename)
 
         rename filename, filename.sub('kuhsaft', 'qbrick'), has_git
       end
@@ -117,10 +142,12 @@ RUBY
     task all: :environment do
       %w(
         rename_sti_references
-        generate_migration
+        generate_migrations
         rename_classes_and_directories
       ).each do |task|
+        puts "invoking #{task}"
         Rake::Task["kuhsaft:migrate_to_qbrick:#{task}"].invoke
+        puts "task #{task} finished"
       end
     end
   end
