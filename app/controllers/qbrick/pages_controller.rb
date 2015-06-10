@@ -13,9 +13,8 @@ module Qbrick
 
     def show
       if redirect_page?
-        redirect_url = @page.redirect_url.sub(%r{\A\/+}, '') # remove all preceding slashes
         session[:qbrick_referrer] = @page.id
-        redirect_to "/#{redirect_url}"
+        redirect_to @page.redirect_url
       elsif @page.present?
         respond_with @page
       elsif @page.blank? && respond_to?(:handle_404)

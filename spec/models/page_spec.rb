@@ -537,4 +537,44 @@ describe Qbrick::Page, type: :model do
       expect(child_page.create_path).to eq '/le_parent/le_child'
     end
   end
+
+  context 'when it is a redirect page' do
+    let(:page) { build :page, page_type: Qbrick::PageType::REDIRECT }
+
+    describe '#internal_redirect?' do
+      it 'returns false for non redirect pages' do
+        expect(build(:page).internal_redirect?).to be_falsey
+      end
+
+      it 'returns false for external redirects' do
+        page.redirect_url = 'http://google.de'
+        expect(page.internal_redirect?).to be_falsey
+      end
+
+      it 'returns true for internal redirects' do
+        page.redirect_url = '/huhu'
+        expect(page.internal_redirect?).to be_truthy
+        page.redirect_url = "http://#{Socket.gethostname}/huhu"
+        expect(page.internal_redirect?).to be_truthy
+      end
+    end
+
+    describe '#external_redirect?' do
+      it 'returns false for non redirect pages' do
+        expect(build(:page).external_redirect?).to be_falsey
+      end
+
+      it 'returns true for external redirects' do
+        page.redirect_url = 'http://google.de'
+        expect(page.external_redirect?).to be_truthy
+      end
+
+      it 'returns false for internal redirects' do
+        page.redirect_url = '/huhu'
+        expect(page.external_redirect?).to be_falsey
+        page.redirect_url = "http://#{Socket.gethostname}/huhu"
+        expect(page.external_redirect?).to be_falsey
+      end
+    end
+  end
 end

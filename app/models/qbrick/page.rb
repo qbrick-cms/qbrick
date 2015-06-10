@@ -27,6 +27,7 @@ module Qbrick
 
     before_validation :create_slug, :create_path
     after_save :update_child_paths
+    validate :remove_preceding_slashes, if: :redirect?
 
     validates :title, presence: true
     validates :slug, presence: true
@@ -79,6 +80,29 @@ module Qbrick
 
     def redirect?
       page_type == Qbrick::PageType::REDIRECT || page_type == Qbrick::PageType::CUSTOM
+    end
+
+    def internal_redirect?
+      return false unless redirect?
+
+      scheme = URI.parse(redirect_url).scheme
+      return true if scheme.nil?
+
+      internal_redirect = Qbrick::Engine.hosts.find do |h|
+        URI.parse("#{scheme}://#{h}").route_to(redirect_url).host.nil?
+      end
+
+      internal_redirect.present?
+    end
+
+    def external_redirect?
+      redirect? && !internal_redirect?
+    end
+
+    def remove_preceding_slashes
+      return if redirect_url.blank?
+
+      redirect_url.sub!(%r{^/+}, '/')
     end
 
     def navigation?
