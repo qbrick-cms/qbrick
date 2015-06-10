@@ -11,7 +11,7 @@ module Qbrick
     isolate_namespace Qbrick
 
     config.i18n.fallbacks = [:de]
-    config.i18n.load_path += Dir[Qbrick::Engine.root.join('config', 'locales', '**', '*.{yml}').to_s]
+    config.i18n.load_path += Dir[Qbrick::Engine.root.join('config/locales/**/*.{yml}').to_s]
 
     # defaults to nil
     config.sublime_video_token = nil
@@ -22,6 +22,12 @@ module Qbrick
     initializer 'qbrick.initialize_haml_dependency_tracker' do
       require 'action_view/dependency_tracker'
       ActionView::DependencyTracker.register_tracker :haml, ActionView::DependencyTracker::ERBTracker
+    end
+
+    def hosts
+      [Socket.gethostname].tap do |result|
+        result.concat [Rails.application.config.hosts].flatten if Rails.application.config.respond_to? :hosts
+      end
     end
   end
 end

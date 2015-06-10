@@ -60,7 +60,7 @@ describe Qbrick::PagesController, type: :controller do
 
       context 'when page is a redirect page' do
         it 'redirects to the redirected url' do
-          page = FactoryGirl.create :page, page_type: 'redirect', slug: 'dumdidum', redirect_url: 'de/redirect_page'
+          page = FactoryGirl.create :page, page_type: 'redirect', slug: 'dumdidum', redirect_url: '/de/redirect_page'
           get :show, url: page.slug
           expect(response).to redirect_to('/de/redirect_page')
         end
