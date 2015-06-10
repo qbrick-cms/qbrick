@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.2 - 2015-06-10
+
+* handle internal and external redirects
+
 ## 2.6.1 - 2015-06-03
 
 * url is now path and contains a leading slash
