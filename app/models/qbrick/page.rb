@@ -15,6 +15,7 @@ module Qbrick
     default_scope { order 'position ASC' }
 
     scope :published, -> { where locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
+    scope :unpublished, -> { where.not locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
     scope :translated, -> { where.not locale_attr(:path) => nil }
 
     scope :content_page, -> { where page_type: Qbrick::PageType::CONTENT }
@@ -71,7 +72,7 @@ module Qbrick
     end
 
     def published?
-      published == Qbrick::PublishState::PUBLISHED
+      published == Qbrick::PublishState::PUBLISHED && !ancestors.unpublished.present?
     end
 
     def state_class
