@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.3 - 2015-06-10
+
+* Simplify check on translated pages
+
 ## 2.6.2 - 2015-06-10
 
 * handle internal and external redirects
