@@ -6,7 +6,7 @@ module Qbrick
       # GET /admins
       # GET /admins.json
       def index
-        @admins = Admin.all
+        @admins = Qbrick::Admin.all
       end
 
       # GET /admins/1
@@ -16,7 +16,7 @@ module Qbrick
 
       # GET /admins/new
       def new
-        @admin = Admin.new
+        @admin = Qbrick::Admin.new
       end
 
       # GET /admins/1/edit
@@ -26,7 +26,7 @@ module Qbrick
       # POST /admins
       # POST /admins.json
       def create
-        @admin = Admin.new(admin_params)
+        @admin = Qbrick::Admin.new(admin_params)
 
         respond_to do |format|
           if @admin.save
@@ -67,7 +67,7 @@ module Qbrick
 
       # Use callbacks to share common setup or constraints between actions.
       def set_admin
-        @admin = Admin.find(params[:id])
+        @admin = Qbrick::Admin.find_by id: params[:id]
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
