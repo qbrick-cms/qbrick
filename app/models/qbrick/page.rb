@@ -114,12 +114,12 @@ module Qbrick
     end
 
     def translated?
-      path.present? && title.present? && slug.present?
+      title.present? && slug.present?
     end
 
     def translated_to?(raw_locale)
       locale = raw_locale.to_s.underscore
-      send("path_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
+      send("title_#{locale}").present? && send("slug_#{locale}").present?
     end
 
     def translated_link_for(locale)
