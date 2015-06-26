@@ -18,3 +18,9 @@ en:
         parent_id: 'Parent page'
         parent: 'Parent page'
         google_verification_key: Google Verification Key
+    errors:
+      models:
+        qbrick/page:
+          attributes:
+            slug:
+              duplicated_slug: 'Unfortunately the slug is already available%{append}'

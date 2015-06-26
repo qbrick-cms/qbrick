@@ -376,6 +376,14 @@ describe Qbrick::Page, type: :model do
   describe '#path' do
     let(:page) { create :page, slug: 'page' }
 
+    it "doesn't allow duplicated paths" do
+      expect(page).to be_valid
+      duplicated_slug_page = build :page, slug: 'page'
+      expect(page.slug).to eq duplicated_slug_page.slug
+      expect(duplicated_slug_page).to be_invalid
+      expect(duplicated_slug_page.errors[:slug]).to be_present
+    end
+
     context 'without parent' do
       it 'returns path with leading /' do
         expect(page.path).to start_with '/'
@@ -421,14 +429,14 @@ describe Qbrick::Page, type: :model do
         expect(child.path).to eq('/parent/child')
       end
     end
-  end
+  end # path
 
   describe '#translated' do
     before :each do
       I18n.with_locale(:en) do
-        @page_1 = create(:page, title: 'Page 1', slug: 'page1')
-        @page_2 = create(:page, title: 'Page 2', slug: 'page1')
-        @page_3 = create(:page, title: 'Page 3', slug: 'page1')
+        @page_1 = create(:page, title: 'Page 1')
+        @page_2 = create(:page, title: 'Page 2')
+        @page_3 = create(:page, title: 'Page 3')
       end
     end
 
@@ -456,7 +464,7 @@ describe Qbrick::Page, type: :model do
     it 'should be findable via scope' do
       expect(Qbrick::Page.by_identifier(cat_page.identifier)).to eq(cat_page)
     end
-  end
+  end # translated
 
   describe '#cloning' do
     around(:each) do |example|

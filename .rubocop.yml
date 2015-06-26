@@ -90,7 +90,7 @@ BracesAroundHashParameters:
 
 ClassLength:
   CountComments: false  # count full line comments?
-  Max: 200
+  Max: 210
 
 # Align with the style guide.
 CollectionMethods:

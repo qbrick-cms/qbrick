@@ -34,6 +34,7 @@ module Qbrick
     validates :redirect_url, presence: true, if: :redirect?
     validates :title, :slug, :keywords, :page_type, length: { maximum: 255 }
     validates :identifier, uniqueness: true, allow_blank: true
+    validate :slug_uniqueness
 
     class << self
       def flat_tree
@@ -65,6 +66,26 @@ module Qbrick
         find_by locale_attr(:path) => given_path.blank? ? '' : "/#{given_path.sub(%r{^/+}, '')}"
       end
     end # class methods
+
+    def slug_uniqueness
+      path_field = locale_attr :path
+      slug_field = locale_attr :slug
+      [slug_field, path_field].each do |field|
+        self.class.validators_on(field).map { |v| v.validate self }
+        return true if errors[field].present?
+      end
+
+      page_with_duplicated_paths = self.class.where path_field => path
+      page_with_duplicated_paths = page_with_duplicated_paths.where.not id: id if persisted?
+      return true unless page_with_duplicated_paths.exists?
+
+      message = 'page ids: '
+      page_with_duplicated_paths.pluck(:id).each do |id|
+        message << "<a href=\"#{edit_cms_page_path id}#page-metadata\" target=\"_blank\">#{id}</a> "
+      end
+      message = I18n.t 'activerecord.errors.models.qbrick/page.attributes.slug.duplicated_slug', append: " (#{message.strip})"
+      errors.add :slug, message.html_safe
+    end
 
     def without_self
       self.class.where.not id: id
