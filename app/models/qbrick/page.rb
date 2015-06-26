@@ -183,7 +183,7 @@ module Qbrick
       if title.present? && slug.blank?
         self.slug = title.downcase.parameterize
       elsif slug.present?
-        self.slug = slug.downcase
+        self.slug = slug.downcase.parameterize
       end
     end
 

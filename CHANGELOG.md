@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2.6.4 - 2015-06-26
+## 2.6.6 - 2015-06-26
+
+* Also parameterize slugs that are explicit added
+
+## 2.6.5 - 2015-06-26
 
 * Add check on duplicated page paths
 
