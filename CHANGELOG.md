@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.4 - 2015-06-26
+
+* Add check on duplicated page paths
+
 ## 2.6.3 - 2015-06-10
 
 * Simplify check on translated pages
