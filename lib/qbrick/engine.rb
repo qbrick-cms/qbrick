@@ -24,10 +24,33 @@ module Qbrick
       ActionView::DependencyTracker.register_tracker :haml, ActionView::DependencyTracker::ERBTracker
     end
 
+    def app_config
+      Rails.application.config
+    end
+
     def hosts
       [Socket.gethostname].tap do |result|
-        result.concat [Rails.application.config.hosts].flatten if Rails.application.config.respond_to? :hosts
+        result.concat [app_config.hosts].flatten if app_config.respond_to? :hosts
+        result.concat [app_config.host].flatten if app_config.respond_to? :host
       end
+    end
+
+    def host
+      return hosts.first unless app_config.respond_to? :host
+
+      app_config.host
+    end
+
+    def scheme
+      return 'http' unless app_config.respond_to? :scheme
+
+      app_config.scheme
+    end
+
+    def port
+      return 80 unless app_config.respond_to? :port
+
+      app_config.port
     end
   end
 end
