@@ -75,7 +75,7 @@ module Qbrick
         return true if errors[field].present?
       end
 
-      page_with_duplicated_paths = self.class.where path_field => path
+      page_with_duplicated_paths = self.class.published.translated.where path_field => path
       page_with_duplicated_paths = page_with_duplicated_paths.where.not id: id if persisted?
       return true unless page_with_duplicated_paths.exists?
 
