@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.8 - 2015-07-14
+
+* validate uniqueness of slugs just against published pages
+
 ## 2.6.7 - 2015-06-30
 
 * Add url method to get an url to the page
