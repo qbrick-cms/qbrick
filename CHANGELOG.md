@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.6.7 - 2015-06-30
+
+* Add url method to get an url to the page
+* Add ability to add scheme, host and port to your app config
+
 ## 2.6.6 - 2015-06-26
 
 * Also parameterize slugs that are explicit added

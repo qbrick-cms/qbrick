@@ -171,6 +171,12 @@ module Qbrick
       "/#{locale}#{send self.class.attr_name_for_locale(:path, locale)}"
     end
 
+    def url
+      URI::HTTP.build([nil, Qbrick::Engine.host, Qbrick::Engine.port, path_with_prefixed_locale, nil, nil]).tap do |url|
+        url.scheme = Qbrick::Engine.scheme
+      end
+    end
+
     def create_path
       opts = { locale: I18n.locale }
       path = path_segments.join '/'
