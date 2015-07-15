@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.9 - 2015-07-15
+
+* make translated scope consistent to the conditions in #translated?
+
 ## 2.6.8 - 2015-07-14
 
 * validate uniqueness of slugs just against published pages

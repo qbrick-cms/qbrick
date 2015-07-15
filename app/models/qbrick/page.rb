@@ -15,7 +15,7 @@ module Qbrick
     default_scope { order 'position ASC' }
 
     scope :published, -> { where locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
-    scope :translated, -> { where.not locale_attr(:path) => nil }
+    scope :translated, -> { where.not locale_attr(:path) => [nil, ''], locale_attr(:title) => [nil, ''] }
 
     scope :content_page, -> { where page_type: Qbrick::PageType::CONTENT }
 
@@ -80,10 +80,10 @@ module Qbrick
       return true unless page_with_duplicated_paths.exists?
 
       message = 'page ids: '
-      page_with_duplicated_paths.pluck(:id).each do |id|
-        message << "<a href=\"#{edit_cms_page_path id}#page-metadata\" target=\"_blank\">#{id}</a> "
+      page_with_duplicated_paths.order(:id).pluck(:id).each do |id|
+        message << "<a href=\"#{edit_cms_page_path id}#page-metadata\" target=\"_blank\">#{id}</a>, "
       end
-      message = I18n.t 'activerecord.errors.models.qbrick/page.attributes.slug.duplicated_slug', append: " (#{message.strip})"
+      message = I18n.t 'activerecord.errors.models.qbrick/page.attributes.slug.duplicated_slug', append: " (#{message.sub(/, $/, '')})"
       errors.add :slug, message.html_safe
     end
 
