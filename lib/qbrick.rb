@@ -19,6 +19,6 @@ module Qbrick
   require 'ancestry'
   require 'bootstrap-sass'
   require 'haml'
-  require 'ckeditor_rails'
+  require 'ckeditor'
   require 'inherited_resources'
 end
