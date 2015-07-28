@@ -29,9 +29,11 @@ module Qbrick
     end
 
     def hosts
-      [Socket.gethostname].tap do |result|
+      [Socket.gethostname, 'localhost'].tap do |result|
         result.concat [app_config.hosts].flatten if app_config.respond_to? :hosts
         result.concat [app_config.host].flatten if app_config.respond_to? :host
+        result.compact!
+        result.uniq!
       end
     end
 
