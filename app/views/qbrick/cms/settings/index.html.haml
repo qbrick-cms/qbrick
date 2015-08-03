@@ -1,0 +1,4 @@
+- if @settings.present?
+  - render_setting_hash @settings
+- else
+  %p= t('qbrick.cms.settings.none_available')

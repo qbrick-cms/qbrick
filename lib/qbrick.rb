@@ -1,4 +1,5 @@
 module Qbrick
+  require 'rails-settings-cached'
   require 'devise'
   require 'qbrick/engine'
   require 'qbrick/orderable'
@@ -6,7 +7,6 @@ module Qbrick
   require 'qbrick/translatable'
   require 'qbrick/searchable'
   require 'qbrick/gridded'
-  require 'qbrick/brick_list'
   require 'qbrick/partial_extractor'
   require 'qbrick/touch_placeholders'
   require 'simple_form'

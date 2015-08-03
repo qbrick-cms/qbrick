@@ -2,6 +2,7 @@ class ChangeSettings < ActiveRecord::Migration
   def change
     remove_index :qbrick_settings, :key
     rename_column :qbrick_settings, :key, :var
+    remove_column :qbrick_settings, :settings_collection_id
 
     change_table :qbrick_settings do |t|
       t.change :var, :string, null: false
