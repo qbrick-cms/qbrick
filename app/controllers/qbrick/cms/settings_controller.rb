@@ -15,12 +15,8 @@ module Qbrick
 
       private
 
-      def setting_params
-        params[:settings]
-      end
-
       def cast_settings_params
-        @casted_settings = RailsSettingsUi::TypeConverter.cast setting_params
+        @casted_settings = RailsSettingsUi::TypeConverter.cast params[:settings]
       end
     end
   end
