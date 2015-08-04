@@ -1,7 +1,8 @@
-require_relative '../../../lib/qbrick/brick_list'
+require_relative '../concerns/brick_list'
 
 module Qbrick
   class Brick < ActiveRecord::Base
+    include ::RailsSettings::Extend
     include Qbrick::BrickList
 
     belongs_to :brick_list, polymorphic: true, touch: true

@@ -1,0 +1,8 @@
+= simple_form_for setting, url: cms_settings_path(setting),wrapper: :bootstrap, html: { class: 'form-horizontal' }  do |f|
+  .form-inputs
+    = f.input :var, as: :hidden
+    = f.input :value, label: t("settings.#{setting.var}") + " (#{setting.var})", input_html: { id: setting.slug }
+
+  .form__indent--horizontal
+    = f.button :submit, t('.save')
+%hr
