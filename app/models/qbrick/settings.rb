@@ -2,10 +2,22 @@ RailsSettings::Settings.table_name = 'qbrick_settings'
 
 module Qbrick
   class Settings < ::RailsSettings::CachedSettings
+    scope :ordered, -> { order :var }
     DIVIDER = '.'
+    alias_attribute :key, :var
+
+    def slug
+      var.to_s.gsub(/\W+/, '_')
+    end
 
     def partial_name
-      value.class.name.underscore.gsub(/\W+/, '_')
+      name = value.class.name.underscore.gsub(/\W+/, '_')
+      case name
+      when /(false|true)_class/
+        'boolean'
+      else
+        name
+      end
     end
 
     class << self
@@ -14,16 +26,22 @@ module Qbrick
       end
       alias keys vars
 
-      def get_all_objects(starting_with = nil)
-        vars = thing_scoped
+      def all_object_hash(starting_with = nil)
+        vars = thing_scoped.ordered
         vars = vars.where "var LIKE '#{starting_with}%'" if starting_with
 
-        Hash[vars.map { |record| [record.var, record] }].with_indifferent_access
+        Hash[vars.map { |record| [record.var, record] }].with_indifferent_access.tap do |result|
+          @@defaults.slice(*(@@defaults.keys - result.keys)).each do |key, value|
+            next if starting_with.present? && !key.start_with?(starting_with)
+
+            result[key] = Qbrick::Settings.new var: key, value: value
+          end
+        end
       end
 
       def hierarchy(starting_with = nil)
         result = {}.with_indifferent_access
-        get_all_objects(starting_with).each_pair do |key, setting|
+        all_object_hash(starting_with).each_pair do |key, setting|
           build_hierarchy result, key, setting
         end
 

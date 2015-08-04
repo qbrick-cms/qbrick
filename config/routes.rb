@@ -2,7 +2,7 @@ Qbrick::Engine.routes.draw do
   devise_for :admins, class_name: 'Qbrick::Admin', module: :devise
 
   namespace :cms do
-    resources :settings, only: %i(update index)
+    resources :settings, only: %i(update index create)
     resources :pages, except: :show do
       post :sort, on: :collection
       get :mirror

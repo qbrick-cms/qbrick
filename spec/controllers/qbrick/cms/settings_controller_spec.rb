@@ -36,4 +36,15 @@ describe Qbrick::Cms::SettingsController, type: :controller do
       expect(response.body).to include(I18n.t 'contact_form.personal_fields')
     end
   end
+
+  describe 'POST create' do
+    it 'creates settings' do
+      Qbrick::Settings.defaults['i_am_boolean'] = false
+
+      expect { post :create, settings: { var: 'i_am_boolean', value: '1' } }.to change { Qbrick::Settings.count }
+      puts response.body
+      expect(response).to redirect_to cms_settings_path
+      expect(Qbrick::Settings['i_am_boolean']).to eq true
+    end
+  end
 end

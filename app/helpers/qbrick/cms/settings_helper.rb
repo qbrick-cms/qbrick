@@ -2,23 +2,16 @@
 module Qbrick
   module Cms
     module SettingsHelper
-      def render_setting_hash(settings, key = nil)
-        path = settings.delete '_path'
-        setting = settings.delete '_value'
-
-        if settings.any? || setting.present?
-          haml_tag :h3, t("settings.#{path}")
-          haml_tag :hr
+      def render_settings(settings)
+        result = ''
+        settings.sort { |a, b| t(a.var) <=> t(b.var) }.map do |setting|
+          result << render_setting(setting)
         end
-        render_setting key, setting, path if setting.present?
-
-        settings.each_pair do |subkey, subsettings|
-          render_setting_hash subsettings, subkey
-        end
+        result.html_safe
       end
 
-      def render_setting(key, setting, path)
-        options = { locals: { key: (key.blank? ? path.to_s.split('').last : key), setting: setting, path: path } }
+      def render_setting(setting)
+        options = { locals: { setting: setting } }
         render options.merge(partial: setting.partial_name)
 
       rescue => _e
