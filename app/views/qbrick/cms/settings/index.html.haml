@@ -17,7 +17,7 @@
           %td.setting-value
             - setting_with_error = @casted_settings && @casted_settings[:errors].include?(name)
             %div{ class: "form-group #{ setting_with_error ? 'has-error' : ''}" }
-              = setting_field(name, value, @settings)
+              = qbrick_setting_field(name, value, @settings)
               - if setting_with_error
                 %span.help-block= @casted_settings[:errors][name]
 

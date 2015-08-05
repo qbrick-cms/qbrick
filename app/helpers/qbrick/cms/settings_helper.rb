@@ -6,7 +6,7 @@ module Qbrick
   module Cms
     module SettingsHelper
 
-      def setting_field(setting_name, setting_value, all_settings)
+      def qbrick_setting_field(setting_name, setting_value, all_settings)
         if !RailsSettingsUi.settings_klass.defaults.has_key?(setting_name.to_sym)
           message_for_default_value_missing
         elsif RailsSettingsUi.settings_displayed_as_select_tag.include?(setting_name.to_sym)
