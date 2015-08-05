@@ -10,6 +10,7 @@ describe Qbrick::Cms::SettingsController, type: :controller do
     allow(request.env['warden']).to receive(:authenticate!) { admin }
     allow(controller).to receive(:current_admin) { admin }
   end
+
   describe 'GET index' do
     it 'renders saved settings' do
       Qbrick::Settings.highlighting_font = 'Comic Sans'
@@ -19,7 +20,7 @@ describe Qbrick::Cms::SettingsController, type: :controller do
     end
 
     it 'renders default settings' do
-      Qbrick::Settings.highlighting_font = 'Comic Sans'
+      Qbrick::Settings.defaults[:highlighting_font] = 'Comic Sans'
       get :index
       expect(response).to be_success
       expect(response.body).to include(I18n.t 'settings.attributes.highlighting_font.name')

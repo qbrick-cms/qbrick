@@ -49,43 +49,5 @@ module Qbrick
         expect(page.settings.heisen).to eq 'berg'
       end
     end
-
-    describe '.hierarchy' do
-      it 'returns a hierarchy' do
-        Qbrick::Settings['global.house.colour'] = 'ultraviolet'
-        expected = Qbrick::Settings.find_by var: 'global.house.colour'
-        setting = Qbrick::Settings.hierarchy['global']['house']['colour']['_value']
-
-        expect(setting).to eq expected
-      end
-
-      it 'returns a hierarchy broken in the end' do
-        Qbrick::Settings['global.house.'] = 'ultraviolet'
-        expected = Qbrick::Settings.find_by var: 'global.house.'
-        setting = Qbrick::Settings.hierarchy['global']['house']['_value']
-
-        expect(setting).to eq expected
-      end
-
-      it 'returns a hierarchy broken in the beginning' do
-        Qbrick::Settings['.house.colour'] = 'ultraviolet'
-        expected = Qbrick::Settings.find_by var: '.house.colour'
-        setting = Qbrick::Settings.hierarchy['.house.colour']['_value']
-
-        expect(setting).to eq expected
-      end
-
-      it 'returns a hash with overlapping paths' do
-        Qbrick::Settings['foo.bar'] = 'far'
-        Qbrick::Settings['foo.bar.far'] = 'boo'
-
-        far = Qbrick::Settings.find_by var: 'foo.bar'
-        boo = Qbrick::Settings.find_by var: 'foo.bar.far'
-
-        result = Qbrick::Settings.hierarchy['foo']['bar']
-        expect(result['_value']).to eq far
-        expect(result['far']['_value']).to eq boo
-      end
-    end
   end
 end
