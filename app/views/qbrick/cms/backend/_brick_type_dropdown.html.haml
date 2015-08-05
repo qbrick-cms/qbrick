@@ -1,6 +1,6 @@
-- unless brick_list.brick_types.empty?
+- unless brick_list.brick_types.allowed.empty?
   .btn-group
-    - if brick_list.brick_types.allowed.count > 1
+    - if brick_list.brick_types.allowed.many?
       %a.btn.btn-small.btn-primary.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
         = t('.add_element')
         %span.caret
@@ -12,4 +12,4 @@
           .divider
     - else
       - brick_list.brick_types.allowed.each do |type|
-        = link_to t('.add_specific_element', :name => type.class_name.constantize.model_name.human), qbrick.new_cms_brick_path(:brick => { :type => type.class_name, :brick_list_id => brick_list.id, :brick_list_type => brick_list.brick_list_type }), :remote => true, :class => 'btn btn-small btn-primary'
+        = link_to t('.add_specific_element', name: type.class_name.constantize.model_name.human), qbrick.new_cms_brick_path(brick: { type: type.class_name, brick_list_id: brick_list.id, brick_list_type: brick_list.brick_list_type }), remote: true, class: 'btn btn-small btn-primary'

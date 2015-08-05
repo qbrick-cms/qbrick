@@ -3,7 +3,7 @@ module Qbrick
   module Cms
     module AdminHelper
       def render_language_switch?
-        I18n.available_locales.size > 1
+        I18n.available_locales.many?
       end
 
       def link_to_content_locale(locale)
