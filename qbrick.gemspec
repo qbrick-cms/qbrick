@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mini_magick' # , '>= 3.4'
   s.add_dependency 'rdiscount' # , '>= 1.6'
   s.add_dependency 'ancestry'
-  s.add_dependency 'bootstrap-sass', '>= 2.3.2.2'
+  s.add_dependency 'bootstrap-sass', '2.3.2.2'
   s.add_dependency 'ckeditor_rails', '4.2'
   s.add_dependency 'pg_search', '0.7.9'
   s.add_dependency 'htmlentities'
@@ -58,5 +58,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise'
   s.add_dependency 'devise-i18n'
   s.add_dependency 'rails-settings-cached'
-  s.add_dependency 'rails-settings-ui', '>= 0.4.0'
+  s.add_dependency 'rails-settings-ui', '>= 0.2.1'
 end

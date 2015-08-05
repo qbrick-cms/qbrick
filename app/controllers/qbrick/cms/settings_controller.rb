@@ -1,8 +1,7 @@
 module Qbrick
   module Cms
     class SettingsController < RailsSettingsUi::SettingsController
-      helper RailsSettingsUi::SettingsHelper
-      helper Qbrick::Cms::AdminHelper
+      helper Qbrick::Cms::SettingsHelper
 
       def update_all
         if @casted_settings[:errors].any?
