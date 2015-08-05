@@ -14,8 +14,7 @@ module Qbrick
           action = 'edit'
         end
 
-        link_to locale.to_s.upcase, url_for(
-          action: action, content_locale: locale)
+        link_to locale.to_s.upcase, qbrick.url_for(action: action, content_locale: locale)
       end
 
       def model_attribute_field(resource, column_name, f)

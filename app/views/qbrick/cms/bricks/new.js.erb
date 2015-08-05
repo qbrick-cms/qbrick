@@ -4,7 +4,7 @@
 
 $("#brick-form").empty();
 
-$("#brick-form").append(<%= render('qbrick/cms/bricks/new', :brick => @brick, :format => :html).to_json.html_safe %>);
+$("#brick-form").append(<%= render('qbrick/cms/bricks/new', brick: @brick, format: :html).to_json.html_safe %>);
 
 $("#brick-form").find('textarea.ckeditor').each(function (index, elem) { initCKEditor(elem.id) });
 

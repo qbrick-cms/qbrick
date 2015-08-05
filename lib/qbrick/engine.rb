@@ -19,6 +19,12 @@ module Qbrick
     # delegate image size config to ImageSize class
     config.image_sizes = ImageSizeDelegator.new
 
+    config.to_prepare do
+      Dir.glob(Qbrick::Engine.root.join 'app/decorators/**/*_decorator*.rb').each do |c|
+        require_dependency c
+      end
+    end
+
     initializer 'qbrick.initialize_haml_dependency_tracker' do
       require 'action_view/dependency_tracker'
       ActionView::DependencyTracker.register_tracker :haml, ActionView::DependencyTracker::ERBTracker

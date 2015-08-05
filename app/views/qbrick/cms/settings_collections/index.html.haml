@@ -1,6 +1,0 @@
-- @settings_collections.each do |sc|
-  - if sc.present?
-    %h3= "#{sc.collection_type.capitalize} #{t('.title')}"
-    %hr
-
-    = render 'form', settings: sc
