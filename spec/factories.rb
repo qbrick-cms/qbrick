@@ -35,11 +35,6 @@ FactoryGirl.define do
     a.file File.open("#{Qbrick::Engine.root}/spec/dummy/app/assets/images/spec-image.png")
   end
 
-  factory :setting, class: Qbrick::Setting do |s|
-    s.key 'code'
-    s.value 'SomeValue'
-  end
-
   factory :admin, class: Qbrick::Admin do
     email 'test@test.com'
     password 'somel33tPW'

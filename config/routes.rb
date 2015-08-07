@@ -2,7 +2,9 @@ Qbrick::Engine.routes.draw do
   devise_for :admins, class_name: 'Qbrick::Admin', module: :devise
 
   namespace :cms do
-    resources :settings_collections, only: %i(update index)
+    resources :settings, only: %i(update_all index) do
+      put :update_all, on: :collection
+    end
     resources :pages, except: :show do
       post :sort, on: :collection
       get :mirror
@@ -16,9 +18,7 @@ Qbrick::Engine.routes.draw do
     resources :ckimages, only: %i(create index destroy)
 
     resource :account, only: :edit do
-      collection do
-        patch 'update_password'
-      end
+      patch :update_password, on: :collection
     end
 
     resources :admins
@@ -31,9 +31,7 @@ Qbrick::Engine.routes.draw do
       resources :pages, only: :index
     end
 
-    resources :pages,
-              only: %i(index),
-              defaults: { locale: I18n.locale }
+    resources :pages, only: %i(index), defaults: { locale: I18n.locale }
     get '(*url)' => 'pages#show', as: :page
   end
 

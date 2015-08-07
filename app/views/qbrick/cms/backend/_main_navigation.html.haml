@@ -15,6 +15,6 @@
       %li= link_to t('.logout'), qbrick.destroy_admin_session_path, method: :delete
 
 %ul.nav
-  %li= link_to t('.settings'), qbrick.cms_settings_collections_path
+  %li= link_to t('.settings'), qbrick.cms_settings_path
   %li= link_to Qbrick::Page.model_name.human(count: 2), qbrick.cms_pages_path
   %li= link_to Qbrick::Admin.model_name.human(count: 2), qbrick.cms_admins_path
