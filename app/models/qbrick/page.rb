@@ -155,7 +155,7 @@ module Qbrick
 
     def link
       if bricks.count == 0 && children.count > 0
-        children.first.link
+        children.published.first.link
       else
         path_with_prefixed_locale
       end
