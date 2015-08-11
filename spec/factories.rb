@@ -7,7 +7,13 @@ FactoryGirl.define do
     p.title { FactoryGirl.generate(:title) }
     p.published 1
     p.body 'lorem ipsum'
-    p.url ''
+    p.page_type Qbrick::PageType::CONTENT
+  end
+
+  factory :root_page, parent: :page do |p|
+    sequence(:title) { |n| "Root Title #{n}" }
+    p.parent nil
+    p.page_type Qbrick::PageType::NAVIGATION
   end
 
   factory :text_brick, class: 'Qbrick::TextBrick' do |tb|

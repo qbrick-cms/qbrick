@@ -20,6 +20,6 @@ module Qbrick
   require 'remotipart'
   require 'ancestry'
   require 'haml'
-  require 'ckeditor_rails'
+  require 'ckeditor'
   require 'inherited_resources'
 end

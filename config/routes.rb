@@ -2,18 +2,18 @@ Qbrick::Engine.routes.draw do
   devise_for :admins, class_name: 'Qbrick::Admin', module: :devise
 
   namespace :cms do
-    resources :settings_collections, only: [:update, :index]
+    resources :settings_collections, only: %i(update index)
     resources :pages, except: :show do
       post :sort, on: :collection
       get :mirror
     end
 
-    resources :bricks, except: [:edit, :index] do
+    resources :bricks, except: %i(edit index) do
       post :sort, on: :collection
     end
 
     resources :assets
-    resources :ckimages, only: [:create, :index, :destroy]
+    resources :ckimages, only: %i(create index destroy)
 
     resource :account, only: :edit do
       collection do
@@ -26,13 +26,13 @@ Qbrick::Engine.routes.draw do
     root to: 'pages#index'
   end
 
-  scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults: { locale: -> { I18n.default_locale } } do
     namespace :api, defaults: { format: :json } do
       resources :pages, only: :index
     end
 
     resources :pages,
-              only: [:index],
+              only: %i(index),
               defaults: { locale: I18n.locale }
     get '(*url)' => 'pages#show', as: :page
   end

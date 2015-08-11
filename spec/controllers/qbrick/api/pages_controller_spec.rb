@@ -1,34 +1,36 @@
 require 'spec_helper'
 
 describe Qbrick::Api::PagesController, type: :controller do
+  routes { Qbrick::Engine.routes }
+
   describe '#index' do
     before do
       @pages = []
-      @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
-                                       url_de: 'de/foobar-de', title_en: 'foobar en', url_en: 'en/foobar-en')
-      @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
-                                       url_de: 'de/barfoo-de', title_en: 'barfoo en', url_en: 'en/barfoo-en')
+      @pages << @page1 = create(:page, published_de: true, published_en: true, title_de: 'foobar de',
+                                       path_de: 'de/foobar-de', title_en: 'foobar en', path_en: 'en/foobar-en')
+      @pages << @page2 = create(:page, published_de: true, published_en: true, title_de: 'barfoo de',
+                                       path_de: 'de/barfoo-de', title_en: 'barfoo en', path_en: 'en/barfoo-en')
       @pages << @unpublished = create(:page, published: false, title_de: 'unpublished de',
-                                             url_de: 'de/unpublished-de', title_en: 'unpublished en',
-                                             url_en: 'en/unpublished-en')
+                                             path_de: 'de/unpublished-de', title_en: 'unpublished en',
+                                             path_en: 'en/unpublished-en')
     end
 
     it 'gets only published pages' do
       I18n.with_locale :de do
-        get :index, use_route: :qbrick
+        get :index
         expect(JSON.parse(response.body)).to eq([@page1, @page2].as_json)
       end
     end
 
     it 'gets specific translated pages for each locale' do
       I18n.with_locale :de do
-        @pages << @only_german = create(:page, published: true, title: 'foobar de', url: 'de/foobar-de')
-        get :index, use_route: :qbrick
+        @pages << @only_german = create(:page, published: true, title: 'foobar de 2', path_de: 'de/foobar-de-2')
+        get :index
         expect(JSON.parse(response.body)).to eq([@page1, @page2, @only_german].as_json)
       end
 
       I18n.with_locale :en do
-        get :index, use_route: :qbrick
+        get :index
         expect(JSON.parse(response.body)).to eq([@page1, @page2].as_json)
       end
     end
@@ -36,14 +38,14 @@ describe Qbrick::Api::PagesController, type: :controller do
 
   describe 'expected json format of a page' do
     before do
-      @pages = []
-      @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
-                                       url_de: 'de/foobar-de', title_en: 'foobar en', url_en: 'en/foobar-en')
-      @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
-                                       url_de: 'de/barfoo-de', title_en: 'barfoo en', url_en: 'en/barfoo-en')
-
       I18n.with_locale :de do
-        get :index, use_route: :qbrick
+        @pages = []
+        @pages << @page1 = create(:page, published: true, title_de: 'foobar de',
+                                         path_de: 'de/foobar-de', title_en: 'foobar en', path_en: 'en/foobar-en')
+        @pages << @page2 = create(:page, published: true, title_de: 'barfoo de',
+                                         path_de: 'de/barfoo-de', title_en: 'barfoo en', path_en: 'en/barfoo-en')
+
+        get :index
         @json = JSON.parse(response.body)
         @page_hash = @json.first
       end

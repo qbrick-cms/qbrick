@@ -1,11 +1,12 @@
 require 'spec_helper'
 include SitemapsHelper
 
-describe 'qbrick/sitemaps/index.xml.haml', :type => :view do
+describe 'qbrick/sitemaps/index.xml.haml', type: :view do
   describe 'structure' do
+    let(:page) { create :page }
+
     before :each do
-      @page = create(:page)
-      @pages = [@page]
+      @pages = [page]
       render
     end
 
@@ -18,11 +19,11 @@ describe 'qbrick/sitemaps/index.xml.haml', :type => :view do
     end
 
     it 'includes the loc tag content' do
-      expect(rendered).to include "<loc>http://#{@request.host}/#{@page.url}</loc>"
+      expect(rendered).to include "<loc>http://#{@request.host}#{page.path_with_prefixed_locale}</loc>"
     end
 
     it 'includes the lastmod tag content' do
-      expect(rendered).to include "<lastmod>#{@page.created_at.utc}</lastmod>"
+      expect(rendered).to include "<lastmod>#{page.created_at.utc}</lastmod>"
     end
 
     it 'includes the changefreq tag content' do
@@ -39,7 +40,7 @@ describe 'qbrick/sitemaps/index.xml.haml', :type => :view do
       allow(I18n).to receive(:available_locales).and_return([:de, :en])
 
       I18n.with_locale(:de) do
-        @page    = create(:page, title: 'Dummy Page 1 DE')
+        @page    = create(:page, title: 'Dummy Page 1 DE', published_de: 1, published_en: 1)
         @page_de = create(:page, title: 'German Page')
       end
 

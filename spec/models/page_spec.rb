@@ -32,10 +32,10 @@ describe Qbrick::Page, type: :model do
     end
   end
 
-  describe '.find_by_url' do
+  describe '.find_by_path' do
     it 'should find its translated content by url' do
       page = create(:page)
-      expect(Qbrick::Page.find_by_url(page.url)).to eq(page)
+      expect(Qbrick::Page.find_by_path(page.path)).to eq(page)
     end
   end
 
@@ -68,9 +68,12 @@ describe Qbrick::Page, type: :model do
 
   describe '#published' do
     it 'returns only published pages' do
-      _p1, p2, _p3 = 3.times.map { create(:page) }
-      p2.update_attribute :published, Qbrick::PublishState::UNPUBLISHED
-      expect(Qbrick::Page.published).to be_all { |p| expect(p.published?).to be_truthy }
+      unpublished_page = 3.times.map { create :page }.last
+      unpublished_page.update_attribute :published, Qbrick::PublishState::UNPUBLISHED
+
+      published_pages = Qbrick::Page.published
+      expect(published_pages).to be_all { |p| expect(p.published?).to be_truthy }
+      expect(published_pages).not_to include unpublished_page
     end
   end
 
@@ -250,7 +253,7 @@ describe Qbrick::Page, type: :model do
       it 'returns the concatenated slug of the whole child/parent tree' do
         page = create(:page, slug: 'parent-slug')
         child = create(:page, slug: 'child-slug', parent: page)
-        expect(child.url).to eq('en/parent-slug/child-slug')
+        expect(child.path).to eq('/parent-slug/child-slug')
       end
     end
 
@@ -258,21 +261,25 @@ describe Qbrick::Page, type: :model do
       it 'returns without the parent page slug' do
         page = create(:page, slug: 'parent-slug', page_type: Qbrick::PageType::NAVIGATION)
         child = create(:page, slug: 'child-slug', parent: page)
-        expect(child.url).to eq('en/child-slug')
+        expect(child.path).to eq('/child-slug')
       end
     end
 
     context 'when it is a redirect? page' do
       it 'returns the absolute url' do
-        page = create(:page, page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
-        expect(page.link).to eq('/en/news')
+        I18n.with_locale(:en) do
+          page = create(:page, page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references', slug: 'news')
+          expect(page.link).to eq('/en/news')
+        end
       end
     end
 
     context 'when url part is empty' do
       it 'strips the trailing slash' do
-        page = create(:page, page_type: Qbrick::PageType::NAVIGATION)
-        expect(page.link).to eq('/en')
+        I18n.with_locale(:en) do
+          page = create(:page, page_type: Qbrick::PageType::NAVIGATION)
+          expect(page.link).to eq('/en')
+        end
       end
     end
   end
@@ -321,14 +328,14 @@ describe Qbrick::Page, type: :model do
 
   describe '#translated?' do
     it 'returns true when page is translated' do
-      @page = create(:page, title: 'Page 1', slug: 'page1')
-      expect(@page.translated?).to be_truthy
+      page = create(:page, title: 'Page 1', slug: 'page1')
+      expect(page.translated?).to be_truthy
     end
 
     it 'returns false when page has no translation' do
-      @page = create(:page, title: 'Page 1', slug: 'page1')
+      page = I18n.with_locale(:en) { create :page, title: 'Page 1', slug: 'page1' }
       I18n.with_locale :de do
-        expect(@page.translated?).to be_falsey
+        expect(page.translated?).to be_falsey
       end
     end
   end
@@ -358,46 +365,32 @@ describe Qbrick::Page, type: :model do
   end
 
   describe '#before_validation' do
-    it 'generates url automatically' do
+    it 'generates path automatically' do
       page = Qbrick::Page.new slug: 'slug'
-      expect(page.url).to be_nil
+      expect(page.path).to be_nil
       page.valid?
-      expect(page.url).to be_present
+      expect(page.path).to be_present
     end
   end
 
-  describe '#after_save' do
-    context 'when updating a parents page type' do
-      it 'updates the child pages url if parent is changed to navigation' do
-        @parent_page = FactoryGirl.create(:page, slug: 'le_parent')
-        @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
+  describe '#path' do
+    let(:page) { create :page, slug: 'page' }
 
-        @parent_page.update_attributes(page_type: Qbrick::PageType::NAVIGATION)
-        expect(@child_page.reload.url).to eq("#{I18n.locale}/le_child")
-      end
-
-      it 'updates the child pages url if parent is changed to content' do
-        @parent_page = FactoryGirl.create(:page, slug: 'le_parent', page_type: Qbrick::PageType::NAVIGATION)
-        @child_page = FactoryGirl.create(:page, slug: 'le_child', parent: @parent_page)
-
-        @parent_page.update_attributes(page_type: Qbrick::PageType::CONTENT)
-        expect(@child_page.reload.url).to eq("#{I18n.locale}/le_parent/le_child")
-      end
-    end
-  end
-
-  describe '#url_without_locale' do
-    let :page do
-      create(:page, slug: 'page')
+    it "doesn't allow duplicated paths" do
+      expect(page).to be_valid
+      duplicated_slug_page = build :page, slug: 'page'
+      expect(page.slug).to eq duplicated_slug_page.slug
+      expect(duplicated_slug_page).to be_invalid
+      expect(duplicated_slug_page.errors[:slug]).to be_present
     end
 
     context 'without parent' do
-      it 'returns url without leading /' do
-        expect(page.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(page.path).to start_with '/'
       end
 
       it 'returns a single slug' do
-        expect(page.url_without_locale).to eq('page')
+        expect(page.path).to eq('/page')
       end
     end
 
@@ -410,12 +403,12 @@ describe Qbrick::Page, type: :model do
         create(:page, slug: 'child', parent: parent)
       end
 
-      it 'returns url without leading /' do
-        expect(child.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(child.path).to start_with '/'
       end
 
       it 'does not concatenate the parent slug' do
-        expect(child.url_without_locale).to eq('child')
+        expect(child.path).to eq('/child')
       end
     end
 
@@ -428,25 +421,29 @@ describe Qbrick::Page, type: :model do
         create(:page, slug: 'child', parent: parent)
       end
 
-      it 'returns url without leading /' do
-        expect(child.url_without_locale).not_to start_with '/'
+      it 'returns path with leading /' do
+        expect(child.path).to start_with '/'
       end
 
       it 'does not concatenate the parent slug' do
-        expect(child.url_without_locale).to eq('parent/child')
+        expect(child.path).to eq('/parent/child')
       end
     end
-  end
+  end # path
 
   describe '#translated' do
     before :each do
-      @page_1 = create(:page, title: 'Page 1', slug: 'page1')
-      @page_2 = create(:page, title: 'Page 2', slug: 'page1')
-      @page_3 = create(:page, title: 'Page 3', slug: 'page1')
+      I18n.with_locale(:en) do
+        @page_1 = create(:page, title: 'Page 1')
+        @page_2 = create(:page, title: 'Page 2')
+        @page_3 = create(:page, title: 'Page 3')
+      end
     end
 
     it 'returns all pages that have a translation' do
-      expect(Qbrick::Page.translated).to eq [@page_1, @page_2, @page_3]
+      I18n.with_locale(:en) do
+        expect(Qbrick::Page.translated).to eq [@page_1, @page_2, @page_3]
+      end
     end
 
     it 'does not return untranslated pages' do
@@ -467,7 +464,7 @@ describe Qbrick::Page, type: :model do
     it 'should be findable via scope' do
       expect(Qbrick::Page.by_identifier(cat_page.identifier)).to eq(cat_page)
     end
-  end
+  end # translated
 
   describe '#cloning' do
     around(:each) do |example|
@@ -507,6 +504,85 @@ describe Qbrick::Page, type: :model do
 
       @page.clone_bricks_to(:en)
       expect(@page.bricks.unscoped.where(locale: :en).count).to eq(3)
+    end
+  end
+
+  describe '#create_path' do
+    context 'when parent was saved' do
+      it 'updates the child pages url if parent is changed to navigation' do
+        parent_page = create :page, slug: 'le_parent'
+        child_page = create :page, slug: 'le_child', parent: parent_page
+        parent_page.save
+        expect(child_page.reload.path).to eq '/le_parent/le_child'
+
+        parent_page.update_attributes page_type: Qbrick::PageType::NAVIGATION
+        expect(child_page.reload.path).to eq '/le_child'
+      end
+
+      it 'updates the child pages url if parent is changed to content' do
+        parent_page = create(:page, slug: 'le_parent', page_type: Qbrick::PageType::NAVIGATION)
+        child_page = create(:page, slug: 'le_child', parent: parent_page)
+
+        parent_page.update_attributes(page_type: Qbrick::PageType::CONTENT)
+        expect(child_page.reload.path).to eq '/le_parent/le_child'
+      end
+    end
+
+    it 'creates a root path' do
+      root_page = Qbrick::Page.new slug: 'ruth', page_type: Qbrick::PageType::NAVIGATION
+      expect(root_page.create_path).to eq ''
+    end
+
+    it 'creates a content page path' do
+      content_page = Qbrick::Page.new slug: 'meersaeuli', page_type: Qbrick::PageType::CONTENT
+      expect(content_page.create_path).to eq '/meersaeuli'
+    end
+
+    it 'creates a path with children' do
+      parent = create :page, slug: 'le_parent'
+      child_page = Qbrick::Page.new slug: 'le_child', parent: parent
+
+      expect(child_page.create_path).to eq '/le_parent/le_child'
+    end
+  end
+
+  context 'when it is a redirect page' do
+    let(:page) { build :page, page_type: Qbrick::PageType::REDIRECT }
+
+    describe '#internal_redirect?' do
+      it 'returns false for non redirect pages' do
+        expect(build(:page).internal_redirect?).to be_falsey
+      end
+
+      it 'returns false for external redirects' do
+        page.redirect_url = 'http://google.de'
+        expect(page.internal_redirect?).to be_falsey
+      end
+
+      it 'returns true for internal redirects' do
+        page.redirect_url = '/huhu'
+        expect(page.internal_redirect?).to be_truthy
+        page.redirect_url = "http://#{Socket.gethostname}/huhu"
+        expect(page.internal_redirect?).to be_truthy
+      end
+    end
+
+    describe '#external_redirect?' do
+      it 'returns false for non redirect pages' do
+        expect(build(:page).external_redirect?).to be_falsey
+      end
+
+      it 'returns true for external redirects' do
+        page.redirect_url = 'http://google.de'
+        expect(page.external_redirect?).to be_truthy
+      end
+
+      it 'returns false for internal redirects' do
+        page.redirect_url = '/huhu'
+        expect(page.external_redirect?).to be_falsey
+        page.redirect_url = "http://#{Socket.gethostname}/huhu"
+        expect(page.external_redirect?).to be_falsey
+      end
     end
   end
 end

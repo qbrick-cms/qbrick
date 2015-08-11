@@ -12,7 +12,7 @@
   - if brick.persisted?
 
     - # addable child dropdown menu
-    - if brick.respond_to?(:brick_list)
+    - if brick.respond_to? :brick_list
       = render('brick_type_dropdown', brick_list: brick)
 
     - # grid selection

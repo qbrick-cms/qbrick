@@ -39,6 +39,7 @@
   - unless hide_content_tab?(@page)
     #brick-form.modal.fade{ tabindex: '-1', role: 'dialog' }
     #page-content{ class: content_tab_active(@page) }
+
       - if @page.persisted?
         .btn__group#collapse-bricks-nav{ class: @page.bricks.present? ? '' : 'hidden' }
           .btn.btn--small#expand-all

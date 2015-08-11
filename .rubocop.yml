@@ -90,7 +90,7 @@ BracesAroundHashParameters:
 
 ClassLength:
   CountComments: false  # count full line comments?
-  Max: 200
+  Max: 220
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or

@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe Qbrick::SitemapsController, type: :controller do
-  describe '#index' do
-    before do
-      @page = FactoryGirl.create(:page)
-    end
+  routes { Qbrick::Engine.routes }
 
+  describe '#index' do
     it 'should be able to send a xml file' do
-      get(:index,  use_route: :qbrick, format: 'xml')
+      @page = FactoryGirl.create :page
+      get :index, format: 'xml'
     end
   end
 end

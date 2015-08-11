@@ -16,7 +16,7 @@ module Qbrick
       end
 
       def hide_content_tab?(page)
-        page.page_type == Qbrick::PageType::REDIRECT || !page.translated? || !page.persisted? || page.errors.present?
+        page.redirect? || !page.translated? || !page.persisted? || page.errors.present?
       end
 
       def main_navigation_list

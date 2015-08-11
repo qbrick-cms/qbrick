@@ -17,3 +17,10 @@ de:
         page_type: 'Seitentyp'
         parent_id: 'Übergeordnete Seite'
         parent: 'Übergeordnete Seite'
+        google_verification_key: 'Google Verification Key'
+    errors:
+      models:
+        qbrick/page:
+          attributes:
+            slug:
+              duplicated_slug: 'Der Slug ist leider schon vergeben%{append}'

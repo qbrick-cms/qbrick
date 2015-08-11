@@ -60,6 +60,7 @@ module Qbrick
     #
     def collect_fulltext
       return '' unless respond_to?(:bricks)
+
       bricks.localized.reduce('') do |text, brick|
         text << brick.collect_fulltext
       end
