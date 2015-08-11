@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.6.10 - 2015-08-11
+
+* move to [`ckeditor` gem](https://github.com/galetahub/ckeditor) again
+* Page#link of an empty page will now show the first PUBLISHED child
+* Qbrick::Engine.hosts won't return empty values anymore
+
 ## 2.6.9 - 2015-07-15
 
 * make translated scope consistent to the conditions in #translated?
