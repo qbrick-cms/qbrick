@@ -38,14 +38,13 @@ describe Qbrick::Cms::PagesHelper, type: :helper do
     end
 
     it 'has a redirect page' do
-      @page = create(:page, title: 'Page 1', slug: 'page1',
-                            page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/references')
-      expect(helper.hide_content_tab?(@page)).to be_truthy
+      page = create :page, title: 'Redirect', page_type: Qbrick::PageType::REDIRECT, redirect_url: 'en/foo'
+      expect(helper.hide_content_tab?(page)).to be_truthy
     end
 
     it 'has a not saved page' do
-      @page = Qbrick::Page.new
-      expect(helper.hide_content_tab?(@page)).to be_truthy
+      page = Qbrick::Page.new
+      expect(helper.hide_content_tab?(page)).to be_truthy
     end
   end
 end

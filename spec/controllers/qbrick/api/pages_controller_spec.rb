@@ -24,7 +24,7 @@ describe Qbrick::Api::PagesController, type: :controller do
 
     it 'gets specific translated pages for each locale' do
       I18n.with_locale :de do
-        @pages << @only_german = create(:page, published: true, title: 'foobar de', path: 'de/foobar-de')
+        @pages << @only_german = create(:page, published: true, title: 'foobar de 2', path_de: 'de/foobar-de-2')
         get :index
         expect(JSON.parse(response.body)).to eq([@page1, @page2, @only_german].as_json)
       end

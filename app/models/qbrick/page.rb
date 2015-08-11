@@ -16,7 +16,7 @@ module Qbrick
 
     scope :published, -> { where locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
     scope :unpublished, -> { where.not locale_attr(:published) => Qbrick::PublishState::PUBLISHED }
-    scope :translated, -> { where.not locale_attr(:path) => nil }
+    scope :translated, -> { where.not locale_attr(:path) => [nil, ''], locale_attr(:title) => [nil, ''] }
 
     scope :content_page, -> { where page_type: Qbrick::PageType::CONTENT }
 
@@ -35,6 +35,7 @@ module Qbrick
     validates :redirect_url, presence: true, if: :redirect?
     validates :title, :slug, :keywords, :page_type, length: { maximum: 255 }
     validates :identifier, uniqueness: true, allow_blank: true
+    validate :slug_uniqueness
 
     class << self
       def flat_tree
@@ -66,6 +67,26 @@ module Qbrick
         find_by locale_attr(:path) => given_path.blank? ? '' : "/#{given_path.sub(%r{^/+}, '')}"
       end
     end # class methods
+
+    def slug_uniqueness
+      path_field = locale_attr :path
+      slug_field = locale_attr :slug
+      [slug_field, path_field].each do |field|
+        self.class.validators_on(field).map { |v| v.validate self }
+        return true if errors[field].present?
+      end
+
+      page_with_duplicated_paths = self.class.published.translated.where path_field => path
+      page_with_duplicated_paths = page_with_duplicated_paths.where.not id: id if persisted?
+      return true unless page_with_duplicated_paths.exists?
+
+      message = 'page ids: '
+      page_with_duplicated_paths.order(:id).pluck(:id).each do |id|
+        message << "<a href=\"#{edit_cms_page_path id}#page-metadata\" target=\"_blank\">#{id}</a>, "
+      end
+      message = I18n.t 'activerecord.errors.models.qbrick/page.attributes.slug.duplicated_slug', append: " (#{message.sub(/, $/, '')})"
+      errors.add :slug, message.html_safe
+    end
 
     def without_self
       self.class.where.not id: id
@@ -115,12 +136,12 @@ module Qbrick
     end
 
     def translated?
-      path.present? && title.present? && slug.present?
+      title.present? && slug.present?
     end
 
     def translated_to?(raw_locale)
       locale = raw_locale.to_s.underscore
-      send("path_#{locale}").present? && send("title_#{locale}").present? && send("slug_#{locale}").present?
+      send("title_#{locale}").present? && send("slug_#{locale}").present?
     end
 
     def translated_link_for(locale)
@@ -135,7 +156,7 @@ module Qbrick
 
     def link
       if bricks.count == 0 && children.count > 0
-        children.first.link
+        children.published.first.link
       else
         path_with_prefixed_locale
       end
@@ -151,6 +172,12 @@ module Qbrick
       "/#{locale}#{send self.class.attr_name_for_locale(:path, locale)}"
     end
 
+    def url
+      URI::HTTP.build([nil, Qbrick::Engine.host, Qbrick::Engine.port, path_with_prefixed_locale, nil, nil]).tap do |url|
+        url.scheme = Qbrick::Engine.scheme
+      end
+    end
+
     def create_path
       opts = { locale: I18n.locale }
       path = path_segments.join '/'
@@ -163,7 +190,7 @@ module Qbrick
       if title.present? && slug.blank?
         self.slug = title.downcase.parameterize
       elsif slug.present?
-        self.slug = slug.downcase
+        self.slug = slug.downcase.parameterize
       end
     end
 

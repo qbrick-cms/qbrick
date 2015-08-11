@@ -13,7 +13,7 @@ CKEDITOR.editorConfig = (config) ->
   config.linkShowAdvancedTab = false
   config.linkShowTargetTab = false
 
-  config.removePlugins = 'link'
+  config.removePlugins = 'link,language'
   config.extraPlugins = 'adv_link'
 
   true

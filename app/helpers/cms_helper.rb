@@ -14,14 +14,17 @@ module CmsHelper
   end
 
   def cms_brick_item(brick_list, type)
-    type_name = type.class_name.constantize.model_name.human
-    link_to type_name, qbrick.new_cms_brick_path(
+    path = qbrick.new_cms_brick_path(
       brick: {
         type: type.class_name,
         brick_list_id: brick_list.id,
         brick_list_type: brick_list.brick_list_type
-      }), remote: true
-  rescue NameError
-    I18n.t type.class_name.underscore, scope: [:activerecord, :models]
+      })
+    type_name = type.class_name.constantize.model_name.human
+
+    link_to type_name, path, remote: true
+  rescue NameError => e
+    title = I18n.t(type.class_name.underscore, scope: %i(activerecord models)) + " (#{e.message})"
+    defined?(path) && path.present? ? link_to(title, path, remote: true) : title
   end
 end

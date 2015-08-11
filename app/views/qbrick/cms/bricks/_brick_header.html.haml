@@ -12,9 +12,9 @@
     - if brick.persisted?
 
       - # addable child dropdown menu
-      - if brick.respond_to?(:brick_list)
+      - if brick.respond_to? :brick_list
         .btn-group
-          = render('brick_type_dropdown', brick_list: brick)
+          = render 'brick_type_dropdown', brick_list: brick
 
       - # grid selection
       - if brick.class.include? Qbrick::Gridded
@@ -24,7 +24,7 @@
             %span.caret
           %ul.dropdown-menu.pull-right
             %li
-              = form.input :col_count, collection: brick.class.available_grid_sizes, as: :radio_buttons, label_method: lambda { |col_count| t("qbrick.cms.bricks.columns", count: col_count) }
+              = form.input :col_count, collection: brick.class.available_grid_sizes, as: :radio_buttons, label_method: lambda { |col_count| t('qbrick.cms.bricks.columns', count: col_count) }
 
       - # possible styles
       - unless brick.available_display_styles.empty?

@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 2.6.10 - 2015-08-11
+
+* move to [`ckeditor` gem](https://github.com/galetahub/ckeditor) again
+* Page#link of an empty page will now show the first PUBLISHED child
+* Qbrick::Engine.hosts won't return empty values anymore
+
+## 2.6.9 - 2015-07-15
+
+* make translated scope consistent to the conditions in #translated?
+
+## 2.6.8 - 2015-07-14
+
+* validate uniqueness of slugs just against published pages
+
+## 2.6.7 - 2015-06-30
+
+* Add url method to get an url to the page
+* Add ability to add scheme, host and port to your app config
+
+## 2.6.6 - 2015-06-26
+
+* Also parameterize slugs that are explicit added
+
+## 2.6.5 - 2015-06-26
+
+* Add check on duplicated page paths
+
+## 2.6.3 - 2015-06-10
+
+* Simplify check on translated pages
+
 ## 2.6.2 - 2015-06-10
 
 * handle internal and external redirects

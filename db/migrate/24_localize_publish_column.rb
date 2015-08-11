@@ -9,6 +9,8 @@ class LocalizePublishColumn < ActiveRecord::Migration
     end
 
     new_translations = Qbrick::Page.translated_columns_for(:published) - %w(published_en)
+    new_translations << 'published_de' unless new_translations.include? 'published_de'
+
     Qbrick::Page.all.each do |page|
       page.update_columns Hash[new_translations.zip([page.published_en] * new_translations.count)]
     end
