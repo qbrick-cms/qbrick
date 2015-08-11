@@ -153,7 +153,7 @@ module Qbrick
     end
 
     def link
-      return children.first.link if bricks.empty? && children.any?
+      return children.published.first.link if bricks.empty? && children.any?
 
       path_with_prefixed_locale
     end
