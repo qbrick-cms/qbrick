@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.7 - 2015-08-26
+* add settings
+
 ## 2.6.10 - 2015-08-11
 
 * move to [`ckeditor` gem](https://github.com/galetahub/ckeditor) again
