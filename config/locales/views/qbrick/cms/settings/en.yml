@@ -1,7 +1,8 @@
 en:
   qbrick:
     cms:
-      settings_collections:
+      settings:
+        none_available: Currently are no settings defined
         index:
           title: Settings
         form:

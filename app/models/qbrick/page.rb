@@ -1,5 +1,6 @@
 module Qbrick
   class Page < ActiveRecord::Base
+    include ::RailsSettings::Extend
     include Qbrick::Engine.routes.url_helpers
     include Qbrick::Orderable
     include Qbrick::Translatable
@@ -144,21 +145,17 @@ module Qbrick
     end
 
     def translated_link_for(locale)
-      if translated_to? locale
-        I18n.with_locale locale do
-          path_with_prefixed_locale
-        end
-      else
-        Qbrick::Page.roots.first.link
+      return Qbrick::Page.roots.first.link unless translated_to? locale
+
+      I18n.with_locale locale do
+        path_with_prefixed_locale
       end
     end
 
     def link
-      if bricks.count == 0 && children.count > 0
-        children.published.first.link
-      else
-        path_with_prefixed_locale
-      end
+      return children.published.first.link if bricks.empty? && children.any?
+
+      path_with_prefixed_locale
     end
 
     def path_segments

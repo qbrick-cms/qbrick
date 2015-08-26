@@ -1,7 +1,7 @@
 module Qbrick
   module Cms
     class AdminsController < BackendController
-      before_action :set_admin, only: [:show, :edit, :update, :destroy]
+      before_action :set_admin, only: %i(show edit update destroy)
 
       # GET /admins
       # GET /admins.json

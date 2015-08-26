@@ -1,9 +1,10 @@
 de:
   qbrick:
     cms:
-      settings_collections:
+      settings:
+        none_available: Derzeit sind leider keine Einstellungen verfügbar
         index:
-          title: Settings
+          title: Einstellungen
         form:
           save: Speichern
           site_title: Seitentitel
