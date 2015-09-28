@@ -13,7 +13,7 @@
     - brick_content = render(@brick.to_edit_partial_path, :brick => @brick, :form => form)
 
     - unless @brick.available_display_styles.empty?
-      #display-styles.btn-group.pull-right
+      .dropdown--display-styles.js-stop-propagation.btn-group.pull-right
         %a.btn.btn-small.dropdown-toggle{ 'data-toggle' => 'dropdown', 'href' => '#' }
           %i.icon-tint
           %span.caret
