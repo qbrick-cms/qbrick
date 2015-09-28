@@ -46,7 +46,8 @@
                 %i.icon-resize-small
                 = t('.collapse_all')
 
-            = render 'brick_clone_menu'
+            - if I18n.available_locales.many?
+              = render 'brick_clone_menu'
             = render 'brick_type_dropdown', brick_list: @page
 
         = render 'qbrick/cms/bricks/brick_list', brick_list: @page
