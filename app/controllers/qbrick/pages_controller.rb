@@ -47,6 +47,7 @@ module Qbrick
 
     def find_page_by_path
       @page = Qbrick::Page.published.find_by_path params[:url].to_s
+      raise ActionController::RoutingError, 'Not Found' if @page && !@page.published?
     end
   end
 end
