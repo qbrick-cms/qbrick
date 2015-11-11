@@ -1,4 +1,6 @@
 # CHANGELOG
+## 2.7.1 - 2015-11-11
+* several little bugfixes for brick dropdowns
 
 ## 2.7 - 2015-08-26
 * add settings
