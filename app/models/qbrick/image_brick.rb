@@ -2,6 +2,8 @@ module Qbrick
   class ImageBrick < Brick
     include Qbrick::ImageUploaderMounting
 
+    IMAGE_POSITION = %w(left center right)
+
     validates :image,
               :image_size, presence: true
 
