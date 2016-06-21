@@ -6,6 +6,10 @@
         = image_tag brick.image.thumb
 
 = form.input :image_position, collection: Qbrick::ImageBrick::IMAGE_POSITION, :input_html => { :class => 'span3' }, :include_blank => false
+%p
+  %span
+    = t('.uploaded_file')
+    = brick.image.path.present? ? link_to(File.basename(brick.image.url), brick.image.url, target: :_blank) : t('.no_file_uploaded')
 = form.input :image, :as => :file, :input_html => { :class => 'span3' }
 = form.input :image_cache, as: :hidden
 = form.input :image_size, :collection => Qbrick::ImageSize.all, :label_method => :label, :value_method => :name, :input_html => { :class => 'span3' }, :include_blank => false
