@@ -1,4 +1,4 @@
-%div{ :class => image_brick.to_style_class }
+%div{ :class => image_brick.to_style_class,  style: "text-align: #{image_brick.image_position}" }
   - if image_brick.image.present?
     = image_tag(image_brick.image.converted.url, :alt => image_brick.alt_text.present? ? image_brick.alt_text : image_alt(image_brick.image.path) )
 

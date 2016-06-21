@@ -4,3 +4,5 @@ en:
       image_brick:
         edit:
           image_preview: 'Preview'
+          uploaded_file: 'Uploaded image: '
+          no_file_uploaded: 'No image uploaded'
