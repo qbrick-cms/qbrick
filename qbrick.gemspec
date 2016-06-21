@@ -57,6 +57,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'inherited_resources'
   s.add_dependency 'devise'
   s.add_dependency 'devise-i18n'
-  s.add_dependency 'rails-settings-cached'
+  s.add_dependency 'rails-settings-cached', '0.5.2'
   s.add_dependency 'rails-settings-ui', '>= 0.5.0'
 end
