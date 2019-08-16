@@ -1,9 +1,0 @@
-en:
-  activerecord:
-    models:
-      qbrick/asset_brick: 'Asset'
-    attributes:
-      qbrick/asset_brick:
-        caption: 'Display text'
-        link_style: 'Style'
-        asset: 'Asset'

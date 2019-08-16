@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    models:
-      qbrick/anchor_brick: 'Anchor'
-    attributes:
-      qbrick/anchor_brick:
-        caption: 'Name'

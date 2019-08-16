@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    models:
-      qbrick/accordion_item_brick: 'Accordion section'
-    attributes:
-      qbrick/accordion_item_brick:
-        caption: 'Title'

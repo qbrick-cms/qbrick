@@ -1,5 +1,0 @@
-en:
-  activerecord:
-    attributes:
-      qbrick/brick:
-        col_count: 'Grid width'

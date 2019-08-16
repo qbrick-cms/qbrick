@@ -1,7 +1,0 @@
-en:
-  activerecord:
-    models:
-      qbrick/two_column_brick: 'Two column element'
-    attributes:
-      qbrick/two_column_brick:
-        partitioning: 'Partition'

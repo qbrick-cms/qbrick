@@ -1,4 +1,0 @@
-en:
-  activerecord:
-    models:
-      qbrick/column_brick: 'Column'
