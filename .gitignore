@@ -12,7 +12,7 @@ spec/dummy/public/uploads/qbrick/*
 spec/dummy/public/uploads/*
 spec/dummy/public/images/**/*
 spec/dummy/public/javascripts/**/*
-Gemfile.lock
+#Gemfile.lock
 .DS_Store
 .sass-cache
 tags
