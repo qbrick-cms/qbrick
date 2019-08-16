@@ -19,4 +19,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 6.0.0.rc2'
 
   spec.add_development_dependency 'rspec-rails'
+  spec.add_development_dependency 'capybara'
+  spec.add_development_dependency 'selenium-webdriver'
+  spec.add_development_dependency 'webdrivers'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'byebug'
 end
