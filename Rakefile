@@ -23,7 +23,7 @@ load 'rails/tasks/statistics.rake'
 require 'bundler/gem_tasks'
 
 desc 'Run specs'
-RSpec::Core::RakeTask.new(spec: :setup)
+RSpec::Core::RakeTask.new(rspec: :setup)
 
 desc 'set up the dummy app for testing'
 task :setup do
