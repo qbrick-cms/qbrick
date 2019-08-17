@@ -15,8 +15,12 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile',
                    'README.md']
 
+  spec.add_dependency 'rails', '~> 6.0.0'
   spec.add_dependency 'pg'
-  spec.add_dependency 'rails', '~> 6.0.0.rc2'
+  spec.add_dependency 'puma'
+  spec.add_dependency 'haml-rails'
+
+  spec.add_development_dependency 'webpacker'
 
   spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'capybara'

@@ -19,3 +19,4 @@ tags
 .idea
 spec/dummy/.sass-cache
 qbrick.xcworkspace/
+node_modules
