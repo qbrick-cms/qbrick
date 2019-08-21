@@ -1,3 +1,5 @@
+require 'webpacker/helper'
+
 module Qbrick
   module ApplicationHelper
     include ::Webpacker::Helper
